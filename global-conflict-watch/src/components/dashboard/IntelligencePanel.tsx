@@ -19,47 +19,46 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
 
   return (
     <aside className="floating-panel inspector-panel flex min-h-[430px] flex-col overflow-hidden" aria-label="Intelligence summary">
-      <PanelHeading eyebrow="Analyst workspace" title={selected ? (selected.kind === "incident" ? "Selected report" : "Selected tracking asset") : "Intelligence summary"} trailing={<span className="pill pill-flag">Demo</span>} />
+      <PanelHeading title={selected ? (selected.kind === "incident" ? "Selected report" : "Selected tracking asset") : "Intelligence summary"} />
       <div className="min-h-0 flex-1 overflow-y-auto pb-2">
         {selected ? <SelectionDetails selected={selected} /> : (
           <section className="intro-note mx-4 mb-1 p-3.5">
-            <p className="text-xs leading-5 text-muted">Select a report or map marker to see its demonstration details and source attribution.</p>
+            <p className="type-instrument text-muted">Select a report or map marker to see its demonstration details and source attribution.</p>
           </section>
         )}
 
         <section className="insight-section px-4 py-4">
-          <h3 className="eyebrow">Current result set</h3>
-          <div className="metric-strip mt-3 grid grid-cols-3">
-            <Metric value={incidents.length} label="Reports" />
+          <h3 className="type-instrument uppercase tracking-[0.1em] text-muted">Current result set</h3>
+          <div className="metric-strip mt-3 grid grid-cols-2">
             <Metric value={highPriority} label="High+" accent="threat-high" />
             <Metric value={corroborated} label="Corroborated" accent="text-ink" />
           </div>
         </section>
 
         <section className="insight-section px-4 py-4">
-          <h3 className="eyebrow">Demo tracking inventory</h3>
+          <h3 className="type-instrument uppercase tracking-[0.1em] text-muted">Demo tracking inventory</h3>
           <div className="metric-strip mt-3 grid grid-cols-2">
             <Metric value={aircraftCount} label="Aircraft" accent="text-flag" />
             <Metric value={vesselCount} label="Vessels" accent="text-ink" />
           </div>
-          <p className="mt-3 text-[10px] leading-4 text-faint">Fictional records only, generalized and delayed. No live operational tracking.</p>
+          <p className="type-instrument mt-3 text-muted">Fictional records only, generalized and delayed. No live operational tracking.</p>
         </section>
 
         <section className="insight-section px-4 py-4">
-          <h3 className="eyebrow">Event distribution</h3>
+          <h3 className="type-instrument uppercase tracking-[0.1em] text-muted">Event distribution</h3>
           <div className="mt-3 space-y-2.5">
             {EVENT_CATEGORIES.map((category) => {
               const count = incidents.filter((incident) => incident.category === category).length;
               const percentage = incidents.length ? (count / incidents.length) * 100 : 0;
-              return <div key={category}><div className="flex justify-between text-[10px]"><span className="text-muted"><span aria-hidden="true" className="mr-2" style={{ color: categoryColors[category] }}>●</span>{category}</span><span className="font-mono text-faint">{count}</span></div><div className="mt-1 h-1 overflow-hidden bg-rule"><div className="h-full" style={{ width: `${percentage}%`, backgroundColor: categoryColors[category] }} /></div></div>;
+              return <div key={category}><div className="type-instrument flex justify-between"><span className="text-muted"><span aria-hidden="true" className="mr-2" style={{ color: categoryColors[category] }}>●</span>{category}</span><span className="text-muted">{count}</span></div><div className="mt-1 h-1 overflow-hidden bg-rule"><div className="h-full" style={{ width: `${percentage}%`, backgroundColor: categoryColors[category] }} /></div></div>;
             })}
           </div>
         </section>
 
         <section className="insight-section px-4 py-4">
-          <h3 className="eyebrow">Regional concentration</h3>
+          <h3 className="type-instrument uppercase tracking-[0.1em] text-muted">Regional concentration</h3>
           <ol className="mt-3 space-y-2">
-            {regionCounts.length ? regionCounts.slice(0, 4).map(([region, count], index) => <li key={region} className="flex items-center gap-3 text-[11px]"><span className="font-mono text-faint">0{index + 1}</span><span className="flex-1 text-muted">{region}</span><span className="font-mono text-ink">{count}</span></li>) : <li className="text-[11px] text-faint">No regional data in current selection.</li>}
+            {regionCounts.length ? regionCounts.slice(0, 4).map(([region, count]) => <li key={region} className="type-instrument flex items-center gap-3"><span className="flex-1 text-muted">{region}</span><span className="text-ink">{count}</span></li>) : <li className="type-instrument text-muted">No regional data in current selection.</li>}
           </ol>
         </section>
       </div>
@@ -72,15 +71,15 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
     const incident = selected.item;
     return (
       <section className="selection-details mx-4 mb-1 p-4" aria-live="polite">
-        <div className="flex items-center justify-between gap-2"><SeverityBadge severity={incident.severity} /><span className="font-mono text-[9px] text-faint">{incident.id}</span></div>
-        <h3 className="headline-item mt-3 text-[16px]">{incident.title}</h3>
-        <p className="meta-line mt-2"><span>{incident.location}</span><span>{incident.country}</span></p>
-        <p className="mt-4 text-xs leading-5 text-muted">{incident.summary}</p>
+        <div className="flex items-center justify-between gap-2"><SeverityBadge severity={incident.severity} /><span className="type-instrument text-muted">{incident.id}</span></div>
+        <h3 className="type-standfirst is-heading mt-3">{incident.title}</h3>
+        <p className="type-instrument meta-line mt-2 uppercase tracking-[0.1em] text-muted"><span>{incident.location}</span><span>{incident.country}</span></p>
+        <p className="type-instrument mt-4 text-muted">{incident.summary}</p>
         <DetailGrid rows={[["Category", incident.category], ["Confidence", incident.confidence], ["Verification", incident.verification], ["Observed", `${formatDateTime(incident.timestamp)} UTC`]]} />
         <div className="mt-4">
-          <p className="eyebrow">Source references</p>
+          <p className="type-instrument uppercase tracking-[0.1em] text-muted">Source references</p>
           <ul className="mt-2 space-y-1.5">
-            {incident.sources.map((source) => <li key={source.name}><a href={source.url} target="_blank" rel="noopener noreferrer" className="link-signal text-[11px]">{source.name} <span aria-hidden="true">↗</span></a></li>)}
+            {incident.sources.map((source) => <li key={source.name}><a href={source.url} target="_blank" rel="noopener noreferrer" className="link-signal type-instrument">{source.name} <span aria-hidden="true">↗</span></a></li>)}
           </ul>
         </div>
       </section>
@@ -107,22 +106,18 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
 
   return (
     <section className="selection-details mx-4 mb-1 p-4" aria-live="polite">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="pill pill-flag">{assetLabel}</span>
-        <span className="font-mono text-[9px] text-faint">{asset.id}</span>
+      <div className="type-instrument flex flex-wrap items-center justify-between gap-2 uppercase tracking-[0.1em]">
+        <span className="text-flag">{assetLabel} · generalized position, delayed demo data</span>
+        <span className="text-muted">{asset.id}</span>
       </div>
-      <p className="meta-line mt-3 text-flag">
-        <span>Generalized position</span>
-        <span>Delayed demo data</span>
-      </p>
-      <h3 className="headline-item mt-3 text-[16px]">{asset.displayName}</h3>
-      <p className="meta-line mt-2"><span>{asset.broadArea}</span><span>{asset.region}</span></p>
-      <p className="mt-4 text-xs leading-5 text-muted">{asset.description}</p>
+      <h3 className="type-standfirst is-heading mt-3">{asset.displayName}</h3>
+      <p className="type-instrument meta-line mt-2 uppercase tracking-[0.1em] text-muted"><span>{asset.broadArea}</span><span>{asset.region}</span></p>
+      <p className="type-instrument mt-4 text-muted">{asset.description}</p>
       <DetailGrid rows={detailRows} />
       <div className="mt-4">
-        <p className="eyebrow">Illustrative source attribution</p>
-        <a href={asset.source.homepageUrl} target="_blank" rel="noopener noreferrer" className="link-signal mt-2 inline-block text-[11px]">{asset.source.name} <span aria-hidden="true">↗</span></a>
-        <p className="mt-2 text-[10px] leading-4 text-faint">Homepage link only. GCW does not call, scrape, or connect to this provider.</p>
+        <p className="type-instrument uppercase tracking-[0.1em] text-muted">Illustrative source attribution</p>
+        <a href={asset.source.homepageUrl} target="_blank" rel="noopener noreferrer" className="link-signal type-instrument mt-2 inline-block">{asset.source.name} <span aria-hidden="true">↗</span></a>
+        <p className="type-instrument mt-2 text-muted">Homepage link only. GCW does not call, scrape, or connect to this provider.</p>
       </div>
     </section>
   );
@@ -130,12 +125,12 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
 
 function DetailGrid({ rows }: { rows: Array<[string, string]> }) {
   return (
-    <dl className="detail-list mt-4">
-      {rows.map(([label, value]) => <div key={label} className="flex items-start justify-between gap-4 py-2"><dt className="text-[10px] text-faint">{label}</dt><dd className="max-w-[62%] text-right text-[11px] leading-4 text-muted">{value}</dd></div>)}
+    <dl className="detail-list type-instrument mt-4">
+      {rows.map(([label, value]) => <div key={label} className="flex items-start justify-between gap-4 py-2"><dt className="text-muted">{label}</dt><dd className="max-w-[62%] text-right text-ink-body">{value}</dd></div>)}
     </dl>
   );
 }
 
 function Metric({ value, label, accent = "text-ink" }: { value: number; label: string; accent?: string }) {
-  return <div className="px-2 py-3 text-center"><div className={`font-mono text-lg font-semibold ${accent}`}>{String(value).padStart(2, "0")}</div><div className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-faint">{label}</div></div>;
+  return <div className="px-2 py-3 text-center"><div className={`type-heading font-mono ${accent}`}>{String(value).padStart(2, "0")}</div><div className="type-instrument mt-1 uppercase tracking-[0.1em] text-muted">{label}</div></div>;
 }

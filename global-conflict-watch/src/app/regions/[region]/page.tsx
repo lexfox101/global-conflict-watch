@@ -12,7 +12,6 @@ import { CATEGORY_SLUGS } from "@/data/threat-categories";
 import { REGIONS, REGION_KEYS, THREAT_CATEGORIES, type RegionKey } from "@/types/briefing";
 import { CountBreakdown } from "@/components/site/CountBreakdown";
 import { Prose } from "@/components/site/Prose";
-import { SectionHeading } from "@/components/site/SectionHeading";
 import { StoryFeed } from "@/components/site/StoryFeed";
 import { ThreatLevelBadge } from "@/components/site/ThreatLevelBadge";
 import { categoryAccent, threatLevelBlurb } from "@/components/site/ui";
@@ -58,43 +57,41 @@ export default async function RegionPage({ params }: PageProps<"/regions/[region
   }));
 
   return (
-    <div className="mx-auto w-full max-w-[1200px] px-4 py-10 lg:px-6 lg:py-14">
-      <Link href="/regions" className="link-signal text-[13px]">
+    <div className="mx-auto w-full max-w-[1000px] px-4 py-14 lg:px-6 lg:py-20">
+      <Link href="/regions" className="link-signal type-body">
         ← All regions
       </Link>
 
-      <header className="mt-8">
-        <p className="eyebrow eyebrow-signal">Region</p>
-        <h1 className="headline-page mt-3">{meta.name}</h1>
-        <p className="standfirst mt-4 max-w-[62ch]">{profile.summary}</p>
-        <p className="meta-line mt-6 border-t border-rule-strong pt-3">
+      <header className="mt-10 border-b border-rule pb-6">
+        <h1 className="type-lead">{meta.name}</h1>
+        <p className="type-standfirst mt-5 max-w-[58ch]">{profile.summary}</p>
+        <p className="type-meta meta-line mt-6">
           {level ? <ThreatLevelBadge level={level} label="Region" /> : <span>Level unset — no current entries</span>}
           <span>
-            {refs.length} {refs.length === 1 ? "story" : "stories"}
+            {refs.length} {refs.length === 1 ? "story" : "stories"} · free window, {FREE_ARCHIVE_DAYS} editions
           </span>
-          <span>Free window · {FREE_ARCHIVE_DAYS} editions</span>
         </p>
-        {level ? <p className="mt-3 max-w-[62ch] text-[13px] leading-relaxed text-faint">{threatLevelBlurb[level]}</p> : null}
+        {level ? <p className="type-body mt-3 max-w-[62ch] text-muted">{threatLevelBlurb[level]}</p> : null}
       </header>
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
+      <div className="mt-16 grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start">
         <section aria-labelledby="region-context">
-          <h2 id="region-context" className="eyebrow border-b border-rule pb-2">
+          <h2 id="region-context" className="type-heading">
             Standing context
           </h2>
           <Prose paragraphs={profile.context} className="mt-4" />
-          <p className="meta-line mt-6">
+          <p className="type-meta meta-line mt-6">
             {profile.watchpoints.map((watchpoint) => (
               <span key={watchpoint}>{watchpoint}</span>
             ))}
           </p>
         </section>
 
-        <section className="soft-panel p-6" aria-labelledby="region-breakdown">
-          <h2 id="region-breakdown" className="eyebrow">
+        <section aria-labelledby="region-breakdown">
+          <h2 id="region-breakdown" className="type-heading">
             Category breakdown
           </h2>
-          <p className="mt-2 text-[13px] leading-relaxed text-muted">
+          <p className="type-body mt-3 text-muted">
             Entries filed to {meta.shortName} in the current free window, by threat category.
           </p>
           <div className="mt-5">
@@ -106,7 +103,7 @@ export default async function RegionPage({ params }: PageProps<"/regions/[region
                 caption="Shares are of this region's current entries. A story tagged to several regions is counted in each of them."
               />
             ) : (
-              <p className="text-[13px] leading-relaxed text-faint">
+              <p className="type-body text-muted">
                 No entries are filed to this region in the current free window, so there is nothing to break down yet.
               </p>
             )}
@@ -114,14 +111,14 @@ export default async function RegionPage({ params }: PageProps<"/regions/[region
         </section>
       </div>
 
-      <section className="mt-14" aria-labelledby="region-feed">
-        <SectionHeading
-          eyebrow="Feed"
-          title={`${meta.shortName} entries`}
-          id="region-feed"
-          description="Newest edition first. Each headline links to the story in the briefing it was published in."
-        />
-        <div className="mt-6">
+      <section className="mt-20" aria-labelledby="region-feed">
+        <h2 id="region-feed" className="type-heading border-b border-rule pb-4">
+          {meta.shortName} entries
+        </h2>
+        <p className="type-body mt-4 max-w-[62ch] text-muted">
+          Newest edition first. Each headline links to the story in the briefing it was published in.
+        </p>
+        <div className="mt-8">
           <StoryFeed
             refs={refs}
             label={`${meta.shortName} stories`}

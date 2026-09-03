@@ -3,13 +3,12 @@ export interface NavItem {
   label: string;
 }
 
+/** Five items, matching the five things a reader can actually do here. */
 export const PRIMARY_NAV: NavItem[] = [
-  { href: "/", label: "Home" },
   { href: "/briefings", label: "Briefings" },
   { href: "/regions", label: "Regions" },
   { href: "/threats", label: "Threats" },
   { href: "/map", label: "Map" },
-  { href: "/data", label: "Data" },
   { href: "/about", label: "About" },
 ];
 
@@ -42,5 +41,5 @@ export const FOOTER_NAV: { title: string; items: NavItem[] }[] = [
 ];
 
 export function isActiveRoute(pathname: string, href: string) {
-  return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+  return pathname === href || pathname.startsWith(`${href}/`);
 }

@@ -13,7 +13,7 @@ interface FiltersProps {
   onReset: () => void;
 }
 
-const fieldClass = "filter-control h-9 px-3 text-[11px] text-ink outline-none transition hover:border-rule-strong";
+const fieldClass = "filter-control type-instrument h-9 px-3 text-ink outline-none transition hover:border-rule-strong";
 
 export function Filters({ query, category, severity, timeRange, resultCount, onQueryChange, onCategoryChange, onSeverityChange, onTimeRangeChange, onReset }: FiltersProps) {
   return (
@@ -49,8 +49,8 @@ export function Filters({ query, category, severity, timeRange, resultCount, onQ
             <option value="all">All demo data</option>
           </select>
         </label>
-        <button type="button" onClick={onReset} className="h-9 px-3 text-[11px] font-medium text-muted transition hover:text-ink">Reset</button>
-        <div aria-live="polite" className="result-pill ml-auto flex h-9 items-center gap-2 px-3 text-[11px] text-faint">
+        <button type="button" onClick={onReset} className="type-instrument h-9 px-3 font-medium text-muted transition hover:text-ink">Reset</button>
+        <div aria-live="polite" className="result-pill type-instrument ml-auto flex h-9 items-center gap-2 px-3 text-muted">
           <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-signal" />
           <strong className="font-mono font-medium text-ink">{resultCount}</strong> reports
         </div>

@@ -278,7 +278,7 @@ export function ConflictMap({ incidents, aircraft, vessels, visibility, selected
               aria-pressed={visibility[layer.key]}
               aria-label={`${visibility[layer.key] ? "Hide" : "Show"} ${layer.label.toLowerCase()} layer`}
               onClick={() => onToggleLayer(layer.key)}
-              className={`layer-pill px-2.5 py-1.5 text-[10px] font-medium transition ${visibility[layer.key] ? "is-active text-ink" : "text-faint"}`}
+              className={`layer-pill type-instrument px-2.5 py-1.5 font-medium transition ${visibility[layer.key] ? "is-active text-ink" : "text-muted"}`}
             >
               <span aria-hidden="true" className="mr-1.5 text-signal">{layer.symbol}</span>{layer.label} <strong className="ml-0.5 font-mono font-medium">{visibility[layer.key] ? layer.count : 0}</strong>
             </button>
@@ -288,15 +288,12 @@ export function ConflictMap({ incidents, aircraft, vessels, visibility, selected
           {visibility.incidents ? incidents.length : 0} reports, {visibility.aircraft ? aircraft.length : 0} aircraft, and {visibility.vessels ? vessels.length : 0} vessels visible.
         </p>
       </div>
-      {!mapReady && !mapError && <div role="status" className="map-status absolute bottom-4 left-4 px-3 py-2 text-[10px] text-muted">Loading basemap…</div>}
+      {!mapReady && !mapError && <div role="status" className="map-status type-instrument absolute bottom-4 left-4 px-3 py-2 text-muted">Loading basemap…</div>}
       {mapError && (
-        <div role="status" className="map-status absolute bottom-4 left-4 max-w-xs px-3 py-2 text-[10px] leading-4 text-flag">
+        <div role="status" className="map-status type-instrument absolute bottom-4 left-4 max-w-xs px-3 py-2 text-flag">
           Basemap tiles are currently unavailable. Feed and analysis remain usable; retry when network access is restored.
         </div>
       )}
-      <div className="map-legend absolute bottom-4 hidden max-w-[52%] flex-wrap gap-x-3 gap-y-1 px-3 py-2 md:flex">
-        {Object.entries(categoryColors).map(([category, color]) => <span key={category} className="text-[9px] text-muted"><span aria-hidden="true" className="mr-1" style={{ color }}>●</span>{category}</span>)}
-      </div>
     </section>
   );
 }

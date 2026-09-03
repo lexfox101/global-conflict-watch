@@ -36,7 +36,6 @@ export const categoryAccent: Record<ThreatCategory, string> = {
 const longDate = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const shortDate = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" });
 const weekday = new Intl.DateTimeFormat("en-GB", { weekday: "long", timeZone: "UTC" });
-const clock = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "UTC", hour12: false });
 
 /** `date` is an ISO calendar date (yyyy-mm-dd), read in UTC to avoid off-by-one shifts. */
 export function formatBriefingDate(date: string) {
@@ -49,8 +48,4 @@ export function formatBriefingDateShort(date: string) {
 
 export function formatBriefingWeekday(date: string) {
   return weekday.format(new Date(`${date}T00:00:00Z`));
-}
-
-export function formatAlertTime(timestamp: string) {
-  return `${clock.format(new Date(timestamp))} UTC`;
 }

@@ -9,9 +9,9 @@ interface StatCardProps {
 export function StatCard({ value, label, note }: StatCardProps) {
   return (
     <div className="flex h-full flex-col border-t border-rule pt-4">
-      <p className="font-mono text-[30px] font-semibold leading-none tracking-[-0.03em] text-ink">{value}</p>
-      <p className="mt-3 text-[13px] font-semibold text-muted">{label}</p>
-      <p className="mt-1.5 text-[12px] leading-relaxed text-faint">{note}</p>
+      <p className="type-heading font-mono tracking-[-0.02em]">{value}</p>
+      <p className="type-body mt-3 font-semibold text-ink">{label}</p>
+      <p className="type-body mt-1 text-muted">{note}</p>
     </div>
   );
 }

@@ -15,11 +15,10 @@ interface StoryFeedProps {
 export function StoryFeed({ refs, label, emptyTitle, emptyBody }: StoryFeedProps) {
   if (refs.length === 0) {
     return (
-      <div className="soft-panel p-6 sm:p-8">
-        <p className="eyebrow">No entries</p>
-        <h3 className="headline-story mt-2">{emptyTitle}</h3>
-        <p className="mt-3 max-w-[62ch] text-[14px] leading-relaxed text-muted">{emptyBody}</p>
-        <Link href="/briefings" className="link-signal mt-4 inline-block text-[13px]">
+      <div>
+        <h3 className="type-standfirst is-heading">{emptyTitle}</h3>
+        <p className="type-body mt-3 max-w-[64ch] text-muted">{emptyBody}</p>
+        <Link href="/briefings" className="link-signal type-body mt-4 inline-block">
           Browse the archive →
         </Link>
       </div>
@@ -27,10 +26,10 @@ export function StoryFeed({ refs, label, emptyTitle, emptyBody }: StoryFeedProps
   }
 
   return (
-    <ul className="ruled-list border-t border-rule" aria-label={label}>
+    <ul className="ruled-list" aria-label={label}>
       {refs.map(({ story, briefing }) => (
         <li key={`${briefing.slug}-${story.id}`}>
-          <StoryCard story={story} briefingSlug={briefing.slug} showDate isSample={briefing.isSample} />
+          <StoryCard story={story} briefingSlug={briefing.slug} isSample={briefing.isSample} />
         </li>
       ))}
     </ul>

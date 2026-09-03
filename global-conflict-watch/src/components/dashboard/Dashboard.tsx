@@ -82,23 +82,14 @@ export function Dashboard({ incidents, aircraft, vessels, lastUpdated }: Dashboa
   return (
     <div className="dashboard-shell flex min-h-dvh flex-col text-ink-body">
       <header className="app-header shrink-0">
-        <div className="mx-auto flex max-w-[1920px] items-center justify-between gap-4 px-4 py-3 lg:px-6">
-          <div className="flex min-w-0 items-center gap-3">
-            <div className="brand-mark" aria-hidden="true"><span>G</span></div>
-            <div className="min-w-0">
-              <h1 className="masthead-name truncate text-[17px]">Global Conflict Watch</h1>
-              <p className="dateline mt-0.5 hidden text-[10px] sm:block">Situational awareness · fictional demonstration</p>
-            </div>
-          </div>
-          <div className="flex shrink-0 items-center gap-3 sm:gap-5">
-            <div className="hidden text-right md:block">
-              <p className="eyebrow">Last update</p>
-              <time dateTime={lastUpdated} className="mt-1 block font-mono text-[10px] text-muted">{formatDateTime(lastUpdated)} UTC</time>
-            </div>
-            <div className="demo-status" title="Fictional demonstration data — not live reporting">
-              <span className="status-pulse h-1.5 w-1.5 rounded-full bg-flag" />
-              <span className="hidden sm:inline">Demonstration data</span><span className="sm:hidden">Demo</span>
-            </div>
+        <div className="mx-auto flex max-w-[1920px] flex-wrap items-center justify-between gap-3 px-4 py-3 lg:px-6">
+          <h1 className="type-heading min-w-0 truncate">Interactive map</h1>
+          <div className="flex shrink-0 items-center gap-4">
+            <time dateTime={lastUpdated} className="type-instrument hidden text-muted md:block">Last update {formatDateTime(lastUpdated)} UTC</time>
+            <p className="demo-status type-instrument" title="Fictional demonstration data — not live reporting">
+              <span aria-hidden="true" className="status-pulse h-1.5 w-1.5 rounded-full bg-flag" />
+              Demonstration data · no live sources
+            </p>
           </div>
         </div>
         <Filters
@@ -137,9 +128,9 @@ export function Dashboard({ incidents, aircraft, vessels, lastUpdated }: Dashboa
       </div>
 
       <footer className="app-footer shrink-0 px-4 py-2 lg:px-6">
-        <div className="mx-auto flex max-w-[1920px] flex-col justify-between gap-1 text-[10px] leading-4 text-faint sm:flex-row sm:items-center">
-          <p><strong className="font-medium text-muted">Methodology:</strong> positions are fictional, generalized and delayed; corroboration is mocked.</p>
-          <p>No live sources or APIs · Basemap © OpenStreetMap © CARTO</p>
+        <div className="type-instrument mx-auto flex max-w-[1920px] flex-col justify-between gap-1 text-muted sm:flex-row sm:items-center">
+          <p><strong className="font-medium text-ink">Methodology:</strong> positions are fictional, generalized and delayed; corroboration is mocked.</p>
+          <p>Basemap © OpenStreetMap © CARTO</p>
         </div>
       </footer>
     </div>

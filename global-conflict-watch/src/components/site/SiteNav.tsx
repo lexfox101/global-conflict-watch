@@ -3,20 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ThreatLevel } from "@/types/briefing";
-import { ThreatLevelBadge } from "./ThreatLevelBadge";
 import { PRIMARY_NAV, isActiveRoute } from "./nav";
 
 const MENU_ID = "site-mobile-nav";
 
-export function SiteNav({ threatLevel }: { threatLevel: ThreatLevel }) {
+export function SiteNav() {
   const pathname = usePathname();
   const [openedAt, setOpenedAt] = useState<string>();
   const open = openedAt === pathname;
 
   return (
     <>
-      <nav aria-label="Primary" className="ml-auto hidden items-center gap-1 lg:flex">
+      <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
         {PRIMARY_NAV.map((item) => {
           const active = isActiveRoute(pathname, item.href);
           return (
@@ -32,7 +30,7 @@ export function SiteNav({ threatLevel }: { threatLevel: ThreatLevel }) {
         onClick={() => setOpenedAt(open ? undefined : pathname)}
         aria-expanded={open}
         aria-controls={MENU_ID}
-        className="ml-auto shrink-0 border border-rule px-3 py-2 font-mono text-[11px] uppercase tracking-[0.11em] text-muted transition-colors hover:text-ink lg:hidden"
+        className="type-meta shrink-0 border border-rule px-3 py-2 text-muted transition-colors hover:text-ink lg:hidden"
       >
         {open ? "Close" : "Menu"}
         <span className="sr-only"> navigation</span>
@@ -52,7 +50,7 @@ export function SiteNav({ threatLevel }: { threatLevel: ThreatLevel }) {
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={`site-nav-link block px-1 py-2.5 text-[15px] ${active ? "is-active" : ""}`}
+                    className={`site-nav-link block px-1 py-3 ${active ? "is-active" : ""}`}
                   >
                     {item.label}
                   </Link>
@@ -61,9 +59,6 @@ export function SiteNav({ threatLevel }: { threatLevel: ThreatLevel }) {
             })}
           </ul>
         </nav>
-        <div className="mt-3 border-t border-rule pt-3 sm:hidden">
-          <ThreatLevelBadge level={threatLevel} label="Global" variant="pill" />
-        </div>
       </div>
     </>
   );

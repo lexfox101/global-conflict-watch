@@ -6,21 +6,20 @@ interface ThreatLevelBadgeProps {
   /** Prefix rendered before the level, e.g. "Global". */
   label?: string;
   /**
-   * `mark` is an unbordered dot and word for use inside a metadata line.
-   * `pill` is the bordered chip, kept for standing status indicators.
+   * `dot` is the marker used inside list rows: colour only, with the level
+   * available to assistive technology. `mark` adds the level as text, for
+   * places where the level itself is the subject.
    */
-  variant?: "mark" | "pill";
+  variant?: "dot" | "mark";
   className?: string;
 }
 
 export function ThreatLevelBadge({ level, label, variant = "mark", className = "" }: ThreatLevelBadgeProps) {
-  const base = variant === "pill" ? "pill" : "threat-mark";
-
   return (
-    <span className={`${base} ${threatToneClass[level]} ${className}`}>
-      {label ? <span className="text-muted">{label}</span> : null}
+    <span className={`threat-mark ${threatToneClass[level]} ${className}`}>
+      {label && variant === "mark" ? <span className="text-muted">{label}</span> : null}
       <span aria-hidden="true" className="threat-dot" />
-      <span>
+      <span className={variant === "dot" ? "sr-only" : undefined}>
         <span className="sr-only">Threat level: </span>
         {level}
       </span>

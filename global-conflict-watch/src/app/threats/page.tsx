@@ -19,47 +19,35 @@ export default function ThreatsIndexPage() {
   }));
 
   return (
-    <div className="mx-auto w-full max-w-[1000px] px-4 py-10 lg:px-6 lg:py-14">
+    <div className="mx-auto w-full max-w-[900px] px-4 py-14 lg:px-6 lg:py-20">
       <SectionHeading
-        eyebrow="Threat categories"
         title="Six categories, defined"
         as="h1"
         description="Every story in a briefing is filed under exactly one category. The definitions below state what GCW includes in each, so that an empty category can be read as out of scope or a quiet cycle rather than a gap left unexplained."
       />
 
-      <div className="soft-panel mt-8 p-5 sm:p-6">
-        <h2 className="eyebrow">Reading the counts</h2>
-        <p className="mt-3 max-w-[70ch] text-[14px] leading-relaxed text-muted">
-          Counts and levels below cover the {FREE_ARCHIVE_DAYS} editions inside the free window. A category level is the highest
-          story-level threat currently filed under it; where nothing is filed, the level is shown as unset rather than defaulted to
-          Low. GCW publishes across all six categories, but a single daily cycle rarely touches every one.
-        </p>
-      </div>
+      <p className="type-body mt-8 max-w-[70ch] text-muted">
+        Counts and levels below cover the {FREE_ARCHIVE_DAYS} editions inside the free window. A category level is the highest
+        story-level threat currently filed under it; where nothing is filed, the level is shown as unset rather than defaulted to
+        Low. GCW publishes across all six categories, but a single daily cycle rarely touches every one.
+      </p>
 
-      <ul className="ruled-list mt-10">
-        {categories.map(({ category, slug, definition, includes, level, storyCount }) => (
+      <ul className="ruled-list mt-20">
+        {categories.map(({ category, slug, definition, level, storyCount }) => (
           <li key={slug}>
             <article>
-              <h2 className="headline-story">
+              <h2 className="type-standfirst is-heading">
                 <Link href={`/threats/${slug}`} className="hover:text-signal">
                   {category}
                 </Link>
               </h2>
-              <p className="standfirst-sm mt-3 max-w-[64ch]">{definition}</p>
-              <p className="meta-line mt-4">
-                {level ? <ThreatLevelBadge level={level} /> : <span>Level unset</span>}
+              <p className="type-body mt-2 max-w-[64ch] text-muted">{definition}</p>
+              <p className="type-meta meta-line mt-3">
+                {level ? <ThreatLevelBadge level={level} variant="dot" /> : <span>Level unset</span>}
                 <span>
                   {storyCount} {storyCount === 1 ? "story" : "stories"}
                 </span>
               </p>
-              <ul className="mt-4 flex flex-col gap-1.5 text-[14px] leading-relaxed text-faint">
-                {includes.slice(0, 3).map((item) => (
-                  <li key={`${slug}-${item}`} className="flex gap-2.5">
-                    <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-rule-strong" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
             </article>
           </li>
         ))}

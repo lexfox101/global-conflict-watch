@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SectionHeading } from "@/components/site/SectionHeading";
 
 export const metadata: Metadata = {
@@ -66,134 +65,112 @@ const UNACCEPTABLE = [
 
 export default function AdvertisePage() {
   return (
-    <div className="mx-auto w-full max-w-[1100px] px-4 py-10 lg:px-6 lg:py-14">
+    <div className="mx-auto w-full max-w-[900px] px-4 py-14 lg:px-6 lg:py-20">
       <SectionHeading
-        eyebrow="Sponsorship"
         title="Advertise on Global Conflict Watch"
         as="h1"
-        description="A small number of clearly labelled placements, sold directly, on terms that keep the briefing independent. This page sets out what is available, what governs it, and what will not be accepted."
+        description="A small number of clearly labelled placements, sold directly, on terms that keep the briefing independent. Sponsorship enquiries go to sponsors@example.com."
       />
 
-      <div className="soft-panel panel-note mt-8 p-5 sm:p-6" role="note">
-        <p className="eyebrow text-flag">Audience figures are not published yet</p>
-        <p className="mt-2 max-w-[76ch] text-[14px] leading-relaxed text-ink-body">
+      <div className="soft-panel panel-note mt-10 p-6" role="note">
+        <p className="type-meta text-flag">Audience figures are not published yet</p>
+        <p className="type-body mt-2 max-w-[76ch] text-ink-body">
           GCW does not publish subscriber counts, traffic figures or open rates it cannot yet substantiate. Every quantitative field
           on this page is marked to be confirmed and will be filled in from measured data, with the measurement period stated. Treat
           the audience description below as qualitative only.
         </p>
       </div>
 
-      <section className="mt-12" aria-labelledby="audience">
-        <SectionHeading eyebrow="Audience" title="Who reads GCW" id="audience" />
-        <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
-          <ul className="flex flex-col gap-4 text-[15px] leading-relaxed text-muted">
-            {AUDIENCE.map((item) => (
-              <li key={item} className="flex gap-3">
-                <span aria-hidden="true" className="mt-[11px] h-px w-2.5 shrink-0 bg-rule-strong" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+      <section className="mt-20" aria-labelledby="audience">
+        <h2 id="audience" className="type-heading border-b border-rule pb-4">
+          Who reads GCW
+        </h2>
+        <ul className="type-body mt-6 flex flex-col gap-4 text-muted">
+          {AUDIENCE.map((item) => (
+            <li key={item} className="max-w-[74ch]">
+              {item}
+            </li>
+          ))}
+        </ul>
 
-          <div className="soft-panel p-6">
-            <h3 className="eyebrow">Audience metrics</h3>
-            <p className="mt-2 text-[12px] leading-relaxed text-faint">
-              Placeholders. No figure below has been measured or verified.
-            </p>
-            <dl className="mt-5 flex flex-col">
-              {METRICS.map((metric) => (
-                <div key={metric.label} className="flex flex-wrap items-baseline justify-between gap-2 border-t border-rule py-2.5">
-                  <dt className="text-[13px] text-muted">{metric.label}</dt>
-                  <dd className="font-mono text-[11px] uppercase tracking-[0.11em] text-flag">{metric.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
+        <dl className="mt-8 flex flex-col">
+          {METRICS.map((metric) => (
+            <div key={metric.label} className="flex flex-wrap items-baseline justify-between gap-2 border-t border-rule py-3">
+              <dt className="type-body text-muted">{metric.label}</dt>
+              <dd className="type-meta text-flag">{metric.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="type-body mt-3 text-muted">Placeholders. No figure above has been measured or verified.</p>
       </section>
 
-      <section className="mt-14" aria-labelledby="placements">
-        <SectionHeading
-          eyebrow="Placements"
-          title="What is available"
-          id="placements"
-          description="Rates are set per placement and per term, and are not published. All placements are sold directly — GCW runs no ad network and serves no third-party creative."
-        />
-        <ul className="mt-8 grid gap-x-10 sm:grid-cols-2">
+      <section className="mt-20" aria-labelledby="placements">
+        <h2 id="placements" className="type-heading border-b border-rule pb-4">
+          What is available
+        </h2>
+        <p className="type-body mt-4 max-w-[74ch] text-muted">
+          Rates are set per placement and per term, and are not published. All placements are sold directly — GCW runs no ad network
+          and serves no third-party creative.
+        </p>
+        <ul className="ruled-list mt-8">
           {PLACEMENTS.map((placement) => (
-            <li key={placement.name} className="border-t border-rule py-5">
-              <article className="flex h-full flex-col gap-2">
-                <h3 className="headline-item">{placement.name}</h3>
-                <p className="meta-line">
+            <li key={placement.name}>
+              <article>
+                <h3 className="type-standfirst is-heading">{placement.name}</h3>
+                <p className="type-body mt-2 max-w-[74ch] text-muted">{placement.description}</p>
+                <p className="type-meta meta-line mt-3">
                   <span>{placement.format}</span>
                   <span>Rate to be confirmed</span>
                 </p>
-                <p className="mt-1 text-[14px] leading-relaxed text-muted">{placement.description}</p>
               </article>
             </li>
           ))}
         </ul>
       </section>
 
-      <section className="mt-14" aria-labelledby="independence">
-        <SectionHeading eyebrow="Policy" title="Editorial independence" id="independence" />
-        <div className="mt-6">
-          <ol className="flex flex-col text-[15px] leading-relaxed text-muted">
-            {INDEPENDENCE.map((item, index) => (
-              <li key={item} className="flex gap-4 border-t border-rule py-4">
-                <span aria-hidden="true" className="mt-0.5 font-mono text-[13px] text-faint">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
+      <section className="mt-20" aria-labelledby="independence">
+        <h2 id="independence" className="type-heading border-b border-rule pb-4">
+          Editorial independence
+        </h2>
+        <ol className="type-body mt-6 flex flex-col gap-4 text-muted">
+          {INDEPENDENCE.map((item) => (
+            <li key={item} className="max-w-[74ch]">
+              {item}
+            </li>
+          ))}
+        </ol>
       </section>
 
-      <section className="mt-14" aria-labelledby="unacceptable">
-        <SectionHeading
-          eyebrow="Policy"
-          title="Advertisers GCW will not accept"
-          id="unacceptable"
-          description="Some categories are refused outright, because carrying them would compromise the beat GCW reports on. This list is not exhaustive and the decision rests with the publication."
-        />
-        <div className="mt-6">
-          <ul className="flex flex-col text-[15px] leading-relaxed text-muted">
-            {UNACCEPTABLE.map((item) => (
-              <li key={item} className="flex gap-4 border-t border-rule py-3.5">
-                <span aria-hidden="true" className="mt-[11px] h-px w-2.5 shrink-0 bg-signal" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <section className="mt-20" aria-labelledby="unacceptable">
+        <h2 id="unacceptable" className="type-heading border-b border-rule pb-4">
+          Advertisers GCW will not accept
+        </h2>
+        <p className="type-body mt-4 max-w-[74ch] text-muted">
+          Some categories are refused outright, because carrying them would compromise the beat GCW reports on. This list is not
+          exhaustive and the decision rests with the publication.
+        </p>
+        <ul className="type-body mt-6 flex flex-col gap-3 text-muted">
+          {UNACCEPTABLE.map((item) => (
+            <li key={item} className="max-w-[74ch]">
+              {item}
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <section className="mt-14" aria-labelledby="sponsor-contact">
-        <SectionHeading eyebrow="Contact" title="Enquiries" id="sponsor-contact" />
-        <div className="soft-panel mt-6 p-6 sm:p-8">
-          <p className="max-w-[68ch] text-[15px] leading-relaxed text-muted">
-            Sponsorship enquiries go to the address below. Include the placement you are interested in, the term, and the copy or
-            creative you have in mind. Requests for editorial input, pre-publication review, or unlabelled placement will be declined
-            without a rate being quoted.
-          </p>
-          <p className="mt-5 font-mono text-[16px] text-ink">sponsors@example.com</p>
-          <p className="mt-2 text-[12px] leading-relaxed text-faint">
-            Placeholder address — the live sponsorship mailbox has not been set up yet. Do not send anything to it.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[13px]">
-            <Link href="/about" className="link-signal">
-              Editorial standards →
-            </Link>
-            <Link href="/data#methodology" className="link-signal">
-              Methodology →
-            </Link>
-            <Link href="/pricing" className="link-signal">
-              Reader access tiers →
-            </Link>
-          </div>
-        </div>
+      <section className="mt-20" aria-labelledby="sponsor-contact">
+        <h2 id="sponsor-contact" className="type-heading border-b border-rule pb-4">
+          Enquiries
+        </h2>
+        <p className="type-body mt-6 max-w-[68ch] text-muted">
+          Sponsorship enquiries go to the address below. Include the placement you are interested in, the term, and the copy or
+          creative you have in mind. Requests for editorial input, pre-publication review, or unlabelled placement will be declined
+          without a rate being quoted.
+        </p>
+        <p className="type-standfirst is-heading mt-5 font-mono">sponsors@example.com</p>
+        <p className="type-body mt-2 max-w-[68ch] text-muted">
+          Placeholder address — the live sponsorship mailbox has not been set up yet. Do not send anything to it.
+        </p>
       </section>
     </div>
   );

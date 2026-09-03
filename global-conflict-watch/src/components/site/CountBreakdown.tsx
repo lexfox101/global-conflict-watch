@@ -35,7 +35,7 @@ export function CountBreakdown({ items, label, total, caption }: CountBreakdownP
 
           return (
             <li key={item.key}>
-              <div className="flex items-baseline justify-between gap-4 text-[13px]">
+              <div className="type-body flex items-baseline justify-between gap-4">
                 <span className="min-w-0 truncate text-muted">
                   {item.href ? (
                     <Link href={item.href} className="hover:text-signal">
@@ -45,7 +45,7 @@ export function CountBreakdown({ items, label, total, caption }: CountBreakdownP
                     item.label
                   )}
                 </span>
-                <span className="shrink-0 font-mono text-[12px] text-faint">
+                <span className="type-meta shrink-0">
                   {item.count}
                   <span> · {share}%</span>
                 </span>
@@ -60,7 +60,7 @@ export function CountBreakdown({ items, label, total, caption }: CountBreakdownP
           );
         })}
       </ul>
-      {caption ? <p className="mt-4 max-w-[60ch] text-[12px] leading-relaxed text-faint">{caption}</p> : null}
+      {caption ? <p className="type-body mt-4 max-w-[60ch] text-muted">{caption}</p> : null}
     </div>
   );
 }

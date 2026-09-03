@@ -10,7 +10,6 @@ import {
 import { CATEGORY_PROFILES, CATEGORY_SLUGS, categoryFromSlug } from "@/data/threat-categories";
 import { REGIONS, REGION_KEYS, THREAT_CATEGORIES } from "@/types/briefing";
 import { CountBreakdown } from "@/components/site/CountBreakdown";
-import { SectionHeading } from "@/components/site/SectionHeading";
 import { StoryFeed } from "@/components/site/StoryFeed";
 import { ThreatLevelBadge } from "@/components/site/ThreatLevelBadge";
 import { threatLevelBlurb } from "@/components/site/ui";
@@ -55,68 +54,52 @@ export default async function ThreatCategoryPage({ params }: PageProps<"/threats
   ];
 
   return (
-    <div className="mx-auto w-full max-w-[1200px] px-4 py-10 lg:px-6 lg:py-14">
-      <Link href="/threats" className="link-signal text-[13px]">
+    <div className="mx-auto w-full max-w-[1000px] px-4 py-14 lg:px-6 lg:py-20">
+      <Link href="/threats" className="link-signal type-body">
         ← All threat categories
       </Link>
 
-      <header className="mt-8">
-        <p className="eyebrow eyebrow-signal">Threat category</p>
-        <h1 className="headline-page mt-3">{category}</h1>
-        <p className="standfirst mt-4 max-w-[64ch]">{profile.definition}</p>
-        <p className="meta-line mt-6 border-t border-rule-strong pt-3">
+      <header className="mt-10 border-b border-rule pb-6">
+        <h1 className="type-lead">{category}</h1>
+        <p className="type-standfirst mt-5 max-w-[60ch]">{profile.definition}</p>
+        <p className="type-meta meta-line mt-6">
           {level ? <ThreatLevelBadge level={level} /> : <span>Level unset — no current entries</span>}
           <span>
-            {refs.length} {refs.length === 1 ? "story" : "stories"}
+            {refs.length} {refs.length === 1 ? "story" : "stories"} · free window, {FREE_ARCHIVE_DAYS} editions
           </span>
-          <span>Free window · {FREE_ARCHIVE_DAYS} editions</span>
         </p>
-        {level ? <p className="mt-3 max-w-[64ch] text-[13px] leading-relaxed text-faint">{threatLevelBlurb[level]}</p> : null}
+        {level ? <p className="type-body mt-3 max-w-[62ch] text-muted">{threatLevelBlurb[level]}</p> : null}
       </header>
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
+      <div className="mt-16 grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start">
         <section aria-labelledby="category-scope">
-          <h2 id="category-scope" className="eyebrow border-b border-rule pb-2">
+          <h2 id="category-scope" className="type-heading">
             Inclusion criteria
           </h2>
-          <div className="mt-5 grid gap-8 sm:grid-cols-2">
-            <div>
-              <h3 className="headline-item">Filed under {category}</h3>
-              <ul className="mt-3 flex flex-col gap-2 text-[14px] leading-relaxed text-muted">
-                {profile.includes.map((item) => (
-                  <li key={item} className="flex gap-2.5">
-                    <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-rule-strong" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="headline-item">Filed elsewhere, or out of scope</h3>
-              <ul className="mt-3 flex flex-col gap-2 text-[14px] leading-relaxed text-muted">
-                {profile.excludes.map((item) => (
-                  <li key={item} className="flex gap-2.5">
-                    <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-rule-strong" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
 
-          <hr className="rule-soft my-7" />
+          <h3 className="type-meta mt-6">Filed under {category}</h3>
+          <ul className="type-body mt-3 flex flex-col gap-2 text-muted">
+            {profile.includes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
 
-          <h3 className="eyebrow">Scope note</h3>
-          <p className="mt-2 max-w-[68ch] text-[14px] leading-relaxed text-muted">{profile.scopeNote}</p>
+          <h3 className="type-meta mt-8">Filed elsewhere, or out of scope</h3>
+          <ul className="type-body mt-3 flex flex-col gap-2 text-muted">
+            {profile.excludes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+
+          <h3 className="type-meta mt-8">Scope note</h3>
+          <p className="type-body mt-3 max-w-[66ch] text-muted">{profile.scopeNote}</p>
         </section>
 
-        <section className="soft-panel p-6" aria-labelledby="category-regions">
-          <h2 id="category-regions" className="eyebrow">
+        <section aria-labelledby="category-regions">
+          <h2 id="category-regions" className="type-heading">
             Regional spread
           </h2>
-          <p className="mt-2 text-[13px] leading-relaxed text-muted">
-            Where the current entries in this category are filed geographically.
-          </p>
+          <p className="type-body mt-3 text-muted">Where the current entries in this category are filed geographically.</p>
           <div className="mt-5">
             {breakdown.length > 0 ? (
               <CountBreakdown
@@ -126,7 +109,7 @@ export default async function ThreatCategoryPage({ params }: PageProps<"/threats
                 caption="A story tagged to several regions is counted in each. Entries with no single geographic focus are grouped as global."
               />
             ) : (
-              <p className="text-[13px] leading-relaxed text-faint">
+              <p className="type-body text-muted">
                 Nothing is filed under this category in the current free window, so there is no regional spread to show.
               </p>
             )}
@@ -134,14 +117,14 @@ export default async function ThreatCategoryPage({ params }: PageProps<"/threats
         </section>
       </div>
 
-      <section className="mt-14" aria-labelledby="category-feed">
-        <SectionHeading
-          eyebrow="Feed"
-          title={`${category} entries`}
-          id="category-feed"
-          description="Newest edition first. Each headline links to the story in the briefing it was published in."
-        />
-        <div className="mt-6">
+      <section className="mt-20" aria-labelledby="category-feed">
+        <h2 id="category-feed" className="type-heading border-b border-rule pb-4">
+          {category} entries
+        </h2>
+        <p className="type-body mt-4 max-w-[62ch] text-muted">
+          Newest edition first. Each headline links to the story in the briefing it was published in.
+        </p>
+        <div className="mt-8">
           <StoryFeed
             refs={refs}
             label={`${category} stories`}

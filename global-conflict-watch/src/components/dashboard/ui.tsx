@@ -18,21 +18,19 @@ export const categoryColors: Record<EventCategory, string> = {
   Humanitarian: "#2f6b56",
 };
 
-export function PanelHeading({ eyebrow, title, trailing }: { eyebrow: string; title: string; trailing?: React.ReactNode }) {
+export function PanelHeading({ title }: { title: string }) {
   return (
-    <div className="flex items-end justify-between gap-3 border-b border-rule px-4 pb-3 pt-4">
-      <div>
-        <p className="eyebrow">{eyebrow}</p>
-        <h2 className="mt-1.5 text-[14px] font-semibold tracking-[-0.01em] text-ink">{title}</h2>
-      </div>
-      {trailing}
+    <div className="border-b border-rule px-4 pb-3 pt-4">
+      <h2 className="type-meta text-ink">{title}</h2>
     </div>
   );
 }
 
+/** Dot marker plus the level as text, so severity is never carried by colour alone. */
 export function SeverityBadge({ severity }: { severity: Severity }) {
   return (
-    <span className={`pill ${severityStyles[severity]}`}>
+    <span className={`threat-mark type-instrument uppercase tracking-[0.1em] ${severityStyles[severity]}`}>
+      <span aria-hidden="true" className="threat-dot" />
       <span className="sr-only">Severity: </span>
       {severity}
     </span>

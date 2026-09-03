@@ -11,31 +11,31 @@ export function SiteHeader() {
     <header className="site-header">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:border focus:border-signal focus:bg-surface focus:px-4 focus:py-2 focus:text-[13px] focus:text-ink"
+        className="type-body sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:border focus:border-signal focus:bg-surface focus:px-4 focus:py-2 focus:text-ink"
       >
         Skip to content
       </a>
 
-      <div className="relative mx-auto flex max-w-[1400px] items-center gap-4 px-4 py-3 lg:px-6">
-        <Link href="/" className="min-w-0">
-          <span className="masthead-name block truncate">Global Conflict Watch</span>
-          <span className="dateline mt-1 hidden text-[10px] sm:block">Open-source intelligence briefings</span>
+      <div className="relative mx-auto flex max-w-[1400px] items-center gap-4 px-4 py-4 lg:px-6">
+        <Link href="/" className="type-heading min-w-0 truncate">
+          Global Conflict Watch
         </Link>
-        <SiteNav threatLevel={globalThreatLevel} />
+        <div className="ml-auto flex shrink-0 items-center gap-3 lg:gap-5">
+          <SiteNav />
+          <ThreatLevelBadge level={globalThreatLevel} label="Global" className="type-meta" />
+        </div>
       </div>
 
       <div className="dateline-strip">
-        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-4 gap-y-1 px-4 py-1.5 lg:px-6">
-          <p className="dateline">
+        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-4 px-4 py-2 lg:px-6">
+          <p className="type-meta">
             {edition ? <span>Edition No.&nbsp;{edition} · </span> : null}
             <time dateTime={latestBriefing.date}>
               {formatBriefingWeekday(latestBriefing.date)} {formatBriefingDate(latestBriefing.date)}
             </time>
+            {" · "}
+            {latestBriefing.isSample ? "Illustrative sample edition" : "Compiled 06:00 UTC"}
           </p>
-          <p className="dateline">{latestBriefing.isSample ? "Illustrative sample edition" : "Compiled 06:00 UTC"}</p>
-          <div className="ml-auto hidden sm:block">
-            <ThreatLevelBadge level={globalThreatLevel} label="Global" />
-          </div>
         </div>
       </div>
     </header>

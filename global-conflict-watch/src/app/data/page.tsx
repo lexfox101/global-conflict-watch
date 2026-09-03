@@ -128,19 +128,18 @@ export default function DataPage() {
   ];
 
   return (
-    <div className="mx-auto w-full max-w-[1200px] px-4 py-10 lg:px-6 lg:py-14">
+    <div className="mx-auto w-full max-w-[1000px] px-4 py-14 lg:px-6 lg:py-20">
       <SectionHeading
-        eyebrow="Data & stats"
         title="What has actually been published"
         as="h1"
         description="Every counter on this page is computed from the briefings on this site at build time. Nothing here is an estimate, a projection, or a traffic figure — each number states exactly what it counts."
       />
 
-      <section className="mt-10" aria-labelledby="counters">
-        <h2 id="counters" className="eyebrow">
+      <section className="mt-16" aria-labelledby="counters">
+        <h2 id="counters" className="type-heading border-b border-rule pb-4">
           Site content counters
         </h2>
-        <ul className="mt-5 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
           <li>
             <StatCard
               value={activeSituations}
@@ -184,18 +183,20 @@ export default function DataPage() {
             />
           </li>
         </ul>
-        <p className="mt-8 max-w-[80ch] text-[12px] leading-relaxed text-faint">
+        <p className="type-body mt-8 max-w-[80ch] text-muted">
           Latest edition: {formatBriefingDate(latestBriefing.date)}. Counters cover every edition on the site unless the note says
           otherwise; the free window covers the {FREE_ARCHIVE_DAYS} most recent editions.
         </p>
       </section>
 
-      <section className="mt-14" aria-labelledby="breakdowns">
-        <SectionHeading eyebrow="Composition" title="Breakdown of published stories" id="breakdowns" />
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
-          <div className="soft-panel p-6">
-            <h3 className="headline-item">By threat category</h3>
-            <p className="mt-1.5 text-[12px] leading-relaxed text-faint">
+      <section className="mt-20" aria-labelledby="breakdowns">
+        <h2 id="breakdowns" className="type-heading border-b border-rule pb-4">
+          Breakdown of published stories
+        </h2>
+        <div className="mt-8 grid gap-10 lg:grid-cols-3">
+          <div>
+            <h3 className="type-meta">By threat category</h3>
+            <p className="type-body mt-2 text-muted">
               Each story is filed under exactly one category, so these sum to the total.
             </p>
             <div className="mt-5">
@@ -203,9 +204,9 @@ export default function DataPage() {
             </div>
           </div>
 
-          <div className="soft-panel p-6">
-            <h3 className="headline-item">By confidence level</h3>
-            <p className="mt-1.5 text-[12px] leading-relaxed text-faint">
+          <div>
+            <h3 className="type-meta">By confidence level</h3>
+            <p className="type-body mt-2 text-muted">
               Each story carries exactly one rating. The lower two ratings are not defects — they record what the sourcing supports.
             </p>
             <div className="mt-5">
@@ -213,9 +214,9 @@ export default function DataPage() {
             </div>
           </div>
 
-          <div className="soft-panel p-6">
-            <h3 className="headline-item">By region</h3>
-            <p className="mt-1.5 text-[12px] leading-relaxed text-faint">
+          <div>
+            <h3 className="type-meta">By region</h3>
+            <p className="type-body mt-2 text-muted">
               A story tagged to several regions is counted in each, so these sum to more than the total.
             </p>
             <div className="mt-5">
@@ -225,37 +226,31 @@ export default function DataPage() {
         </div>
       </section>
 
-      <hr className="rule-soft my-14" />
+      <section className="mt-20" aria-labelledby="external-datasets">
+        <h2 id="external-datasets" className="type-heading border-b border-rule pb-4">
+          Where to go for the underlying data
+        </h2>
+        <p className="type-body mt-4 max-w-[74ch] text-muted">
+          GCW does not host, mirror or redistribute any of the datasets below. These are outbound links to the organisations that
+          maintain them, offered so readers can check a briefing entry against a primary record. Global Conflict Watch is not
+          affiliated with, endorsed by, or funded by any of these organisations. Their names appear here as attribution for a link,
+          nothing more. No data is fetched from them, cached, or re-published on this site — each entry below is a pointer, and
+          their own terms and licences govern any use you make of them.
+        </p>
 
-      <section aria-labelledby="external-datasets">
-        <SectionHeading
-          eyebrow="External reference datasets"
-          title="Where to go for the underlying data"
-          id="external-datasets"
-          description="GCW does not host, mirror or redistribute any of the datasets below. These are outbound links to the organisations that maintain them, offered so readers can check a briefing entry against a primary record."
-        />
-
-        <div className="soft-panel panel-note mt-6 p-5" role="note">
-          <p className="eyebrow text-flag">Not affiliated</p>
-          <p className="mt-2 max-w-[78ch] text-[13px] leading-relaxed text-ink-body">
-            Global Conflict Watch is not affiliated with, endorsed by, or funded by any of these organisations. Their names appear
-            here as attribution for a link, nothing more. No data is fetched from them, cached, or re-published on this site — each
-            entry below is a pointer, and their own terms and licences govern any use you make of them.
-          </p>
-        </div>
-
-        <ul className="mt-8 grid gap-x-10 sm:grid-cols-2">
+        <ul className="ruled-list mt-10">
           {EXTERNAL_DATASETS.map((dataset) => (
-            <li key={dataset.name} className="flex flex-col gap-2 border-t border-rule py-5">
-              <article className="flex h-full flex-col gap-2">
-                <h3 className="headline-item">{dataset.name}</h3>
-                <p className="text-[13px] leading-relaxed text-muted">{dataset.description}</p>
-                <p className="text-[13px] leading-relaxed text-faint">{dataset.useFor}</p>
+            <li key={dataset.name}>
+              <article>
+                <h3 className="type-standfirst is-heading">{dataset.name}</h3>
+                <p className="type-body mt-2 max-w-[74ch] text-muted">
+                  {dataset.description} {dataset.useFor}
+                </p>
                 <a
                   href={dataset.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link-signal mt-auto pt-1 text-[13px]"
+                  className="link-signal type-body mt-2 inline-block"
                 >
                   Open {dataset.name}
                   <span className="sr-only"> (opens in a new tab)</span>
@@ -267,45 +262,38 @@ export default function DataPage() {
         </ul>
       </section>
 
-      <hr className="rule-soft my-14" />
+      <section id="methodology" className="mt-20 scroll-mt-24" aria-labelledby="methodology-heading">
+        <h2 id="methodology-heading" className="type-heading border-b border-rule pb-4">
+          How entries are sourced, rated and corrected
+        </h2>
 
-      <section id="methodology" className="scroll-mt-24" aria-labelledby="methodology-heading">
-        <SectionHeading
-          eyebrow="Methodology"
-          title="How entries are sourced, rated and corrected"
-          id="methodology-heading"
-        />
-
-        <div className="mt-8 grid gap-8 lg:grid-cols-3 lg:gap-10">
-          <article className="border-t border-rule pt-4">
-            <h3 className="headline-item">Sourcing</h3>
+        <div className="mt-8 grid gap-12 lg:grid-cols-3">
+          <article>
+            <h3 className="type-meta">Sourcing</h3>
             <Prose paragraphs={METHODOLOGY.sourcing} className="is-tight mt-3" />
           </article>
-          <article className="border-t border-rule pt-4">
-            <h3 className="headline-item">Corroboration levels</h3>
+          <article>
+            <h3 className="type-meta">Corroboration levels</h3>
             <Prose paragraphs={METHODOLOGY.corroboration} className="is-tight mt-3" />
           </article>
-          <article className="border-t border-rule pt-4">
-            <h3 className="headline-item">Corrections</h3>
+          <article>
+            <h3 className="type-meta">Corrections</h3>
             <Prose paragraphs={METHODOLOGY.corrections} className="is-tight mt-3" />
           </article>
         </div>
 
-        <div className="soft-panel panel-note mt-10 p-5 sm:p-6" role="note">
-          <p className="eyebrow text-flag">Standing caveat</p>
-          <p className="mt-2 max-w-[78ch] text-[14px] leading-relaxed text-ink-body">
+        <div className="soft-panel panel-note mt-12 p-6" role="note">
+          <p className="type-meta text-flag">Standing caveat</p>
+          <p className="type-body mt-2 max-w-[78ch] text-ink-body">
             Time-sensitive figures — severity scores, contract values, casualty and displacement counts, alert levels — change after
             publication and are frequently revised. Verify any such figure against the issuing primary source before acting on it. A
             GCW briefing is a starting point for that check, not a substitute for it.
           </p>
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[13px]">
+          <p className="type-body mt-4 flex flex-wrap gap-x-6 gap-y-2">
             <Link href="/about" className="link-signal">
               Editorial standards and corrections process →
             </Link>
-            <Link href="/briefings" className="link-signal">
-              Read the briefings →
-            </Link>
-          </div>
+          </p>
         </div>
       </section>
     </div>

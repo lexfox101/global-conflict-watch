@@ -30,17 +30,16 @@ export function NewsletterSignup({
   }
 
   return (
-    <section className={`soft-panel newsletter-band p-6 sm:p-8 ${className}`} aria-labelledby={`${fieldId}-heading`}>
-      <p className="eyebrow eyebrow-signal">Daily email</p>
-      <h2 id={`${fieldId}-heading`} className="headline-section mt-2">
+    <section className={`newsletter-band p-8 sm:p-10 ${className}`} aria-labelledby={`${fieldId}-heading`}>
+      <h2 id={`${fieldId}-heading`} className="type-heading">
         {heading}
       </h2>
-      <p className="standfirst-sm mt-3 max-w-[56ch]">{description}</p>
+      <p className="type-body mt-3 max-w-[56ch] text-muted">{description}</p>
 
       {status === "done" ? (
-        <div className="soft-panel panel-note mt-6 p-5" role="status">
-          <p className="text-[15px] font-semibold text-ink">Address captured in this page only.</p>
-          <p className="mt-2 text-[14px] leading-relaxed text-muted">
+        <div className="mt-8 border-t border-rule pt-5" role="status">
+          <p className="type-body font-semibold text-ink">Address captured in this page only.</p>
+          <p className="type-body mt-2 max-w-[62ch] text-muted">
             This is an interface demonstration. Nothing was transmitted, stored, or shared — the value you entered lives in browser
             memory and disappears when you reload. Subscription delivery is not connected yet.
           </p>
@@ -50,17 +49,17 @@ export function NewsletterSignup({
               setEmail("");
               setStatus("idle");
             }}
-            className="btn mt-4"
+            className="btn mt-5"
           >
             Enter another address
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} noValidate className="mt-6">
-          <label htmlFor={fieldId} className="block text-[13px] font-medium text-muted">
+        <form onSubmit={handleSubmit} noValidate className="mt-8">
+          <label htmlFor={fieldId} className="type-meta block">
             Email address
           </label>
-          <div className="mt-2 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:max-w-[36rem]">
             <input
               id={fieldId}
               type="email"
@@ -75,18 +74,18 @@ export function NewsletterSignup({
               }}
               aria-describedby={noteId}
               aria-invalid={status === "error"}
-              className="field min-w-0 flex-1 px-4 py-2.5 text-[15px]"
+              className="field type-body min-w-0 flex-1 px-4 py-2.5"
             />
             <button type="submit" className="btn btn-primary shrink-0">
               Sign up
             </button>
           </div>
           {status === "error" ? (
-            <p role="alert" className="mt-2 text-[13px] text-flag">
+            <p role="alert" className="type-body mt-2 text-flag">
               Enter an email address in the form name@example.com.
             </p>
           ) : null}
-          <p id={noteId} className="mt-3 text-[12px] leading-relaxed text-faint">
+          <p id={noteId} className="type-body mt-3 max-w-[62ch] text-muted">
             Demonstration form. No data is transmitted or stored — there is no mailing backend connected.
           </p>
         </form>

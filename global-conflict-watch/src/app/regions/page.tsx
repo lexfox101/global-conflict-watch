@@ -21,41 +21,34 @@ export default function RegionsIndexPage() {
   }));
 
   return (
-    <div className="mx-auto w-full max-w-[1000px] px-4 py-10 lg:px-6 lg:py-14">
+    <div className="mx-auto w-full max-w-[900px] px-4 py-14 lg:px-6 lg:py-20">
       <SectionHeading
-        eyebrow="Regions"
         title="Five tracked regions"
         as="h1"
         description="Every briefing story is tagged to one or more regions, or left global where it has no single geographic focus. Each region page carries standing context and the current feed of entries filed to it."
       />
 
-      <div className="soft-panel mt-8 p-5 sm:p-6">
-        <h2 className="eyebrow">How the region level is worked out</h2>
-        <p className="mt-3 max-w-[70ch] text-[14px] leading-relaxed text-muted">
-          A region&apos;s level is the highest story-level threat currently filed to it across the {FREE_ARCHIVE_DAYS} editions inside
-          the free window. It is a summary of what is on the page, not a forecast, and it moves as editions roll out of the window.
-          Where a region has no current entries, the level is shown as unset rather than defaulted to Low.
-        </p>
-      </div>
+      <p className="type-body mt-8 max-w-[70ch] text-muted">
+        A region&apos;s level is the highest story-level threat currently filed to it across the {FREE_ARCHIVE_DAYS} editions inside
+        the free window. It is a summary of what is on the page, not a forecast, and it moves as editions roll out of the window.
+        Where a region has no current entries, the level is shown as unset rather than defaulted to Low.
+      </p>
 
-      <ul className="ruled-list mt-10">
-        {regions.map(({ key, region, summary, watchpoints, level, storyCount }) => (
+      <ul className="ruled-list mt-20">
+        {regions.map(({ key, region, summary, level, storyCount }) => (
           <li key={key}>
             <article>
-              <h2 className="headline-story">
+              <h2 className="type-standfirst is-heading">
                 <Link href={`/regions/${key}`} className="hover:text-signal">
                   {region.name}
                 </Link>
               </h2>
-              <p className="standfirst-sm mt-3 max-w-[64ch]">{summary}</p>
-              <p className="meta-line mt-4">
-                {level ? <ThreatLevelBadge level={level} label="Region" /> : <span>Level unset</span>}
+              <p className="type-body mt-2 max-w-[64ch] text-muted">{summary}</p>
+              <p className="type-meta meta-line mt-3">
+                {level ? <ThreatLevelBadge level={level} variant="dot" /> : <span>Level unset</span>}
                 <span>
                   {storyCount} {storyCount === 1 ? "story" : "stories"}
                 </span>
-                {watchpoints.map((watchpoint) => (
-                  <span key={`${key}-${watchpoint}`}>{watchpoint}</span>
-                ))}
               </p>
             </article>
           </li>
