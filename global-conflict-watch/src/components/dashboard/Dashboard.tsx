@@ -27,7 +27,7 @@ export function Dashboard({ incidents, aircraft, vessels, lastUpdated }: Dashboa
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<EventCategory | "all">("all");
   const [severity, setSeverity] = useState<Severity | "all">("all");
-  const [timeRange, setTimeRange] = useState<TimeRange>("72h");
+  const [timeRange, setTimeRange] = useState<TimeRange>("24h");
   const [selection, setSelection] = useState<DashboardSelection>();
   const [layerVisibility, setLayerVisibility] = useState<LayerVisibility>({ incidents: true, aircraft: true, vessels: true });
 
@@ -70,7 +70,7 @@ export function Dashboard({ incidents, aircraft, vessels, lastUpdated }: Dashboa
     setQuery("");
     setCategory("all");
     setSeverity("all");
-    setTimeRange("72h");
+    setTimeRange("24h");
     clearIncidentSelection();
   };
   const toggleLayer = (layer: keyof LayerVisibility) => {
@@ -87,7 +87,7 @@ export function Dashboard({ incidents, aircraft, vessels, lastUpdated }: Dashboa
           <div className="flex shrink-0 items-center gap-4">
             <time dateTime={lastUpdated} className="type-instrument hidden text-muted md:block">Last update {formatDateTime(lastUpdated)} UTC</time>
             <p className="demo-status type-instrument" title="Fictional demonstration data — not live reporting">
-              <span aria-hidden="true" className="status-pulse h-1.5 w-1.5 rounded-full bg-flag" />
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-flag" />
               Demonstration data · no live sources
             </p>
           </div>
@@ -123,7 +123,7 @@ export function Dashboard({ incidents, aircraft, vessels, lastUpdated }: Dashboa
           onSelect={(id) => setSelection({ kind: "incident", id })}
         />
         <div className="inspector-overlay min-h-0">
-          <IntelligencePanel incidents={filteredIncidents} selected={selected} aircraftCount={aircraft.length} vesselCount={vessels.length} />
+          <IntelligencePanel incidents={filteredIncidents} selected={selected} />
         </div>
       </div>
 

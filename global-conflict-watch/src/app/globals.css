@@ -403,6 +403,77 @@
     background: var(--surface-sunken);
   }
 
+  /* ── Homepage split ───────────────────────────────────────────
+     Today's briefing and a situation summary flanking a read-only map. Same
+     arrangement as the dashboard, but hairlines only and no motion. */
+
+  .home-stage {
+    display: grid;
+    align-items: start;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "lead"
+      "map"
+      "list"
+      "summary"
+      "signup";
+    gap: 40px 32px;
+  }
+
+  .home-lead { grid-area: lead; }
+  .home-list { grid-area: list; }
+  .home-summary { grid-area: summary; }
+  .home-signup { grid-area: signup; }
+
+  .home-map {
+    display: flex;
+    min-height: 520px;
+    flex-direction: column;
+    grid-area: map;
+    margin: 0;
+  }
+
+  .home-map .map-canvas {
+    height: auto;
+    flex: 1 1 auto;
+  }
+
+  .home-map-caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px 20px;
+    padding-top: 10px;
+  }
+
+  .home-rules > li {
+    padding-block: 16px;
+  }
+
+  .home-rules > li + li {
+    border-top: 1px solid var(--rule);
+  }
+
+  .home-panel {
+    border: 1px solid var(--rule);
+    padding: 24px;
+  }
+
+  .home-count-list > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 9px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .home-count-list > div:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
   /* ── Map dashboard ───────────────────────────────────────────────────
      Denser and more utilitarian than the editorial pages, but on the same
      palette and type. Square corners are enforced against MapLibre below. */
@@ -442,11 +513,6 @@
     border: 1px solid var(--rule);
     background: var(--surface);
     color-scheme: light;
-  }
-
-  .result-pill {
-    border: 1px solid var(--rule);
-    background: var(--surface-sunken);
   }
 
   .dashboard-stage {
@@ -544,20 +610,11 @@
     border-bottom: 0;
   }
 
-  .status-pulse {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--flag) 32%, transparent);
-    animation: status-pulse 2.4s ease-out infinite;
-  }
-
   /* The map dashboard brings its own full-height shell; relax it inside the site layout. */
   .map-route .dashboard-shell {
     min-height: 0;
     background: transparent;
   }
-}
-
-@keyframes status-pulse {
-  70%, 100% { box-shadow: 0 0 0 6px rgb(125 96 16 / 0); }
 }
 
 /* ── MapLibre overrides (square corners, project palette) ──────────── */
@@ -656,16 +713,39 @@
   font-size: 11px;
 }
 
-/* ── Dashboard layout at breakpoint ────────────────────────────────── */
+/* ── Homepage and dashboard layout at breakpoint ───────────────────── */
 
 @layer components {
+  @media (min-width: 768px) {
+    .home-stage {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-areas:
+        "map map"
+        "lead summary"
+        "list signup";
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .home-stage {
+      grid-template-columns: clamp(340px, 26vw, 380px) minmax(0, 1fr) clamp(300px, 22vw, 340px);
+      grid-template-areas:
+        "lead map summary"
+        "list map signup";
+    }
+
+    .home-map {
+      align-self: stretch;
+    }
+  }
+
   @media (min-width: 768px) and (max-width: 1279px) {
     .dashboard-stage {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }
 
-    .map-canvas {
+    .dashboard-stage .map-canvas {
       grid-column: 1 / -1;
       height: min(58vh, 660px);
     }
@@ -685,7 +765,7 @@
       padding: 12px;
     }
 
-    .map-canvas {
+    .dashboard-stage .map-canvas {
       position: absolute;
       inset: 12px;
       height: auto;
@@ -721,7 +801,7 @@
       transform: translateX(-50%);
     }
 
-    .map-status {
+    .dashboard-stage .map-status {
       left: calc(clamp(300px, 22vw, 360px) + 46px);
     }
   }
@@ -747,7 +827,7 @@
       padding: 8px;
     }
 
-    .map-canvas {
+    .dashboard-stage .map-canvas {
       height: 58vh;
       min-height: 420px;
     }
@@ -759,8 +839,8 @@
 }
 
 @media (min-width: 1280px) {
-  .maplibregl-ctrl-top-right,
-  .maplibregl-ctrl-bottom-right {
+  .dashboard-stage .maplibregl-ctrl-top-right,
+  .dashboard-stage .maplibregl-ctrl-bottom-right {
     right: calc(clamp(300px, 22vw, 360px) + 32px);
   }
 }

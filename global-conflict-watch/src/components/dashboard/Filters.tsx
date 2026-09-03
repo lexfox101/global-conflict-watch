@@ -19,12 +19,9 @@ export function Filters({ query, category, severity, timeRange, resultCount, onQ
   return (
     <section aria-label="Incident filters" className="filter-bar px-4 pb-3 lg:px-6">
       <div className="mx-auto flex max-w-[1920px] flex-wrap items-center gap-2">
-        <label className="min-w-[210px] flex-1 md:max-w-sm">
+        <label className="min-w-[200px] flex-1 md:max-w-xs">
           <span className="sr-only">Search incidents</span>
-          <span className="relative block">
-            <span aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-faint">⌕</span>
-            <input className={`${fieldClass} w-full pl-8`} type="search" value={query} onChange={(event) => onQueryChange(event.target.value)} placeholder="Search reports…" />
-          </span>
+          <input className={`${fieldClass} w-full`} type="search" value={query} onChange={(event) => onQueryChange(event.target.value)} placeholder="Search reports…" />
         </label>
         <label>
           <span className="sr-only">Event category</span>
@@ -50,10 +47,9 @@ export function Filters({ query, category, severity, timeRange, resultCount, onQ
           </select>
         </label>
         <button type="button" onClick={onReset} className="type-instrument h-9 px-3 font-medium text-muted transition hover:text-ink">Reset</button>
-        <div aria-live="polite" className="result-pill type-instrument ml-auto flex h-9 items-center gap-2 px-3 text-muted">
-          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-signal" />
-          <strong className="font-mono font-medium text-ink">{resultCount}</strong> reports
-        </div>
+        <p aria-live="polite" className="type-instrument ml-auto flex h-9 items-center text-muted">
+          <strong className="mr-1 font-mono font-medium text-ink">{resultCount}</strong> reports
+        </p>
       </div>
     </section>
   );

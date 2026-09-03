@@ -5,15 +5,9 @@ import { categoryColors, PanelHeading, SeverityBadge, formatDateTime } from "./u
 interface IntelligencePanelProps {
   incidents: Incident[];
   selected?: SelectedTarget;
-  aircraftCount: number;
-  vesselCount: number;
 }
 
-export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCount }: IntelligencePanelProps) {
-  const regionCounts = Object.entries(incidents.reduce<Record<string, number>>((counts, incident) => {
-    counts[incident.region] = (counts[incident.region] ?? 0) + 1;
-    return counts;
-  }, {})).sort((a, b) => b[1] - a[1]);
+export function IntelligencePanel({ incidents, selected }: IntelligencePanelProps) {
   const corroborated = incidents.filter((incident) => incident.verification === "Corroborated").length;
   const highPriority = incidents.filter((incident) => incident.severity === "Critical" || incident.severity === "High").length;
 
@@ -33,14 +27,6 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
             <Metric value={highPriority} label="High+" accent="threat-high" />
             <Metric value={corroborated} label="Corroborated" accent="text-ink" />
           </div>
-        </section>
-
-        <section className="insight-section px-4 py-4">
-          <h3 className="type-instrument uppercase tracking-[0.1em] text-muted">Demo tracking inventory</h3>
-          <div className="metric-strip mt-3 grid grid-cols-2">
-            <Metric value={aircraftCount} label="Aircraft" accent="text-flag" />
-            <Metric value={vesselCount} label="Vessels" accent="text-ink" />
-          </div>
           <p className="type-instrument mt-3 text-muted">Fictional records only, generalized and delayed. No live operational tracking.</p>
         </section>
 
@@ -53,13 +39,6 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
               return <div key={category}><div className="type-instrument flex justify-between"><span className="text-muted"><span aria-hidden="true" className="mr-2" style={{ color: categoryColors[category] }}>●</span>{category}</span><span className="text-muted">{count}</span></div><div className="mt-1 h-1 overflow-hidden bg-rule"><div className="h-full" style={{ width: `${percentage}%`, backgroundColor: categoryColors[category] }} /></div></div>;
             })}
           </div>
-        </section>
-
-        <section className="insight-section px-4 py-4">
-          <h3 className="type-instrument uppercase tracking-[0.1em] text-muted">Regional concentration</h3>
-          <ol className="mt-3 space-y-2">
-            {regionCounts.length ? regionCounts.slice(0, 4).map(([region, count]) => <li key={region} className="type-instrument flex items-center gap-3"><span className="flex-1 text-muted">{region}</span><span className="text-ink">{count}</span></li>) : <li className="type-instrument text-muted">No regional data in current selection.</li>}
-          </ol>
         </section>
       </div>
     </aside>
