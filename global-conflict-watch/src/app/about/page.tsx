@@ -65,52 +65,52 @@ export default function AboutPage() {
         description="This page is the trust record: what the publication is, how each briefing is put together, what the confidence ratings mean, and how corrections, funding and reader data are handled."
       />
 
-      <div className="mt-6 flex flex-wrap items-center gap-2">
-        <span className="pill pill-muted">{allBriefings.length} editions published</span>
-        <span className="pill pill-muted">{storyCount} stories</span>
-        <span className="pill pill-muted">{FREE_ARCHIVE_DAYS}-day free window</span>
-      </div>
+      <p className="meta-line mt-6">
+        <span>{allBriefings.length} editions published</span>
+        <span>{storyCount} stories</span>
+        <span>{FREE_ARCHIVE_DAYS}-day free window</span>
+      </p>
 
       <div className="mt-12 flex flex-col gap-14">
         <section aria-labelledby="what-it-is">
-          <h2 id="what-it-is" className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">
+          <h2 id="what-it-is" className="headline-section border-b border-rule pb-3">
             What it is
           </h2>
           <Prose paragraphs={WHAT_IT_IS} className="mt-4" />
         </section>
 
         <section aria-labelledby="mission">
-          <h2 id="mission" className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">
+          <h2 id="mission" className="headline-section border-b border-rule pb-3">
             Editorial mission
           </h2>
           <Prose paragraphs={MISSION} className="mt-4" />
         </section>
 
         <section aria-labelledby="production">
-          <h2 id="production" className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">
+          <h2 id="production" className="headline-section border-b border-rule pb-3">
             How a briefing is produced
           </h2>
           <Prose paragraphs={PRODUCTION} className="mt-4" />
         </section>
 
         <section aria-labelledby="verification">
-          <h2 id="verification" className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">
+          <h2 id="verification" className="headline-section border-b border-rule pb-3">
             Sourcing and verification standards
           </h2>
           <Prose paragraphs={VERIFICATION} className="mt-4" />
 
-          <dl className="mt-6 grid gap-3 sm:grid-cols-2">
+          <dl className="mt-6 grid gap-x-10 sm:grid-cols-2">
             {CONFIDENCE_LEVELS.map((confidence) => (
-              <div key={confidence} className="soft-panel p-5">
-                <dt className="text-[14px] font-semibold text-slate-100">{confidence}</dt>
-                <dd className="mt-1.5 text-[13px] leading-relaxed text-slate-400">{confidenceDescription[confidence]}</dd>
+              <div key={confidence} className="border-t border-rule py-4">
+                <dt className="headline-item">{confidence}</dt>
+                <dd className="mt-1.5 text-[13px] leading-relaxed text-paper-dim">{confidenceDescription[confidence]}</dd>
               </div>
             ))}
           </dl>
 
-          <p className="mt-5 text-[13px] text-slate-500">
+          <p className="mt-5 text-[13px] text-paper-faint">
             The full methodology, including the correction policy and the standing caveat on time-sensitive figures, is set out on the{" "}
-            <Link href="/data#methodology" className="text-cyan-200 hover:text-cyan-100">
+            <Link href="/data#methodology" className="link-signal">
               data page
             </Link>
             .
@@ -118,56 +118,56 @@ export default function AboutPage() {
         </section>
 
         <section aria-labelledby="corrections">
-          <h2 id="corrections" className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">
+          <h2 id="corrections" className="headline-section border-b border-rule pb-3">
             Corrections and complaints
           </h2>
           <Prose paragraphs={CORRECTIONS} className="mt-4" />
         </section>
 
         <section aria-labelledby="independence">
-          <h2 id="independence" className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">
+          <h2 id="independence" className="headline-section border-b border-rule pb-3">
             Independence and funding
           </h2>
           <Prose paragraphs={INDEPENDENCE} className="mt-4" />
         </section>
 
         <section aria-labelledby="privacy">
-          <h2 id="privacy" className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">
+          <h2 id="privacy" className="headline-section border-b border-rule pb-3">
             Newsletter data and privacy
           </h2>
           <Prose paragraphs={PRIVACY} className="mt-4" />
         </section>
 
         <section aria-labelledby="operator">
-          <h2 id="operator" className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">
+          <h2 id="operator" className="headline-section border-b border-rule pb-3">
             Who produces it
           </h2>
-          <div className="soft-panel mt-4 border-amber-300/25 bg-amber-400/[0.06] p-6 sm:p-7" role="note">
-            <p className="eyebrow text-amber-200/80">Placeholder — to be written by the operator</p>
-            <p className="mt-3 max-w-[68ch] text-[14px] leading-relaxed text-slate-300">
+          <div className="soft-panel panel-note mt-6 p-6 sm:p-7" role="note">
+            <p className="eyebrow text-flag">Placeholder — to be written by the operator</p>
+            <p className="mt-3 max-w-[68ch] text-[14px] leading-relaxed text-paper-body">
               This block is intentionally unwritten. Nothing about the operator&apos;s background, employment history, qualifications
               or clearances has been assumed or drafted on their behalf, because inventing any of it would undermine the point of this
               page.
             </p>
-            <ul className="mt-5 flex flex-col gap-2.5 text-[13px] leading-relaxed text-slate-400">
+            <ul className="mt-5 flex flex-col gap-2.5 text-[13px] leading-relaxed text-paper-dim">
               <li className="flex gap-3">
-                <span aria-hidden="true" className="mt-[8px] h-1 w-1 shrink-0 rounded-full bg-amber-300/60" />
+                <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-flag" />
                 <span>TODO: name, or a stated decision to publish under the GCW masthead without a byline.</span>
               </li>
               <li className="flex gap-3">
-                <span aria-hidden="true" className="mt-[8px] h-1 w-1 shrink-0 rounded-full bg-amber-300/60" />
+                <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-flag" />
                 <span>TODO: relevant professional background, in whatever detail you are willing to stand behind publicly.</span>
               </li>
               <li className="flex gap-3">
-                <span aria-hidden="true" className="mt-[8px] h-1 w-1 shrink-0 rounded-full bg-amber-300/60" />
+                <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-flag" />
                 <span>TODO: why you started GCW, and what you are trying to be useful for.</span>
               </li>
               <li className="flex gap-3">
-                <span aria-hidden="true" className="mt-[8px] h-1 w-1 shrink-0 rounded-full bg-amber-300/60" />
+                <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-flag" />
                 <span>TODO: declarable interests — current employment, consulting, holdings or affiliations a reader should know about.</span>
               </li>
               <li className="flex gap-3">
-                <span aria-hidden="true" className="mt-[8px] h-1 w-1 shrink-0 rounded-full bg-amber-300/60" />
+                <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-flag" />
                 <span>TODO: whether anyone else contributes to editions, and in what capacity.</span>
               </li>
             </ul>
@@ -175,37 +175,37 @@ export default function AboutPage() {
         </section>
 
         <section aria-labelledby="contact">
-          <h2 id="contact" className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">
+          <h2 id="contact" className="headline-section border-b border-rule pb-3">
             Contact
           </h2>
-          <div className="soft-panel mt-4 p-6 sm:p-7">
+          <div className="soft-panel mt-6 p-6 sm:p-7">
             <dl className="grid gap-5 sm:grid-cols-2">
               <div>
-                <dt className="text-[13px] font-semibold text-slate-200">Corrections</dt>
-                <dd className="mt-1 font-mono text-[14px] text-cyan-100">corrections@example.com</dd>
-                <dd className="mt-1 text-[12px] leading-relaxed text-slate-500">
+                <dt className="eyebrow">Corrections</dt>
+                <dd className="mt-2 font-mono text-[14px] text-paper">corrections@example.com</dd>
+                <dd className="mt-1 text-[12px] leading-relaxed text-paper-faint">
                   Identify the entry, the claim, and a primary source.
                 </dd>
               </div>
               <div>
-                <dt className="text-[13px] font-semibold text-slate-200">Editorial and general</dt>
-                <dd className="mt-1 font-mono text-[14px] text-cyan-100">editor@example.com</dd>
-                <dd className="mt-1 text-[12px] leading-relaxed text-slate-500">
+                <dt className="eyebrow">Editorial and general</dt>
+                <dd className="mt-2 font-mono text-[14px] text-paper">editor@example.com</dd>
+                <dd className="mt-1 text-[12px] leading-relaxed text-paper-faint">
                   Coverage questions, complaints, institutional access enquiries.
                 </dd>
               </div>
             </dl>
-            <p className="mt-5 text-[12px] leading-relaxed text-slate-500">
+            <p className="mt-5 text-[12px] leading-relaxed text-paper-faint">
               Both addresses are placeholders. The live mailboxes have not been set up yet, so nothing sent to them will arrive.
             </p>
-            <div className="mt-6 flex flex-wrap gap-4 text-[13px]">
-              <Link href="/data#methodology" className="text-cyan-200 hover:text-cyan-100">
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[13px]">
+              <Link href="/data#methodology" className="link-signal">
                 Methodology →
               </Link>
-              <Link href="/pricing" className="text-cyan-200 hover:text-cyan-100">
+              <Link href="/pricing" className="link-signal">
                 Access tiers →
               </Link>
-              <Link href="/advertise" className="text-cyan-200 hover:text-cyan-100">
+              <Link href="/advertise" className="link-signal">
                 Sponsorship policy →
               </Link>
             </div>

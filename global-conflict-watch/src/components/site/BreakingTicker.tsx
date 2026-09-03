@@ -3,14 +3,17 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { BreakingAlert } from "@/types/briefing";
-import { formatAlertTime, threatPillClass } from "./ui";
+import { formatAlertTime, threatToneClass } from "./ui";
 
 function AlertItem({ alert }: { alert: BreakingAlert }) {
   const body = (
     <>
-      <span className={`pill ${threatPillClass[alert.level]}`}>{alert.level}</span>
-      <span className="text-[13px] text-slate-300">{alert.headline}</span>
-      <time dateTime={alert.timestamp} className="font-mono text-[11px] text-slate-500">
+      <span className={`threat-mark ${threatToneClass[alert.level]}`}>
+        <span aria-hidden="true" className="threat-dot" />
+        {alert.level}
+      </span>
+      <span className="text-[13px] text-paper-body">{alert.headline}</span>
+      <time dateTime={alert.timestamp} className="font-mono text-[11px] text-paper-faint">
         {formatAlertTime(alert.timestamp)}
       </time>
     </>
@@ -19,7 +22,7 @@ function AlertItem({ alert }: { alert: BreakingAlert }) {
   return (
     <li className="flex shrink-0 items-center gap-3">
       {alert.href ? (
-        <Link href={alert.href} className="flex items-center gap-3 rounded-none hover:text-cyan-100">
+        <Link href={alert.href} className="flex items-center gap-3 hover:text-signal">
           {body}
         </Link>
       ) : (
@@ -53,7 +56,7 @@ export function BreakingTicker({ alerts }: { alerts: BreakingAlert[] }) {
   return (
     <section className="ticker" aria-label="Breaking alerts">
       <div className="mx-auto flex max-w-[1400px] items-center gap-3 px-4 py-2 lg:px-6">
-        <p className="eyebrow shrink-0 text-red-300/80">Breaking</p>
+        <p className="eyebrow shrink-0 text-signal">Breaking</p>
 
         <div className="ticker-viewport min-w-0 flex-1">
           <div className={`ticker-track ${paused || !animated ? "is-paused" : ""}`}>
@@ -77,7 +80,7 @@ export function BreakingTicker({ alerts }: { alerts: BreakingAlert[] }) {
             type="button"
             onClick={() => setPaused((current) => !current)}
             aria-pressed={paused}
-            className="shrink-0 rounded-none border border-white/10 px-3 py-1 text-[11px] text-slate-400 transition-colors hover:bg-white/5 hover:text-slate-200"
+            className="shrink-0 border border-rule px-3 py-1 font-mono text-[10px] uppercase tracking-[0.11em] text-paper-faint transition-colors hover:text-paper"
           >
             {paused ? "Resume" : "Pause"}
             <span className="sr-only"> scrolling alerts</span>

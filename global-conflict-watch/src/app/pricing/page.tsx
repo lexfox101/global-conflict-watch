@@ -106,7 +106,7 @@ const FAQ = [
 function AvailabilityCell({ available }: { available: boolean }) {
   return (
     <>
-      <span aria-hidden="true" className={available ? "text-cyan-200" : "text-slate-600"}>
+      <span aria-hidden="true" className={available ? "text-signal" : "text-paper-faint"}>
         {available ? "●" : "—"}
       </span>
       <span className="sr-only">{available ? "Included" : "Not included"}</span>
@@ -124,9 +124,9 @@ export default function PricingPage() {
         description="Global Conflict Watch keeps the current record open and puts the archive behind a subscription. This page describes the intended split — no payment system is connected, and nothing on it can charge you."
       />
 
-      <div className="soft-panel mt-6 border-amber-300/25 bg-amber-400/[0.06] p-5 sm:p-6" role="note">
-        <p className="eyebrow text-amber-200/80">Billing is not enabled in this demo</p>
-        <p className="mt-2 max-w-[76ch] text-[14px] leading-relaxed text-slate-300">
+      <div className="soft-panel panel-note mt-8 p-5 sm:p-6" role="note">
+        <p className="eyebrow text-flag">Billing is not enabled in this demo</p>
+        <p className="mt-2 max-w-[76ch] text-[14px] leading-relaxed text-paper-body">
           There is no payment processor, no checkout, no card handling and no stored billing data anywhere on this site. Prices are
           not set and are shown below as to be confirmed. The buttons in the subscriber column are deliberately inert: they cannot
           take a payment, start a trial, or create an account. Everything described as a subscriber feature is a statement of intent,
@@ -134,39 +134,39 @@ export default function PricingPage() {
         </p>
       </div>
 
-      <div className="mt-8 grid gap-4 lg:grid-cols-2">
-        <article className="soft-panel flex flex-col gap-4 p-6 sm:p-8">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="pill pill-accent">Free</span>
-            <span className="pill pill-muted">No account needed</span>
-          </div>
+      <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-12">
+        <article className="flex flex-col gap-4 border-t border-rule-strong pt-5">
           <div>
-            <h2 className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">Open access</h2>
-            <p className="mt-1 font-mono text-[13px] text-slate-500">No charge, no sign-up</p>
+            <p className="meta-line">
+              <span>Free</span>
+              <span>No account needed</span>
+            </p>
+            <h2 className="headline-section mt-2">Open access</h2>
+            <p className="dateline mt-2">No charge, no sign-up</p>
           </div>
-          <p className="text-[14px] leading-relaxed text-slate-400">
+          <p className="text-[14px] leading-relaxed text-paper-dim">
             The current record stays open: the homepage and today&apos;s top threats, the {FREE_ARCHIVE_DAYS} most recent editions in
             full, every region page, every threat category page, and the interactive map. That is {allBriefings.length} editions on the
             site today, of which the {FREE_ARCHIVE_DAYS} newest are readable in full.
           </p>
           <Link
             href={`/briefings/${latestBriefing.slug}`}
-            className="mt-auto self-start rounded-none border border-cyan-300/25 bg-cyan-400/10 px-5 py-2.5 text-[14px] font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15"
+            className="btn btn-primary mt-auto self-start"
           >
             Read today&apos;s briefing
           </Link>
         </article>
 
-        <article className="soft-panel flex flex-col gap-4 p-6 sm:p-8">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="pill pill-elevated">Subscriber</span>
-            <span className="pill pill-muted">Not yet available</span>
-          </div>
+        <article className="flex flex-col gap-4 border-t border-rule-strong pt-5">
           <div>
-            <h2 className="text-[24px] font-semibold tracking-[-0.02em] text-slate-50">Full archive</h2>
-            <p className="mt-1 font-mono text-[13px] text-slate-500">Price to be confirmed</p>
+            <p className="meta-line">
+              <span>Subscriber</span>
+              <span className="text-flag">Not yet available</span>
+            </p>
+            <h2 className="headline-section mt-2">Full archive</h2>
+            <p className="dateline mt-2">Price to be confirmed</p>
           </div>
-          <p className="text-[14px] leading-relaxed text-slate-400">
+          <p className="text-[14px] leading-relaxed text-paper-dim">
             Adds the searchable archive beyond the free window, region and category feeds across the whole archive, early alerts
             between editions, export and citation output, and priority handling of correction requests and coverage questions.
           </p>
@@ -175,11 +175,11 @@ export default function PricingPage() {
               type="button"
               disabled
               aria-describedby="billing-disabled-note"
-              className="self-start rounded-none border border-white/10 bg-white/[0.03] px-5 py-2.5 text-[14px] font-semibold text-slate-400 disabled:cursor-not-allowed"
+              className="btn self-start"
             >
               Checkout unavailable in this demo
             </button>
-            <p id="billing-disabled-note" className="text-[12px] leading-relaxed text-slate-500">
+            <p id="billing-disabled-note" className="text-[12px] leading-relaxed text-paper-faint">
               This control is disabled because no billing system exists. It will not charge you, start a trial, or collect any
               details.
             </p>
@@ -189,33 +189,33 @@ export default function PricingPage() {
 
       <section className="mt-14" aria-labelledby="comparison">
         <SectionHeading eyebrow="Comparison" title="What sits on each side of the line" id="comparison" />
-        <div className="soft-panel mt-6 overflow-x-auto p-2 sm:p-4">
+        <div className="mt-6 overflow-x-auto">
           <table className="w-full min-w-[620px] border-collapse text-left">
             <caption className="sr-only">Feature comparison between free and subscriber access</caption>
             <thead>
-              <tr className="text-[11px] uppercase tracking-[0.08em] text-slate-500">
-                <th scope="col" className="px-4 py-3 font-medium">
+              <tr className="border-b border-rule-strong font-mono text-[10px] uppercase tracking-[0.11em] text-paper-faint">
+                <th scope="col" className="py-3 pr-4 font-medium">
                   Feature
                 </th>
-                <th scope="col" className="w-24 px-4 py-3 text-center font-medium">
+                <th scope="col" className="w-24 py-3 text-center font-medium">
                   Free
                 </th>
-                <th scope="col" className="w-28 px-4 py-3 text-center font-medium">
+                <th scope="col" className="w-28 py-3 text-center font-medium">
                   Subscriber
                 </th>
               </tr>
             </thead>
             <tbody>
               {FEATURES.map((row) => (
-                <tr key={row.feature} className="border-t border-white/[0.055] align-top">
-                  <th scope="row" className="px-4 py-4 font-normal">
-                    <span className="block text-[14px] font-semibold text-slate-100">{row.feature}</span>
-                    <span className="mt-1 block max-w-[60ch] text-[12px] leading-relaxed text-slate-500">{row.detail}</span>
+                <tr key={row.feature} className="border-t border-rule align-top">
+                  <th scope="row" className="py-4 pr-4 font-normal">
+                    <span className="headline-item block">{row.feature}</span>
+                    <span className="mt-1 block max-w-[60ch] text-[12px] leading-relaxed text-paper-faint">{row.detail}</span>
                   </th>
-                  <td className="px-4 py-4 text-center">
+                  <td className="py-4 text-center">
                     <AvailabilityCell available={row.free} />
                   </td>
-                  <td className="px-4 py-4 text-center">
+                  <td className="py-4 text-center">
                     <AvailabilityCell available={row.subscriber} />
                   </td>
                 </tr>
@@ -227,21 +227,21 @@ export default function PricingPage() {
 
       <section className="mt-14" aria-labelledby="pricing-faq">
         <SectionHeading eyebrow="FAQ" title="Questions worth answering up front" id="pricing-faq" />
-        <dl className="mt-6 grid gap-4 lg:grid-cols-2">
+        <dl className="mt-6 grid gap-x-10 lg:grid-cols-2">
           {FAQ.map((item) => (
-            <div key={item.question} className="soft-panel p-5 sm:p-6">
-              <dt className="text-[15px] font-semibold tracking-[-0.01em] text-slate-100">{item.question}</dt>
-              <dd className="mt-2 text-[14px] leading-relaxed text-slate-400">{item.answer}</dd>
+            <div key={item.question} className="border-t border-rule py-5">
+              <dt className="headline-item">{item.question}</dt>
+              <dd className="mt-2 max-w-[64ch] text-[14px] leading-relaxed text-paper-dim">{item.answer}</dd>
             </div>
           ))}
         </dl>
-        <p className="mt-6 text-[13px] text-slate-500">
+        <p className="mt-6 text-[13px] text-paper-faint">
           More on how entries are sourced and rated:{" "}
-          <Link href="/data#methodology" className="text-cyan-200 hover:text-cyan-100">
+          <Link href="/data#methodology" className="link-signal">
             methodology
           </Link>
           {" · "}
-          <Link href="/about" className="text-cyan-200 hover:text-cyan-100">
+          <Link href="/about" className="link-signal">
             editorial standards
           </Link>
         </p>

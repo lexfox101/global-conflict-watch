@@ -1,5 +1,5 @@
 import { THREAT_LEVELS, threatLevelRank, type ThreatLevel } from "@/types/briefing";
-import { threatLevelBlurb, threatSegClass } from "./ui";
+import { threatLevelBlurb, threatToneClass } from "./ui";
 
 interface ThreatGaugeProps {
   level: ThreatLevel;
@@ -17,19 +17,19 @@ export function ThreatGauge({ level, label = "Global threat level" }: ThreatGaug
     <div>
       <div className="flex items-baseline justify-between gap-4">
         <p className="eyebrow">{label}</p>
-        <p className="text-[13px] font-semibold text-slate-200">{level}</p>
+        <p className={`threat-mark ${threatToneClass[level]}`}>{level}</p>
       </div>
-      <div className="threat-gauge mt-3" aria-hidden="true">
+      <div className={`threat-gauge mt-3 ${threatToneClass[level]}`} aria-hidden="true">
         {THREAT_LEVELS.map((step, index) => (
-          <span key={step} className={`threat-seg ${index <= activeRank ? threatSegClass[level] : ""}`} />
+          <span key={step} className={`threat-seg ${index <= activeRank ? "is-on" : ""}`} />
         ))}
       </div>
-      <ul className="mt-2 flex justify-between text-[10px] text-slate-500" aria-hidden="true">
+      <ul className="mt-2 flex justify-between font-mono text-[10px] uppercase tracking-[0.08em] text-paper-faint" aria-hidden="true">
         {THREAT_LEVELS.map((step) => (
           <li key={step}>{step}</li>
         ))}
       </ul>
-      <p className="mt-3 text-sm leading-relaxed text-slate-400">
+      <p className="mt-3 text-[14px] leading-relaxed text-paper-dim">
         <span className="sr-only">{label}: </span>
         {level} — {threatLevelBlurb[level]}
       </p>

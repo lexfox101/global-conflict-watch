@@ -1,17 +1,11 @@
 import type { StoryConfidence, ThreatCategory, ThreatLevel } from "@/types/briefing";
 
-export const threatPillClass: Record<ThreatLevel, string> = {
-  Low: "pill-low",
-  Elevated: "pill-elevated",
-  High: "pill-high",
-  Critical: "pill-critical",
-};
-
-export const threatSegClass: Record<ThreatLevel, string> = {
-  Low: "is-on-low",
-  Elevated: "is-on-elevated",
-  High: "is-on-high",
-  Critical: "is-on-critical",
+/** Colour tone for a threat level. Sets `color`, so borders and dots follow it. */
+export const threatToneClass: Record<ThreatLevel, string> = {
+  Low: "threat-low",
+  Elevated: "threat-elevated",
+  High: "threat-high",
+  Critical: "threat-critical",
 };
 
 export const threatLevelBlurb: Record<ThreatLevel, string> = {
@@ -21,13 +15,6 @@ export const threatLevelBlurb: Record<ThreatLevel, string> = {
   Critical: "Severe developments with immediate and wide-reaching consequences.",
 };
 
-export const confidencePillClass: Record<StoryConfidence, string> = {
-  Confirmed: "pill-accent",
-  Corroborated: "pill-accent",
-  "Single source": "pill-muted",
-  "Claimed/unverified": "pill-elevated",
-};
-
 export const confidenceDescription: Record<StoryConfidence, string> = {
   Confirmed: "Confirmed by the responsible organisation or an official advisory.",
   Corroborated: "Reported independently by two or more outlets.",
@@ -35,13 +22,14 @@ export const confidenceDescription: Record<StoryConfidence, string> = {
   "Claimed/unverified": "Asserted by an involved party and not independently verified.",
 };
 
+/** Muted category hues, used only for the proportional bars on breakdown charts. */
 export const categoryAccent: Record<ThreatCategory, string> = {
-  "Military Conflicts": "#f05d5e",
-  Terrorism: "#f59e5b",
-  Cybersecurity: "#9b8afb",
-  "Political Instability": "#f4c15d",
-  "Natural Disasters": "#52d6a1",
-  "Nuclear & WMD": "#36c2d9",
+  "Military Conflicts": "#c05a4e",
+  Terrorism: "#c2854a",
+  Cybersecurity: "#8a86a8",
+  "Political Instability": "#b3a05a",
+  "Natural Disasters": "#6f9483",
+  "Nuclear & WMD": "#6d8ea3",
 };
 
 const longDate = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });

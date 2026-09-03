@@ -8,17 +8,26 @@ interface SectionHeadingProps {
   trailing?: React.ReactNode;
 }
 
+/** Section head: mono kicker, serif title, hairline rule. */
 export function SectionHeading({ eyebrow, title, description, as: Tag = "h2", id, trailing }: SectionHeadingProps) {
+  const isPageTitle = Tag === "h1";
+
   return (
-    <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
-      <div className="min-w-0">
-        {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-        <Tag id={id} className="mt-2 text-balance text-[22px] font-semibold tracking-[-0.02em] text-slate-50 sm:text-[26px]">
-          {title}
-        </Tag>
-        {description ? <p className="mt-2 max-w-[60ch] text-sm leading-relaxed text-slate-400">{description}</p> : null}
+    <div>
+      <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 border-b border-rule pb-3">
+        <div className="min-w-0">
+          {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+          <Tag id={id} className={`mt-2 ${isPageTitle ? "headline-page" : "headline-section"}`}>
+            {title}
+          </Tag>
+        </div>
+        {trailing}
       </div>
-      {trailing}
+      {description ? (
+        <p className={`mt-4 ${isPageTitle ? "standfirst max-w-[58ch]" : "max-w-[64ch] text-[14px] leading-relaxed text-paper-dim"}`}>
+          {description}
+        </p>
+      ) : null}
     </div>
   );
 }

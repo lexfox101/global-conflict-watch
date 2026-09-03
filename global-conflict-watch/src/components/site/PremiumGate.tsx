@@ -18,9 +18,9 @@ export function PremiumGate({ title, dateLabel, teaser, storyCount, compact = fa
   return (
     <section className={`soft-panel premium-teaser ${compact ? "p-5" : "p-6 sm:p-8"}`} aria-label={`${title} — subscriber archive`}>
       <div className="premium-veil" aria-hidden="true">
-        <p className="eyebrow">{dateLabel}</p>
-        <h3 className="mt-2 text-[19px] font-semibold tracking-[-0.01em] text-slate-100">{title}</h3>
-        <div className="prose-editorial mt-3 text-[15px]">
+        <p className="dateline">{dateLabel}</p>
+        <h3 className="headline-story mt-2">{title}</h3>
+        <div className="prose-editorial is-tight mt-3">
           {teaser.map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
           ))}
@@ -30,19 +30,20 @@ export function PremiumGate({ title, dateLabel, teaser, storyCount, compact = fa
       <div className="premium-scrim absolute inset-0 flex flex-col justify-end gap-3 p-5 sm:p-7">
         <p className="eyebrow">Subscriber archive</p>
         <div>
-          <h3 className="text-balance text-[18px] font-semibold tracking-[-0.01em] text-slate-50">{title}</h3>
-          <p className="mt-1.5 max-w-[52ch] text-[13px] leading-relaxed text-slate-400">
-            {dateLabel}
-            {typeof storyCount === "number" ? ` · ${storyCount} ${storyCount === 1 ? "story" : "stories"}` : ""} · outside the free
-            seven-day window.
+          <h3 className="headline-item">{title}</h3>
+          <p className="meta-line mt-2">
+            <span>{dateLabel}</span>
+            {typeof storyCount === "number" ? (
+              <span>
+                {storyCount} {storyCount === 1 ? "story" : "stories"}
+              </span>
+            ) : null}
+            <span>Outside the free seven-day window</span>
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <Link
-            href="/pricing"
-            className="rounded-none border border-cyan-300/25 bg-cyan-400/10 px-4 py-2 text-[13px] font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15"
-          >
-            View subscription options
+          <Link href="/pricing" className="btn">
+            Subscription options
           </Link>
           <span className="pill pill-muted">Interface demo — no payments</span>
         </div>

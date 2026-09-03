@@ -59,50 +59,42 @@ export default async function RegionPage({ params }: PageProps<"/regions/[region
 
   return (
     <div className="mx-auto w-full max-w-[1200px] px-4 py-10 lg:px-6 lg:py-14">
-      <Link href="/regions" className="text-[13px] text-cyan-200 hover:text-cyan-100">
+      <Link href="/regions" className="link-signal text-[13px]">
         ← All regions
       </Link>
 
-      <header className="mt-6">
+      <header className="mt-8">
         <p className="eyebrow">Region</p>
-        <h1 className="mt-3 text-balance text-[30px] font-semibold leading-[1.12] tracking-[-0.03em] text-slate-50 sm:text-[38px]">
-          {meta.name}
-        </h1>
-        <p className="mt-4 max-w-[62ch] text-[16px] leading-relaxed text-slate-400">{profile.summary}</p>
-        <div className="mt-5 flex flex-wrap items-center gap-2">
-          {level ? (
-            <ThreatLevelBadge level={level} label="Region" />
-          ) : (
-            <span className="pill pill-muted">Level unset — no current entries</span>
-          )}
-          <span className="pill pill-muted">
+        <h1 className="headline-page mt-3">{meta.name}</h1>
+        <p className="standfirst mt-4 max-w-[62ch]">{profile.summary}</p>
+        <p className="meta-line mt-6 border-t border-rule-strong pt-3">
+          {level ? <ThreatLevelBadge level={level} label="Region" /> : <span>Level unset — no current entries</span>}
+          <span>
             {refs.length} {refs.length === 1 ? "story" : "stories"}
           </span>
-          <span className="pill pill-muted">Free window · {FREE_ARCHIVE_DAYS} editions</span>
-        </div>
-        {level ? <p className="mt-3 max-w-[62ch] text-[13px] leading-relaxed text-slate-500">{threatLevelBlurb[level]}</p> : null}
+          <span>Free window · {FREE_ARCHIVE_DAYS} editions</span>
+        </p>
+        {level ? <p className="mt-3 max-w-[62ch] text-[13px] leading-relaxed text-paper-faint">{threatLevelBlurb[level]}</p> : null}
       </header>
 
-      <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start">
-        <section className="soft-panel p-6 sm:p-8" aria-labelledby="region-context">
-          <h2 id="region-context" className="eyebrow">
+      <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
+        <section aria-labelledby="region-context">
+          <h2 id="region-context" className="eyebrow border-b border-rule pb-2">
             Standing context
           </h2>
-          <Prose paragraphs={profile.context} className="mt-3" />
-          <ul className="mt-6 flex flex-wrap gap-2">
+          <Prose paragraphs={profile.context} className="mt-4" />
+          <p className="meta-line mt-6">
             {profile.watchpoints.map((watchpoint) => (
-              <li key={watchpoint} className="pill pill-muted">
-                {watchpoint}
-              </li>
+              <span key={watchpoint}>{watchpoint}</span>
             ))}
-          </ul>
+          </p>
         </section>
 
         <section className="soft-panel p-6" aria-labelledby="region-breakdown">
           <h2 id="region-breakdown" className="eyebrow">
             Category breakdown
           </h2>
-          <p className="mt-2 text-[13px] leading-relaxed text-slate-400">
+          <p className="mt-2 text-[13px] leading-relaxed text-paper-dim">
             Entries filed to {meta.shortName} in the current free window, by threat category.
           </p>
           <div className="mt-5">
@@ -114,7 +106,7 @@ export default async function RegionPage({ params }: PageProps<"/regions/[region
                 caption="Shares are of this region's current entries. A story tagged to several regions is counted in each of them."
               />
             ) : (
-              <p className="text-[13px] leading-relaxed text-slate-500">
+              <p className="text-[13px] leading-relaxed text-paper-faint">
                 No entries are filed to this region in the current free window, so there is nothing to break down yet.
               </p>
             )}

@@ -19,47 +19,47 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
 
   return (
     <aside className="floating-panel inspector-panel flex min-h-[430px] flex-col overflow-hidden" aria-label="Intelligence summary">
-      <PanelHeading eyebrow="Analyst workspace" title={selected ? (selected.kind === "incident" ? "Selected report" : "Selected tracking asset") : "Intelligence summary"} trailing={<span className="rounded-none bg-cyan-300/10 px-2 py-1 font-mono text-[8px] font-medium text-cyan-200">Demo</span>} />
+      <PanelHeading eyebrow="Analyst workspace" title={selected ? (selected.kind === "incident" ? "Selected report" : "Selected tracking asset") : "Intelligence summary"} trailing={<span className="pill pill-flag">Demo</span>} />
       <div className="min-h-0 flex-1 overflow-y-auto pb-2">
         {selected ? <SelectionDetails selected={selected} /> : (
-          <section className="intro-note mx-4 mb-1 rounded-none p-3.5">
-            <p className="text-xs leading-5 text-slate-400">Select a report or map marker to inspect safe demonstration details and source attribution.</p>
+          <section className="intro-note mx-4 mb-1 p-3.5">
+            <p className="text-xs leading-5 text-paper-dim">Select a report or map marker to see its demonstration details and source attribution.</p>
           </section>
         )}
 
         <section className="insight-section px-4 py-4">
-          <h3 className="text-[11px] font-medium text-slate-400">Current result set</h3>
-          <div className="metric-strip mt-3 grid grid-cols-3 rounded-none">
+          <h3 className="eyebrow">Current result set</h3>
+          <div className="metric-strip mt-3 grid grid-cols-3">
             <Metric value={incidents.length} label="Reports" />
-            <Metric value={highPriority} label="High+" accent="text-orange-300" />
-            <Metric value={corroborated} label="Corroborated" accent="text-cyan-300" />
+            <Metric value={highPriority} label="High+" accent="threat-high" />
+            <Metric value={corroborated} label="Corroborated" accent="text-paper" />
           </div>
         </section>
 
         <section className="insight-section px-4 py-4">
-          <h3 className="text-[11px] font-medium text-slate-400">Demo tracking inventory</h3>
-          <div className="metric-strip mt-3 grid grid-cols-2 rounded-none">
-            <Metric value={aircraftCount} label="Aircraft" accent="text-amber-300" />
-            <Metric value={vesselCount} label="Vessels" accent="text-cyan-300" />
+          <h3 className="eyebrow">Demo tracking inventory</h3>
+          <div className="metric-strip mt-3 grid grid-cols-2">
+            <Metric value={aircraftCount} label="Aircraft" accent="text-flag" />
+            <Metric value={vesselCount} label="Vessels" accent="text-paper" />
           </div>
-          <p className="mt-3 text-[9px] leading-4 text-slate-600">Fictional, generalized, delayed records only. No live operational tracking.</p>
+          <p className="mt-3 text-[10px] leading-4 text-paper-faint">Fictional records only, generalized and delayed. No live operational tracking.</p>
         </section>
 
         <section className="insight-section px-4 py-4">
-          <h3 className="text-[11px] font-medium text-slate-400">Event distribution</h3>
+          <h3 className="eyebrow">Event distribution</h3>
           <div className="mt-3 space-y-2.5">
             {EVENT_CATEGORIES.map((category) => {
               const count = incidents.filter((incident) => incident.category === category).length;
               const percentage = incidents.length ? (count / incidents.length) * 100 : 0;
-              return <div key={category}><div className="flex justify-between text-[10px]"><span className="text-slate-400"><span className="mr-2" style={{ color: categoryColors[category] }}>●</span>{category}</span><span className="font-mono text-slate-500">{count}</span></div><div className="mt-1 h-1 overflow-hidden rounded-none bg-white/5"><div className="h-full rounded-none" style={{ width: `${percentage}%`, backgroundColor: categoryColors[category] }} /></div></div>;
+              return <div key={category}><div className="flex justify-between text-[10px]"><span className="text-paper-dim"><span aria-hidden="true" className="mr-2" style={{ color: categoryColors[category] }}>●</span>{category}</span><span className="font-mono text-paper-faint">{count}</span></div><div className="mt-1 h-1 overflow-hidden bg-rule"><div className="h-full" style={{ width: `${percentage}%`, backgroundColor: categoryColors[category] }} /></div></div>;
             })}
           </div>
         </section>
 
         <section className="insight-section px-4 py-4">
-          <h3 className="text-[11px] font-medium text-slate-400">Regional concentration</h3>
+          <h3 className="eyebrow">Regional concentration</h3>
           <ol className="mt-3 space-y-2">
-            {regionCounts.length ? regionCounts.slice(0, 4).map(([region, count], index) => <li key={region} className="flex items-center gap-3 text-[11px]"><span className="font-mono text-slate-600">0{index + 1}</span><span className="flex-1 text-slate-400">{region}</span><span className="font-mono text-slate-300">{count}</span></li>) : <li className="text-[11px] text-slate-600">No regional data in current selection.</li>}
+            {regionCounts.length ? regionCounts.slice(0, 4).map(([region, count], index) => <li key={region} className="flex items-center gap-3 text-[11px]"><span className="font-mono text-paper-faint">0{index + 1}</span><span className="flex-1 text-paper-dim">{region}</span><span className="font-mono text-paper">{count}</span></li>) : <li className="text-[11px] text-paper-faint">No regional data in current selection.</li>}
           </ol>
         </section>
       </div>
@@ -71,16 +71,16 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
   if (selected.kind === "incident") {
     const incident = selected.item;
     return (
-      <section className="selection-details mx-4 mb-1 rounded-none p-4" aria-live="polite">
-        <div className="flex items-center justify-between gap-2"><SeverityBadge severity={incident.severity} /><span className="font-mono text-[9px] text-slate-500">{incident.id}</span></div>
-        <h3 className="mt-3 text-base font-semibold leading-snug text-slate-100">{incident.title}</h3>
-        <p className="mt-2 text-[11px] text-cyan-200/70">{incident.location} · {incident.country}</p>
-        <p className="mt-4 text-xs leading-5 text-slate-400">{incident.summary}</p>
+      <section className="selection-details mx-4 mb-1 p-4" aria-live="polite">
+        <div className="flex items-center justify-between gap-2"><SeverityBadge severity={incident.severity} /><span className="font-mono text-[9px] text-paper-faint">{incident.id}</span></div>
+        <h3 className="headline-item mt-3 text-[16px]">{incident.title}</h3>
+        <p className="meta-line mt-2"><span>{incident.location}</span><span>{incident.country}</span></p>
+        <p className="mt-4 text-xs leading-5 text-paper-dim">{incident.summary}</p>
         <DetailGrid rows={[["Category", incident.category], ["Confidence", incident.confidence], ["Verification", incident.verification], ["Observed", `${formatDateTime(incident.timestamp)} UTC`]]} />
         <div className="mt-4">
-          <p className="text-[10px] font-medium text-slate-500">Source references</p>
+          <p className="eyebrow">Source references</p>
           <ul className="mt-2 space-y-1.5">
-            {incident.sources.map((source) => <li key={source.name}><a href={source.url} target="_blank" rel="noopener noreferrer" className="text-[11px] text-cyan-300/75 hover:text-cyan-200">{source.name} <span aria-hidden="true">↗</span></a></li>)}
+            {incident.sources.map((source) => <li key={source.name}><a href={source.url} target="_blank" rel="noopener noreferrer" className="link-signal text-[11px]">{source.name} <span aria-hidden="true">↗</span></a></li>)}
           </ul>
         </div>
       </section>
@@ -106,23 +106,23 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
   }
 
   return (
-    <section className="selection-details mx-4 mb-1 rounded-none p-4" aria-live="polite">
+    <section className="selection-details mx-4 mb-1 p-4" aria-live="polite">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="rounded-none border border-amber-300/20 bg-amber-300/10 px-2 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wide text-amber-200">{assetLabel}</span>
-        <span className="font-mono text-[9px] text-slate-500">{asset.id}</span>
+        <span className="pill pill-flag">{assetLabel}</span>
+        <span className="font-mono text-[9px] text-paper-faint">{asset.id}</span>
       </div>
-      <div className="mt-3 flex flex-wrap gap-1.5">
-        <strong className="rounded-none bg-cyan-300/10 px-2 py-1 font-mono text-[8px] uppercase tracking-wide text-cyan-200">Generalized position</strong>
-        <strong className="rounded-none bg-amber-300/10 px-2 py-1 font-mono text-[8px] uppercase tracking-wide text-amber-200">Delayed demo data</strong>
-      </div>
-      <h3 className="mt-3 text-base font-semibold leading-snug text-slate-100">{asset.displayName}</h3>
-      <p className="mt-2 text-[11px] text-cyan-200/70">{asset.broadArea} · {asset.region}</p>
-      <p className="mt-4 text-xs leading-5 text-slate-400">{asset.description}</p>
+      <p className="meta-line mt-3 text-flag">
+        <span>Generalized position</span>
+        <span>Delayed demo data</span>
+      </p>
+      <h3 className="headline-item mt-3 text-[16px]">{asset.displayName}</h3>
+      <p className="meta-line mt-2"><span>{asset.broadArea}</span><span>{asset.region}</span></p>
+      <p className="mt-4 text-xs leading-5 text-paper-dim">{asset.description}</p>
       <DetailGrid rows={detailRows} />
       <div className="mt-4">
-        <p className="text-[10px] font-medium text-slate-500">Illustrative source attribution</p>
-        <a href={asset.source.homepageUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-[11px] text-cyan-300/75 hover:text-cyan-200">{asset.source.name} <span aria-hidden="true">↗</span></a>
-        <p className="mt-2 text-[9px] leading-4 text-slate-600">Homepage link only. GCW does not call, scrape, or connect to this provider.</p>
+        <p className="eyebrow">Illustrative source attribution</p>
+        <a href={asset.source.homepageUrl} target="_blank" rel="noopener noreferrer" className="link-signal mt-2 inline-block text-[11px]">{asset.source.name} <span aria-hidden="true">↗</span></a>
+        <p className="mt-2 text-[10px] leading-4 text-paper-faint">Homepage link only. GCW does not call, scrape, or connect to this provider.</p>
       </div>
     </section>
   );
@@ -131,11 +131,11 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
 function DetailGrid({ rows }: { rows: Array<[string, string]> }) {
   return (
     <dl className="detail-list mt-4">
-      {rows.map(([label, value]) => <div key={label} className="flex items-start justify-between gap-4 py-2"><dt className="text-[9px] text-slate-500">{label}</dt><dd className="max-w-[62%] text-right text-[10px] leading-4 text-slate-300">{value}</dd></div>)}
+      {rows.map(([label, value]) => <div key={label} className="flex items-start justify-between gap-4 py-2"><dt className="text-[10px] text-paper-faint">{label}</dt><dd className="max-w-[62%] text-right text-[11px] leading-4 text-paper-dim">{value}</dd></div>)}
     </dl>
   );
 }
 
-function Metric({ value, label, accent = "text-slate-100" }: { value: number; label: string; accent?: string }) {
-  return <div className="px-2 py-3 text-center"><div className={`font-mono text-lg font-semibold ${accent}`}>{String(value).padStart(2, "0")}</div><div className="mt-1 text-[8px] text-slate-500">{label}</div></div>;
+function Metric({ value, label, accent = "text-paper" }: { value: number; label: string; accent?: string }) {
+  return <div className="px-2 py-3 text-center"><div className={`font-mono text-lg font-semibold ${accent}`}>{String(value).padStart(2, "0")}</div><div className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-paper-faint">{label}</div></div>;
 }

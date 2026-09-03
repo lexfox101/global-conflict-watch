@@ -1,27 +1,28 @@
 import type { EventCategory, Severity } from "@/types/incident";
 
+/** Severity tones match the editorial threat palette used across the site. */
 export const severityStyles: Record<Severity, string> = {
-  Critical: "border-red-400/30 bg-red-500/10 text-red-300",
-  High: "border-orange-400/30 bg-orange-500/10 text-orange-300",
-  Medium: "border-amber-300/25 bg-amber-400/10 text-amber-200",
-  Low: "border-cyan-300/25 bg-cyan-400/10 text-cyan-200",
+  Critical: "threat-critical",
+  High: "threat-high",
+  Medium: "threat-elevated",
+  Low: "threat-low",
 };
 
 export const categoryColors: Record<EventCategory, string> = {
-  "Armed conflict": "#f05d5e",
-  "Air activity": "#f59e5b",
-  "Civil unrest": "#f4c15d",
-  Maritime: "#36c2d9",
-  Cyber: "#9b8afb",
-  Humanitarian: "#52d6a1",
+  "Armed conflict": "#c05a4e",
+  "Air activity": "#c2854a",
+  "Civil unrest": "#b3a05a",
+  Maritime: "#6d8ea3",
+  Cyber: "#8a86a8",
+  Humanitarian: "#6f9483",
 };
 
 export function PanelHeading({ eyebrow, title, trailing }: { eyebrow: string; title: string; trailing?: React.ReactNode }) {
   return (
-    <div className="flex items-end justify-between gap-3 px-4 pb-3 pt-4">
+    <div className="flex items-end justify-between gap-3 border-b border-rule px-4 pb-3 pt-4">
       <div>
-        <p className="text-[10px] font-medium text-cyan-300/65">{eyebrow}</p>
-        <h2 className="mt-1 text-[15px] font-semibold tracking-[-0.01em] text-slate-100">{title}</h2>
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 className="mt-1.5 text-[14px] font-semibold tracking-[-0.01em] text-paper">{title}</h2>
       </div>
       {trailing}
     </div>
@@ -29,7 +30,12 @@ export function PanelHeading({ eyebrow, title, trailing }: { eyebrow: string; ti
 }
 
 export function SeverityBadge({ severity }: { severity: Severity }) {
-  return <span className={`rounded-none border px-2 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wide ${severityStyles[severity]}`}>{severity}</span>;
+  return (
+    <span className={`pill ${severityStyles[severity]}`}>
+      <span className="sr-only">Severity: </span>
+      {severity}
+    </span>
+  );
 }
 
 export function formatTime(timestamp: string) {

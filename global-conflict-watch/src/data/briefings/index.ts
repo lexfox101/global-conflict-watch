@@ -26,6 +26,12 @@ export function isBriefingPremium(briefing: Briefing) {
   return !isBriefingFree(briefing);
 }
 
+/** 1-based edition number, counted from the oldest edition on the site. */
+export function briefingEditionNumber(slug: string): number | undefined {
+  const index = allBriefings.findIndex((briefing) => briefing.slug === slug);
+  return index === -1 ? undefined : allBriefings.length - index;
+}
+
 export function getAdjacentBriefings(slug: string) {
   const index = allBriefings.findIndex((briefing) => briefing.slug === slug);
   if (index === -1) return { newer: undefined, older: undefined };

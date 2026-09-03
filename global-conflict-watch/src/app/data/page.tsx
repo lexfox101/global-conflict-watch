@@ -136,11 +136,11 @@ export default function DataPage() {
         description="Every counter on this page is computed from the briefings on this site at build time. Nothing here is an estimate, a projection, or a traffic figure — each number states exactly what it counts."
       />
 
-      <section className="mt-8" aria-labelledby="counters">
+      <section className="mt-10" aria-labelledby="counters">
         <h2 id="counters" className="eyebrow">
           Site content counters
         </h2>
-        <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-5 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
           <li>
             <StatCard
               value={activeSituations}
@@ -184,7 +184,7 @@ export default function DataPage() {
             />
           </li>
         </ul>
-        <p className="mt-4 max-w-[80ch] text-[12px] leading-relaxed text-slate-500">
+        <p className="mt-8 max-w-[80ch] text-[12px] leading-relaxed text-paper-faint">
           Latest edition: {formatBriefingDate(latestBriefing.date)}. Counters cover every edition on the site unless the note says
           otherwise; the free window covers the {FREE_ARCHIVE_DAYS} most recent editions.
         </p>
@@ -194,8 +194,8 @@ export default function DataPage() {
         <SectionHeading eyebrow="Composition" title="Breakdown of published stories" id="breakdowns" />
         <div className="mt-6 grid gap-4 lg:grid-cols-3">
           <div className="soft-panel p-6">
-            <h3 className="text-[14px] font-semibold text-slate-100">By threat category</h3>
-            <p className="mt-1.5 text-[12px] leading-relaxed text-slate-500">
+            <h3 className="headline-item">By threat category</h3>
+            <p className="mt-1.5 text-[12px] leading-relaxed text-paper-faint">
               Each story is filed under exactly one category, so these sum to the total.
             </p>
             <div className="mt-5">
@@ -204,8 +204,8 @@ export default function DataPage() {
           </div>
 
           <div className="soft-panel p-6">
-            <h3 className="text-[14px] font-semibold text-slate-100">By confidence level</h3>
-            <p className="mt-1.5 text-[12px] leading-relaxed text-slate-500">
+            <h3 className="headline-item">By confidence level</h3>
+            <p className="mt-1.5 text-[12px] leading-relaxed text-paper-faint">
               Each story carries exactly one rating. The lower two ratings are not defects — they record what the sourcing supports.
             </p>
             <div className="mt-5">
@@ -214,8 +214,8 @@ export default function DataPage() {
           </div>
 
           <div className="soft-panel p-6">
-            <h3 className="text-[14px] font-semibold text-slate-100">By region</h3>
-            <p className="mt-1.5 text-[12px] leading-relaxed text-slate-500">
+            <h3 className="headline-item">By region</h3>
+            <p className="mt-1.5 text-[12px] leading-relaxed text-paper-faint">
               A story tagged to several regions is counted in each, so these sum to more than the total.
             </p>
             <div className="mt-5">
@@ -235,27 +235,27 @@ export default function DataPage() {
           description="GCW does not host, mirror or redistribute any of the datasets below. These are outbound links to the organisations that maintain them, offered so readers can check a briefing entry against a primary record."
         />
 
-        <div className="soft-panel mt-6 border-amber-300/20 bg-amber-400/[0.05] p-5" role="note">
-          <p className="eyebrow text-amber-200/80">Not affiliated</p>
-          <p className="mt-2 max-w-[78ch] text-[13px] leading-relaxed text-slate-300">
+        <div className="soft-panel panel-note mt-6 p-5" role="note">
+          <p className="eyebrow text-flag">Not affiliated</p>
+          <p className="mt-2 max-w-[78ch] text-[13px] leading-relaxed text-paper-body">
             Global Conflict Watch is not affiliated with, endorsed by, or funded by any of these organisations. Their names appear
             here as attribution for a link, nothing more. No data is fetched from them, cached, or re-published on this site — each
             entry below is a pointer, and their own terms and licences govern any use you make of them.
           </p>
         </div>
 
-        <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <ul className="mt-8 grid gap-x-10 sm:grid-cols-2">
           {EXTERNAL_DATASETS.map((dataset) => (
-            <li key={dataset.name}>
-              <article className="soft-panel flex h-full flex-col gap-2 p-5">
-                <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-slate-50">{dataset.name}</h3>
-                <p className="text-[13px] leading-relaxed text-slate-400">{dataset.description}</p>
-                <p className="text-[13px] leading-relaxed text-slate-500">{dataset.useFor}</p>
+            <li key={dataset.name} className="flex flex-col gap-2 border-t border-rule py-5">
+              <article className="flex h-full flex-col gap-2">
+                <h3 className="headline-item">{dataset.name}</h3>
+                <p className="text-[13px] leading-relaxed text-paper-dim">{dataset.description}</p>
+                <p className="text-[13px] leading-relaxed text-paper-faint">{dataset.useFor}</p>
                 <a
                   href={dataset.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto text-[13px] text-cyan-200 underline decoration-cyan-300/30 underline-offset-4 hover:text-cyan-100"
+                  className="link-signal mt-auto pt-1 text-[13px]"
                 >
                   Open {dataset.name}
                   <span className="sr-only"> (opens in a new tab)</span>
@@ -276,33 +276,33 @@ export default function DataPage() {
           id="methodology-heading"
         />
 
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
-          <article className="soft-panel p-6 sm:p-7">
-            <h3 className="text-[15px] font-semibold text-slate-100">Sourcing</h3>
-            <Prose paragraphs={METHODOLOGY.sourcing} className="mt-3 text-[14px]" />
+        <div className="mt-8 grid gap-8 lg:grid-cols-3 lg:gap-10">
+          <article className="border-t border-rule pt-4">
+            <h3 className="headline-item">Sourcing</h3>
+            <Prose paragraphs={METHODOLOGY.sourcing} className="is-tight mt-3" />
           </article>
-          <article className="soft-panel p-6 sm:p-7">
-            <h3 className="text-[15px] font-semibold text-slate-100">Corroboration levels</h3>
-            <Prose paragraphs={METHODOLOGY.corroboration} className="mt-3 text-[14px]" />
+          <article className="border-t border-rule pt-4">
+            <h3 className="headline-item">Corroboration levels</h3>
+            <Prose paragraphs={METHODOLOGY.corroboration} className="is-tight mt-3" />
           </article>
-          <article className="soft-panel p-6 sm:p-7">
-            <h3 className="text-[15px] font-semibold text-slate-100">Corrections</h3>
-            <Prose paragraphs={METHODOLOGY.corrections} className="mt-3 text-[14px]" />
+          <article className="border-t border-rule pt-4">
+            <h3 className="headline-item">Corrections</h3>
+            <Prose paragraphs={METHODOLOGY.corrections} className="is-tight mt-3" />
           </article>
         </div>
 
-        <div className="soft-panel mt-4 border-amber-300/20 bg-amber-400/[0.05] p-5 sm:p-6" role="note">
-          <p className="eyebrow text-amber-200/80">Standing caveat</p>
-          <p className="mt-2 max-w-[78ch] text-[14px] leading-relaxed text-slate-300">
+        <div className="soft-panel panel-note mt-10 p-5 sm:p-6" role="note">
+          <p className="eyebrow text-flag">Standing caveat</p>
+          <p className="mt-2 max-w-[78ch] text-[14px] leading-relaxed text-paper-body">
             Time-sensitive figures — severity scores, contract values, casualty and displacement counts, alert levels — change after
             publication and are frequently revised. Verify any such figure against the issuing primary source before acting on it. A
             GCW briefing is a starting point for that check, not a substitute for it.
           </p>
-          <div className="mt-4 flex flex-wrap gap-3 text-[13px]">
-            <Link href="/about" className="text-cyan-200 hover:text-cyan-100">
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[13px]">
+            <Link href="/about" className="link-signal">
               Editorial standards and corrections process →
             </Link>
-            <Link href="/briefings" className="text-cyan-200 hover:text-cyan-100">
+            <Link href="/briefings" className="link-signal">
               Read the briefings →
             </Link>
           </div>

@@ -17,9 +17,9 @@ export function StoryFeed({ refs, label, emptyTitle, emptyBody }: StoryFeedProps
     return (
       <div className="soft-panel p-6 sm:p-8">
         <p className="eyebrow">No entries</p>
-        <h3 className="mt-2 text-balance text-[18px] font-semibold tracking-[-0.01em] text-slate-100">{emptyTitle}</h3>
-        <p className="mt-2 max-w-[62ch] text-[14px] leading-relaxed text-slate-400">{emptyBody}</p>
-        <Link href="/briefings" className="mt-4 inline-block text-[13px] text-cyan-200 hover:text-cyan-100">
+        <h3 className="headline-story mt-2">{emptyTitle}</h3>
+        <p className="mt-3 max-w-[62ch] text-[14px] leading-relaxed text-paper-dim">{emptyBody}</p>
+        <Link href="/briefings" className="link-signal mt-4 inline-block text-[13px]">
           Browse the archive →
         </Link>
       </div>
@@ -27,7 +27,7 @@ export function StoryFeed({ refs, label, emptyTitle, emptyBody }: StoryFeedProps
   }
 
   return (
-    <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-label={label}>
+    <ul className="ruled-list border-t border-rule" aria-label={label}>
       {refs.map(({ story, briefing }) => (
         <li key={`${briefing.slug}-${story.id}`}>
           <StoryCard story={story} briefingSlug={briefing.slug} showDate isSample={briefing.isSample} />

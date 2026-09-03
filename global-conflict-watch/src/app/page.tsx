@@ -1,9 +1,14 @@
 import Link from "next/link";
 import { breakingAlerts } from "@/data/alerts";
-import { FREE_ARCHIVE_DAYS, globalThreatLevel, latestBriefing, topThreats } from "@/data/briefings";
-import { briefingCategories, briefingStoryCount } from "@/types/briefing";
+import {
+  FREE_ARCHIVE_DAYS,
+  briefingEditionNumber,
+  globalThreatLevel,
+  latestBriefing,
+  topThreats,
+} from "@/data/briefings";
+import { briefingCategories, briefingStoryCount, regionLabels } from "@/types/briefing";
 import { BreakingTicker } from "@/components/site/BreakingTicker";
-import { CategoryPill } from "@/components/site/CategoryPill";
 import { NewsletterSignup } from "@/components/site/NewsletterSignup";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { StoryCard } from "@/components/site/StoryCard";
@@ -20,77 +25,125 @@ const SECONDARY_LINKS = [
 
 export default function HomePage() {
   const stories = topThreats(4);
+  const [lead, ...rest] = stories;
   const storyCount = briefingStoryCount(latestBriefing);
   const categories = briefingCategories(latestBriefing);
+  const edition = briefingEditionNumber(latestBriefing.slug);
 
   return (
     <>
       <BreakingTicker alerts={breakingAlerts} />
 
-      <div className="mx-auto w-full max-w-[1400px] px-4 py-10 lg:px-6 lg:py-14">
-        <section className="grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:items-start">
-          <div>
+      <div className="mx-auto w-full max-w-[1400px] px-4 py-8 lg:px-6 lg:py-12">
+        <section className="grid gap-10 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:gap-12" aria-labelledby="lead-story">
+          <article>
             <p className="eyebrow">
-              {formatBriefingWeekday(latestBriefing.date)} · {formatBriefingDate(latestBriefing.date)}
+              Lead · {formatBriefingWeekday(latestBriefing.date)} {formatBriefingDate(latestBriefing.date)}
             </p>
-            <h1 className="mt-3 text-balance text-[32px] font-semibold leading-[1.1] tracking-[-0.03em] text-slate-50 sm:text-[42px]">
-              Daily open-source intelligence, with the sourcing shown
+            <h1 id="lead-story" className="headline-lead mt-4">
+              <Link href={`/briefings/${latestBriefing.slug}#${lead.id}`} className="hover:text-signal">
+                {lead.headline}
+              </Link>
             </h1>
-            <p className="mt-4 max-w-[58ch] text-[16px] leading-relaxed text-slate-400">
-              Global Conflict Watch publishes one briefing each day across cyber threats, the private-security market, and
-              defence-industry technology. Every story carries a threat level, a confidence rating, and the publications it draws
-              on — claims made by an involved party stay labelled as claims.
+            <p className="standfirst mt-5 max-w-[48ch]">{lead.dek}</p>
+            <p className="meta-line mt-5">
+              <ThreatLevelBadge level={lead.threatLevel} />
+              <span>{lead.category}</span>
+              <span>{regionLabels(lead.regions).join(", ")}</span>
+              <span>{lead.confidence}</span>
+              {latestBriefing.isSample ? <span className="text-flag">Illustrative sample</span> : null}
             </p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Link
-                href={`/briefings/${latestBriefing.slug}`}
-                className="rounded-none border border-cyan-300/25 bg-cyan-400/10 px-5 py-2.5 text-[14px] font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15"
-              >
+
+            <div className="prose-editorial mt-7">
+              <p>{lead.body[0]}</p>
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link href={`/briefings/${latestBriefing.slug}`} className="btn btn-primary">
                 Read today&apos;s briefing
               </Link>
-              <Link
-                href="/briefings"
-                className="rounded-none border border-white/10 px-5 py-2.5 text-[14px] text-slate-300 transition-colors hover:bg-white/5 hover:text-slate-100"
-              >
+              <Link href="/briefings" className="btn">
                 Browse the archive
               </Link>
             </div>
-          </div>
+          </article>
 
-          <div className="soft-panel p-6">
+          <aside className="flex flex-col gap-6 lg:border-l lg:border-rule lg:pl-10" aria-label="Today's edition at a glance">
             <ThreatGauge level={globalThreatLevel} />
-            <hr className="rule-soft my-5" />
-            <dl className="grid grid-cols-3 gap-4 text-center">
-              <div>
-                <dt className="text-[11px] text-slate-500">Stories today</dt>
-                <dd className="mt-1 font-mono text-[18px] text-slate-100">{storyCount}</dd>
-              </div>
-              <div>
-                <dt className="text-[11px] text-slate-500">Sections</dt>
-                <dd className="mt-1 font-mono text-[18px] text-slate-100">{latestBriefing.sections.length}</dd>
-              </div>
-              <div>
-                <dt className="text-[11px] text-slate-500">Free archive</dt>
-                <dd className="mt-1 font-mono text-[18px] text-slate-100">{FREE_ARCHIVE_DAYS}d</dd>
-              </div>
-            </dl>
-          </div>
+
+            <hr className="rule-soft" />
+
+            <div>
+              <p className="eyebrow">In this edition</p>
+              <p className="dateline mt-2">
+                {edition ? `No. ${edition} · ` : ""}
+                {formatBriefingDate(latestBriefing.date)}
+              </p>
+              <h2 className="headline-item mt-2">{latestBriefing.title}</h2>
+              <p className="mt-3 text-[14px] leading-relaxed text-paper-dim">{latestBriefing.topLine[0]}</p>
+
+              <ul className="mt-5 flex flex-col">
+                {latestBriefing.sections.map((section) => (
+                  <li key={section.id} className="flex items-baseline justify-between gap-4 border-t border-rule py-2 text-[13px] text-paper-dim">
+                    <span>
+                      <span className="font-mono text-[12px] text-paper-faint">{section.number}.</span> {section.title}
+                    </span>
+                    <span className="font-mono text-[12px] text-paper-faint">{section.stories.length}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="meta-line mt-4">
+                {categories.map((category) => (
+                  <span key={category}>{category}</span>
+                ))}
+              </p>
+
+              <dl className="mt-5 grid grid-cols-3 border-t border-rule pt-3 text-center">
+                <div>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-paper-faint">Stories</dt>
+                  <dd className="mt-1 font-mono text-[18px] text-paper">{storyCount}</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-paper-faint">Sections</dt>
+                  <dd className="mt-1 font-mono text-[18px] text-paper">{latestBriefing.sections.length}</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-paper-faint">Free archive</dt>
+                  <dd className="mt-1 font-mono text-[18px] text-paper">{FREE_ARCHIVE_DAYS}d</dd>
+                </div>
+              </dl>
+            </div>
+
+            <hr className="rule-soft" />
+
+            <div>
+              <p className="eyebrow">What this is</p>
+              <p className="mt-2 text-[13px] leading-relaxed text-paper-faint">
+                One briefing a day across cyber threats, the private-security market, and defence-industry technology. Every story
+                carries a threat level, a confidence rating, and the publications it draws on. Claims made by an involved party stay
+                labelled as claims.
+              </p>
+            </div>
+          </aside>
         </section>
 
-        <section className="mt-14" aria-labelledby="top-threats">
+        <hr className="rule-strong mt-12" />
+
+        <section className="mt-8" aria-labelledby="top-threats">
           <SectionHeading
-            eyebrow="Priority items"
-            title="Today's top threats"
+            eyebrow="Also in today's briefing"
+            title="The rest of the priority list"
             id="top-threats"
-            description="The most severe entries from the current briefing, ranked by assessed threat level."
+            description="Remaining entries from the current edition, ranked by assessed threat level."
             trailing={
-              <Link href={`/briefings/${latestBriefing.slug}`} className="text-[13px] text-cyan-200 hover:text-cyan-100">
+              <Link href={`/briefings/${latestBriefing.slug}`} className="link-signal text-[13px]">
                 All {storyCount} stories →
               </Link>
             }
           />
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {stories.map((story) => (
+          <ul className="ruled-list mt-6">
+            {rest.map((story) => (
               <li key={story.id}>
                 <StoryCard story={story} briefingSlug={latestBriefing.slug} isSample={latestBriefing.isSample} />
               </li>
@@ -98,51 +151,18 @@ export default function HomePage() {
           </ul>
         </section>
 
-        <section className="mt-14 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-stretch">
-          <article className="soft-panel flex flex-col gap-4 p-6 sm:p-8">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="pill pill-accent">Latest briefing</span>
-              <ThreatLevelBadge level={latestBriefing.globalThreatLevel} label="Global" />
-            </div>
-            <div>
-              <p className="eyebrow">{formatBriefingDate(latestBriefing.date)}</p>
-              <h2 className="mt-2 text-balance text-[24px] font-semibold tracking-[-0.02em] text-slate-50">{latestBriefing.title}</h2>
-            </div>
-            <p className="prose-editorial text-[15px]">{latestBriefing.topLine[0]}</p>
-            <ul className="flex flex-col gap-2 text-[13px] text-slate-400">
-              {latestBriefing.sections.map((section) => (
-                <li key={section.id} className="flex items-baseline justify-between gap-4">
-                  <span>
-                    <span className="font-mono text-slate-500">{section.number}.</span> {section.title}
-                  </span>
-                  <span className="font-mono text-[12px] text-slate-500">{section.stories.length}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-auto flex flex-wrap items-center gap-2">
-              {categories.map((category) => (
-                <CategoryPill key={category} category={category} />
-              ))}
-            </div>
-            <Link
-              href={`/briefings/${latestBriefing.slug}`}
-              className="self-start rounded-none border border-cyan-300/25 bg-cyan-400/10 px-5 py-2.5 text-[14px] font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15"
-            >
-              Read full briefing
-            </Link>
-          </article>
-
+        <div className="mt-14">
           <NewsletterSignup />
-        </section>
+        </div>
 
         <section className="mt-14" aria-labelledby="explore-more">
-          <SectionHeading eyebrow="Also on GCW" title="Explore the rest of the site" id="explore-more" as="h2" />
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <SectionHeading eyebrow="Also on GCW" title="The rest of the site" id="explore-more" as="h2" />
+          <ul className="mt-6 grid sm:grid-cols-2 sm:gap-x-10">
             {SECONDARY_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="soft-panel soft-panel-hover block h-full p-5">
-                  <p className="text-[15px] font-semibold text-slate-100">{link.label}</p>
-                  <p className="mt-1.5 text-[13px] leading-relaxed text-slate-400">{link.blurb}</p>
+              <li key={link.href} className="border-t border-rule py-4">
+                <Link href={link.href} className="group block">
+                  <p className="headline-item group-hover:text-signal">{link.label}</p>
+                  <p className="mt-1.5 text-[13px] leading-relaxed text-paper-faint">{link.blurb}</p>
                 </Link>
               </li>
             ))}

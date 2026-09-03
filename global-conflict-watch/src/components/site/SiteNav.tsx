@@ -16,7 +16,7 @@ export function SiteNav({ threatLevel }: { threatLevel: ThreatLevel }) {
 
   return (
     <>
-      <nav aria-label="Primary" className="ml-auto hidden items-center gap-0.5 lg:flex">
+      <nav aria-label="Primary" className="ml-auto hidden items-center gap-1 lg:flex">
         {PRIMARY_NAV.map((item) => {
           const active = isActiveRoute(pathname, item.href);
           return (
@@ -27,38 +27,32 @@ export function SiteNav({ threatLevel }: { threatLevel: ThreatLevel }) {
         })}
       </nav>
 
-      <div className="ml-auto flex shrink-0 items-center gap-2 lg:ml-3">
-        <Link href="/briefings" className="hidden sm:inline-flex" title="Current global threat level, from the latest briefing">
-          <ThreatLevelBadge level={threatLevel} label="Global" />
-        </Link>
-
-        <button
-          type="button"
-          onClick={() => setOpenedAt(open ? undefined : pathname)}
-          aria-expanded={open}
-          aria-controls={MENU_ID}
-          className="rounded-none border border-white/10 px-3 py-2 text-[12px] text-slate-300 transition-colors hover:bg-white/5 lg:hidden"
-        >
-          {open ? "Close" : "Menu"}
-          <span className="sr-only"> navigation</span>
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={() => setOpenedAt(open ? undefined : pathname)}
+        aria-expanded={open}
+        aria-controls={MENU_ID}
+        className="ml-auto shrink-0 border border-rule px-3 py-2 font-mono text-[11px] uppercase tracking-[0.11em] text-paper-dim transition-colors hover:text-paper lg:hidden"
+      >
+        {open ? "Close" : "Menu"}
+        <span className="sr-only"> navigation</span>
+      </button>
 
       <div
         id={MENU_ID}
         hidden={!open}
-        className="absolute left-0 right-0 top-full border-b border-white/5 bg-[rgb(5_12_21/0.97)] px-4 pb-4 pt-2 shadow-[0_18px_40px_rgb(0_0_0/0.4)] backdrop-blur-xl lg:hidden"
+        className="absolute left-0 right-0 top-full border-b border-rule-strong bg-ink px-4 pb-4 pt-2 lg:hidden"
       >
         <nav aria-label="Primary, mobile">
           <ul className="flex flex-col">
             {PRIMARY_NAV.map((item) => {
               const active = isActiveRoute(pathname, item.href);
               return (
-                <li key={item.href}>
+                <li key={item.href} className="border-b border-rule last:border-b-0">
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={`site-nav-link block px-3 py-2.5 text-[15px] ${active ? "is-active" : ""}`}
+                    className={`site-nav-link block px-1 py-2.5 text-[15px] ${active ? "is-active" : ""}`}
                   >
                     {item.label}
                   </Link>
@@ -67,8 +61,8 @@ export function SiteNav({ threatLevel }: { threatLevel: ThreatLevel }) {
             })}
           </ul>
         </nav>
-        <div className="mt-3 border-t border-white/5 pt-3 sm:hidden">
-          <ThreatLevelBadge level={threatLevel} label="Global" />
+        <div className="mt-3 border-t border-rule pt-3 sm:hidden">
+          <ThreatLevelBadge level={threatLevel} label="Global" variant="pill" />
         </div>
       </div>
     </>
