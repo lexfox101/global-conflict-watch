@@ -11,7 +11,7 @@ export function SiteHeader() {
     <header className="site-header">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:border focus:border-signal focus:bg-ink focus:px-4 focus:py-2 focus:text-[13px] focus:text-paper"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:border focus:border-signal focus:bg-surface focus:px-4 focus:py-2 focus:text-[13px] focus:text-ink"
       >
         Skip to content
       </a>

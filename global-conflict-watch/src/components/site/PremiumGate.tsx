@@ -28,7 +28,7 @@ export function PremiumGate({ title, dateLabel, teaser, storyCount, compact = fa
       </div>
 
       <div className="premium-scrim absolute inset-0 flex flex-col justify-end gap-3 p-5 sm:p-7">
-        <p className="eyebrow">Subscriber archive</p>
+        <p className="eyebrow eyebrow-signal">Subscriber archive</p>
         <div>
           <h3 className="headline-item">{title}</h3>
           <p className="meta-line mt-2">

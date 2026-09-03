@@ -81,12 +81,12 @@ export default function BriefingArchivePage() {
 
       <div className="soft-panel mt-8 p-5 sm:p-6">
         <h2 className="eyebrow">Free and subscriber access</h2>
-        <p className="mt-3 max-w-[70ch] text-[14px] leading-relaxed text-paper-dim">
+        <p className="mt-3 max-w-[70ch] text-[14px] leading-relaxed text-muted">
           The {FREE_ARCHIVE_DAYS} most recent editions are free to read in full. Older editions move into the subscriber archive and
           appear here as a locked teaser. {accessSummary} Subscription and payment handling are not implemented: the upgrade links
           are interface demonstrations only.
         </p>
-        <p className="mt-3 max-w-[70ch] text-[13px] leading-relaxed text-paper-faint">
+        <p className="mt-3 max-w-[70ch] text-[13px] leading-relaxed text-faint">
           Editions marked <span className="text-flag">Illustrative sample</span> are placeholder content written to demonstrate the
           format. They are not derived from real reporting and carry no sources.
         </p>

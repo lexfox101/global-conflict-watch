@@ -31,7 +31,7 @@ export default function RegionsIndexPage() {
 
       <div className="soft-panel mt-8 p-5 sm:p-6">
         <h2 className="eyebrow">How the region level is worked out</h2>
-        <p className="mt-3 max-w-[70ch] text-[14px] leading-relaxed text-paper-dim">
+        <p className="mt-3 max-w-[70ch] text-[14px] leading-relaxed text-muted">
           A region&apos;s level is the highest story-level threat currently filed to it across the {FREE_ARCHIVE_DAYS} editions inside
           the free window. It is a summary of what is on the page, not a forecast, and it moves as editions roll out of the window.
           Where a region has no current entries, the level is shown as unset rather than defaulted to Low.

@@ -8,13 +8,14 @@ export const severityStyles: Record<Severity, string> = {
   Low: "threat-low",
 };
 
+/** Marker and legend hues, tuned to stay distinguishable on the pale basemap. */
 export const categoryColors: Record<EventCategory, string> = {
-  "Armed conflict": "#c05a4e",
-  "Air activity": "#c2854a",
-  "Civil unrest": "#b3a05a",
-  Maritime: "#6d8ea3",
-  Cyber: "#8a86a8",
-  Humanitarian: "#6f9483",
+  "Armed conflict": "#a8322c",
+  "Air activity": "#a1621a",
+  "Civil unrest": "#7d6a17",
+  Maritime: "#2f5f7a",
+  Cyber: "#5b4f8c",
+  Humanitarian: "#2f6b56",
 };
 
 export function PanelHeading({ eyebrow, title, trailing }: { eyebrow: string; title: string; trailing?: React.ReactNode }) {
@@ -22,7 +23,7 @@ export function PanelHeading({ eyebrow, title, trailing }: { eyebrow: string; ti
     <div className="flex items-end justify-between gap-3 border-b border-rule px-4 pb-3 pt-4">
       <div>
         <p className="eyebrow">{eyebrow}</p>
-        <h2 className="mt-1.5 text-[14px] font-semibold tracking-[-0.01em] text-paper">{title}</h2>
+        <h2 className="mt-1.5 text-[14px] font-semibold tracking-[-0.01em] text-ink">{title}</h2>
       </div>
       {trailing}
     </div>

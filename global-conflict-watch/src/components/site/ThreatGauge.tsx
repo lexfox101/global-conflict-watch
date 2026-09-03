@@ -24,12 +24,12 @@ export function ThreatGauge({ level, label = "Global threat level" }: ThreatGaug
           <span key={step} className={`threat-seg ${index <= activeRank ? "is-on" : ""}`} />
         ))}
       </div>
-      <ul className="mt-2 flex justify-between font-mono text-[10px] uppercase tracking-[0.08em] text-paper-faint" aria-hidden="true">
+      <ul className="mt-2 flex justify-between font-mono text-[10px] uppercase tracking-[0.08em] text-faint" aria-hidden="true">
         {THREAT_LEVELS.map((step) => (
           <li key={step}>{step}</li>
         ))}
       </ul>
-      <p className="mt-3 text-[14px] leading-relaxed text-paper-dim">
+      <p className="mt-3 text-[14px] leading-relaxed text-muted">
         <span className="sr-only">{label}: </span>
         {level} — {threatLevelBlurb[level]}
       </p>

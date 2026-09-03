@@ -64,7 +64,7 @@ export default async function RegionPage({ params }: PageProps<"/regions/[region
       </Link>
 
       <header className="mt-8">
-        <p className="eyebrow">Region</p>
+        <p className="eyebrow eyebrow-signal">Region</p>
         <h1 className="headline-page mt-3">{meta.name}</h1>
         <p className="standfirst mt-4 max-w-[62ch]">{profile.summary}</p>
         <p className="meta-line mt-6 border-t border-rule-strong pt-3">
@@ -74,7 +74,7 @@ export default async function RegionPage({ params }: PageProps<"/regions/[region
           </span>
           <span>Free window · {FREE_ARCHIVE_DAYS} editions</span>
         </p>
-        {level ? <p className="mt-3 max-w-[62ch] text-[13px] leading-relaxed text-paper-faint">{threatLevelBlurb[level]}</p> : null}
+        {level ? <p className="mt-3 max-w-[62ch] text-[13px] leading-relaxed text-faint">{threatLevelBlurb[level]}</p> : null}
       </header>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
@@ -94,7 +94,7 @@ export default async function RegionPage({ params }: PageProps<"/regions/[region
           <h2 id="region-breakdown" className="eyebrow">
             Category breakdown
           </h2>
-          <p className="mt-2 text-[13px] leading-relaxed text-paper-dim">
+          <p className="mt-2 text-[13px] leading-relaxed text-muted">
             Entries filed to {meta.shortName} in the current free window, by threat category.
           </p>
           <div className="mt-5">
@@ -106,7 +106,7 @@ export default async function RegionPage({ params }: PageProps<"/regions/[region
                 caption="Shares are of this region's current entries. A story tagged to several regions is counted in each of them."
               />
             ) : (
-              <p className="text-[13px] leading-relaxed text-paper-faint">
+              <p className="text-[13px] leading-relaxed text-faint">
                 No entries are filed to this region in the current free window, so there is nothing to break down yet.
               </p>
             )}

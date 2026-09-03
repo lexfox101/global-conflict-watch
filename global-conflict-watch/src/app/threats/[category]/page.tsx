@@ -61,7 +61,7 @@ export default async function ThreatCategoryPage({ params }: PageProps<"/threats
       </Link>
 
       <header className="mt-8">
-        <p className="eyebrow">Threat category</p>
+        <p className="eyebrow eyebrow-signal">Threat category</p>
         <h1 className="headline-page mt-3">{category}</h1>
         <p className="standfirst mt-4 max-w-[64ch]">{profile.definition}</p>
         <p className="meta-line mt-6 border-t border-rule-strong pt-3">
@@ -71,7 +71,7 @@ export default async function ThreatCategoryPage({ params }: PageProps<"/threats
           </span>
           <span>Free window · {FREE_ARCHIVE_DAYS} editions</span>
         </p>
-        {level ? <p className="mt-3 max-w-[64ch] text-[13px] leading-relaxed text-paper-faint">{threatLevelBlurb[level]}</p> : null}
+        {level ? <p className="mt-3 max-w-[64ch] text-[13px] leading-relaxed text-faint">{threatLevelBlurb[level]}</p> : null}
       </header>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
@@ -82,7 +82,7 @@ export default async function ThreatCategoryPage({ params }: PageProps<"/threats
           <div className="mt-5 grid gap-8 sm:grid-cols-2">
             <div>
               <h3 className="headline-item">Filed under {category}</h3>
-              <ul className="mt-3 flex flex-col gap-2 text-[14px] leading-relaxed text-paper-dim">
+              <ul className="mt-3 flex flex-col gap-2 text-[14px] leading-relaxed text-muted">
                 {profile.includes.map((item) => (
                   <li key={item} className="flex gap-2.5">
                     <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-rule-strong" />
@@ -93,7 +93,7 @@ export default async function ThreatCategoryPage({ params }: PageProps<"/threats
             </div>
             <div>
               <h3 className="headline-item">Filed elsewhere, or out of scope</h3>
-              <ul className="mt-3 flex flex-col gap-2 text-[14px] leading-relaxed text-paper-dim">
+              <ul className="mt-3 flex flex-col gap-2 text-[14px] leading-relaxed text-muted">
                 {profile.excludes.map((item) => (
                   <li key={item} className="flex gap-2.5">
                     <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-rule-strong" />
@@ -107,14 +107,14 @@ export default async function ThreatCategoryPage({ params }: PageProps<"/threats
           <hr className="rule-soft my-7" />
 
           <h3 className="eyebrow">Scope note</h3>
-          <p className="mt-2 max-w-[68ch] text-[14px] leading-relaxed text-paper-dim">{profile.scopeNote}</p>
+          <p className="mt-2 max-w-[68ch] text-[14px] leading-relaxed text-muted">{profile.scopeNote}</p>
         </section>
 
         <section className="soft-panel p-6" aria-labelledby="category-regions">
           <h2 id="category-regions" className="eyebrow">
             Regional spread
           </h2>
-          <p className="mt-2 text-[13px] leading-relaxed text-paper-dim">
+          <p className="mt-2 text-[13px] leading-relaxed text-muted">
             Where the current entries in this category are filed geographically.
           </p>
           <div className="mt-5">
@@ -126,7 +126,7 @@ export default async function ThreatCategoryPage({ params }: PageProps<"/threats
                 caption="A story tagged to several regions is counted in each. Entries with no single geographic focus are grouped as global."
               />
             ) : (
-              <p className="text-[13px] leading-relaxed text-paper-faint">
+              <p className="text-[13px] leading-relaxed text-faint">
                 Nothing is filed under this category in the current free window, so there is no regional spread to show.
               </p>
             )}

@@ -22,14 +22,15 @@ export const confidenceDescription: Record<StoryConfidence, string> = {
   "Claimed/unverified": "Asserted by an involved party and not independently verified.",
 };
 
-/** Muted category hues, used only for the proportional bars on breakdown charts. */
+/** Muted category hues, used only for the proportional bars on breakdown charts.
+    Tuned to stay legible against the white page. */
 export const categoryAccent: Record<ThreatCategory, string> = {
-  "Military Conflicts": "#c05a4e",
-  Terrorism: "#c2854a",
-  Cybersecurity: "#8a86a8",
-  "Political Instability": "#b3a05a",
-  "Natural Disasters": "#6f9483",
-  "Nuclear & WMD": "#6d8ea3",
+  "Military Conflicts": "#a8322c",
+  Terrorism: "#a1621a",
+  Cybersecurity: "#5b4f8c",
+  "Political Instability": "#7d6a17",
+  "Natural Disasters": "#2f6b56",
+  "Nuclear & WMD": "#2f5f7a",
 };
 
 const longDate = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });

@@ -43,10 +43,10 @@ function StoryArticle({ story }: { story: BriefingStory }) {
 
       <Prose paragraphs={story.body} className="mt-5" />
 
-      <div className="mt-6 max-w-[68ch] text-[13px] leading-relaxed text-paper-faint">
+      <div className="mt-6 max-w-[68ch] text-[13px] leading-relaxed text-faint">
         {story.sources.length > 0 ? (
           <p>
-            <span className="font-medium text-paper-dim">Sources: </span>
+            <span className="font-medium text-muted">Sources: </span>
             {story.sources.map((source, index) => (
               <span key={`${story.id}-${source.name}`}>
                 {index > 0 ? <span aria-hidden="true"> · </span> : null}
@@ -78,7 +78,7 @@ function SectionBlock({ section }: { section: BriefingSection }) {
     <section id={section.id} className="scroll-mt-28" aria-labelledby={`${section.id}-heading`}>
       <div className="border-b border-rule-strong pb-3">
         <div className="flex items-baseline gap-3">
-          <span aria-hidden="true" className="font-mono text-[13px] text-paper-faint">
+          <span aria-hidden="true" className="font-mono text-[13px] text-faint">
             {String(section.number).padStart(2, "0")}
           </span>
           <h2 id={`${section.id}-heading`} className="headline-section">
@@ -97,7 +97,7 @@ function SectionBlock({ section }: { section: BriefingSection }) {
       {section.coverageNote ? (
         <aside className="mt-10 border-l-2 border-rule-strong pl-5" aria-label={`${section.title} coverage note`}>
           <p className="eyebrow">Coverage note</p>
-          <p className="mt-2 max-w-[66ch] text-[14px] leading-relaxed text-paper-dim">{section.coverageNote}</p>
+          <p className="mt-2 max-w-[66ch] text-[14px] leading-relaxed text-muted">{section.coverageNote}</p>
         </aside>
       ) : null}
     </section>
@@ -163,7 +163,7 @@ export default async function BriefingPage({ params }: PageProps<"/briefings/[da
       {briefing.isSample ? (
         <aside className="soft-panel panel-note mt-8 p-5" aria-label="Sample content notice">
           <p className="eyebrow text-flag">Illustrative sample edition</p>
-          <p className="mt-2 max-w-[66ch] text-[14px] leading-relaxed text-paper-body">
+          <p className="mt-2 max-w-[66ch] text-[14px] leading-relaxed text-ink-body">
             This edition is placeholder content, written to demonstrate the briefing format. It is not derived from real reporting,
             carries no source attributions, and must not be treated as intelligence.
           </p>
@@ -188,7 +188,7 @@ export default async function BriefingPage({ params }: PageProps<"/briefings/[da
       {!briefing.isSample ? (
         <aside className="mt-16 border-t border-rule-strong pt-5" aria-label="How this edition was compiled">
           <p className="eyebrow">How this edition was compiled</p>
-          <p className="mt-3 max-w-[66ch] text-[14px] leading-relaxed text-paper-dim">
+          <p className="mt-3 max-w-[66ch] text-[14px] leading-relaxed text-muted">
             Open-source reporting only: publications, national-authority and vendor advisories, court and regulatory filings, and
             published research. Every entry carries a threat level, a confidence rating, region tags and a category. Source links
             point to publication homepages rather than individual articles, because article URLs decay. The global level above is
@@ -207,7 +207,7 @@ export default async function BriefingPage({ params }: PageProps<"/briefings/[da
 
       <aside className="mt-10 border-t border-rule pt-5" aria-label="Verification note">
         <p className="eyebrow">Verification</p>
-        <p className="mt-3 max-w-[66ch] text-[14px] leading-relaxed text-paper-dim">{briefing.verificationNote}</p>
+        <p className="mt-3 max-w-[66ch] text-[14px] leading-relaxed text-muted">{briefing.verificationNote}</p>
       </aside>
 
       <nav className="mt-12 grid sm:grid-cols-2 sm:gap-x-8" aria-label="Briefing navigation">

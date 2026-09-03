@@ -18,7 +18,7 @@ export function StoryFeed({ refs, label, emptyTitle, emptyBody }: StoryFeedProps
       <div className="soft-panel p-6 sm:p-8">
         <p className="eyebrow">No entries</p>
         <h3 className="headline-story mt-2">{emptyTitle}</h3>
-        <p className="mt-3 max-w-[62ch] text-[14px] leading-relaxed text-paper-dim">{emptyBody}</p>
+        <p className="mt-3 max-w-[62ch] text-[14px] leading-relaxed text-muted">{emptyBody}</p>
         <Link href="/briefings" className="link-signal mt-4 inline-block text-[13px]">
           Browse the archive →
         </Link>

@@ -37,7 +37,7 @@ export default function HomePage() {
       <div className="mx-auto w-full max-w-[1400px] px-4 py-8 lg:px-6 lg:py-12">
         <section className="grid gap-10 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:gap-12" aria-labelledby="lead-story">
           <article>
-            <p className="eyebrow">
+            <p className="eyebrow eyebrow-signal">
               Lead · {formatBriefingWeekday(latestBriefing.date)} {formatBriefingDate(latestBriefing.date)}
             </p>
             <h1 id="lead-story" className="headline-lead mt-4">
@@ -80,15 +80,15 @@ export default function HomePage() {
                 {formatBriefingDate(latestBriefing.date)}
               </p>
               <h2 className="headline-item mt-2">{latestBriefing.title}</h2>
-              <p className="mt-3 text-[14px] leading-relaxed text-paper-dim">{latestBriefing.topLine[0]}</p>
+              <p className="mt-3 text-[14px] leading-relaxed text-muted">{latestBriefing.topLine[0]}</p>
 
               <ul className="mt-5 flex flex-col">
                 {latestBriefing.sections.map((section) => (
-                  <li key={section.id} className="flex items-baseline justify-between gap-4 border-t border-rule py-2 text-[13px] text-paper-dim">
+                  <li key={section.id} className="flex items-baseline justify-between gap-4 border-t border-rule py-2 text-[13px] text-muted">
                     <span>
-                      <span className="font-mono text-[12px] text-paper-faint">{section.number}.</span> {section.title}
+                      <span className="font-mono text-[12px] text-faint">{section.number}.</span> {section.title}
                     </span>
-                    <span className="font-mono text-[12px] text-paper-faint">{section.stories.length}</span>
+                    <span className="font-mono text-[12px] text-faint">{section.stories.length}</span>
                   </li>
                 ))}
               </ul>
@@ -101,16 +101,16 @@ export default function HomePage() {
 
               <dl className="mt-5 grid grid-cols-3 border-t border-rule pt-3 text-center">
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-paper-faint">Stories</dt>
-                  <dd className="mt-1 font-mono text-[18px] text-paper">{storyCount}</dd>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-faint">Stories</dt>
+                  <dd className="mt-1 font-mono text-[18px] text-ink">{storyCount}</dd>
                 </div>
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-paper-faint">Sections</dt>
-                  <dd className="mt-1 font-mono text-[18px] text-paper">{latestBriefing.sections.length}</dd>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-faint">Sections</dt>
+                  <dd className="mt-1 font-mono text-[18px] text-ink">{latestBriefing.sections.length}</dd>
                 </div>
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-paper-faint">Free archive</dt>
-                  <dd className="mt-1 font-mono text-[18px] text-paper">{FREE_ARCHIVE_DAYS}d</dd>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-faint">Free archive</dt>
+                  <dd className="mt-1 font-mono text-[18px] text-ink">{FREE_ARCHIVE_DAYS}d</dd>
                 </div>
               </dl>
             </div>
@@ -119,7 +119,7 @@ export default function HomePage() {
 
             <div>
               <p className="eyebrow">What this is</p>
-              <p className="mt-2 text-[13px] leading-relaxed text-paper-faint">
+              <p className="mt-2 text-[13px] leading-relaxed text-faint">
                 One briefing a day across cyber threats, the private-security market, and defence-industry technology. Every story
                 carries a threat level, a confidence rating, and the publications it draws on. Claims made by an involved party stay
                 labelled as claims.
@@ -162,7 +162,7 @@ export default function HomePage() {
               <li key={link.href} className="border-t border-rule py-4">
                 <Link href={link.href} className="group block">
                   <p className="headline-item group-hover:text-signal">{link.label}</p>
-                  <p className="mt-1.5 text-[13px] leading-relaxed text-paper-faint">{link.blurb}</p>
+                  <p className="mt-1.5 text-[13px] leading-relaxed text-faint">{link.blurb}</p>
                 </Link>
               </li>
             ))}

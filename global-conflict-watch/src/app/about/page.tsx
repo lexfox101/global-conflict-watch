@@ -103,12 +103,12 @@ export default function AboutPage() {
             {CONFIDENCE_LEVELS.map((confidence) => (
               <div key={confidence} className="border-t border-rule py-4">
                 <dt className="headline-item">{confidence}</dt>
-                <dd className="mt-1.5 text-[13px] leading-relaxed text-paper-dim">{confidenceDescription[confidence]}</dd>
+                <dd className="mt-1.5 text-[13px] leading-relaxed text-muted">{confidenceDescription[confidence]}</dd>
               </div>
             ))}
           </dl>
 
-          <p className="mt-5 text-[13px] text-paper-faint">
+          <p className="mt-5 text-[13px] text-faint">
             The full methodology, including the correction policy and the standing caveat on time-sensitive figures, is set out on the{" "}
             <Link href="/data#methodology" className="link-signal">
               data page
@@ -144,12 +144,12 @@ export default function AboutPage() {
           </h2>
           <div className="soft-panel panel-note mt-6 p-6 sm:p-7" role="note">
             <p className="eyebrow text-flag">Placeholder — to be written by the operator</p>
-            <p className="mt-3 max-w-[68ch] text-[14px] leading-relaxed text-paper-body">
+            <p className="mt-3 max-w-[68ch] text-[14px] leading-relaxed text-ink-body">
               This block is intentionally unwritten. Nothing about the operator&apos;s background, employment history, qualifications
               or clearances has been assumed or drafted on their behalf, because inventing any of it would undermine the point of this
               page.
             </p>
-            <ul className="mt-5 flex flex-col gap-2.5 text-[13px] leading-relaxed text-paper-dim">
+            <ul className="mt-5 flex flex-col gap-2.5 text-[13px] leading-relaxed text-muted">
               <li className="flex gap-3">
                 <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-flag" />
                 <span>TODO: name, or a stated decision to publish under the GCW masthead without a byline.</span>
@@ -182,20 +182,20 @@ export default function AboutPage() {
             <dl className="grid gap-5 sm:grid-cols-2">
               <div>
                 <dt className="eyebrow">Corrections</dt>
-                <dd className="mt-2 font-mono text-[14px] text-paper">corrections@example.com</dd>
-                <dd className="mt-1 text-[12px] leading-relaxed text-paper-faint">
+                <dd className="mt-2 font-mono text-[14px] text-ink">corrections@example.com</dd>
+                <dd className="mt-1 text-[12px] leading-relaxed text-faint">
                   Identify the entry, the claim, and a primary source.
                 </dd>
               </div>
               <div>
                 <dt className="eyebrow">Editorial and general</dt>
-                <dd className="mt-2 font-mono text-[14px] text-paper">editor@example.com</dd>
-                <dd className="mt-1 text-[12px] leading-relaxed text-paper-faint">
+                <dd className="mt-2 font-mono text-[14px] text-ink">editor@example.com</dd>
+                <dd className="mt-1 text-[12px] leading-relaxed text-faint">
                   Coverage questions, complaints, institutional access enquiries.
                 </dd>
               </div>
             </dl>
-            <p className="mt-5 text-[12px] leading-relaxed text-paper-faint">
+            <p className="mt-5 text-[12px] leading-relaxed text-faint">
               Both addresses are placeholders. The live mailboxes have not been set up yet, so nothing sent to them will arrive.
             </p>
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[13px]">

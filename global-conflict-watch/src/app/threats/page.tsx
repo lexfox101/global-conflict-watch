@@ -29,7 +29,7 @@ export default function ThreatsIndexPage() {
 
       <div className="soft-panel mt-8 p-5 sm:p-6">
         <h2 className="eyebrow">Reading the counts</h2>
-        <p className="mt-3 max-w-[70ch] text-[14px] leading-relaxed text-paper-dim">
+        <p className="mt-3 max-w-[70ch] text-[14px] leading-relaxed text-muted">
           Counts and levels below cover the {FREE_ARCHIVE_DAYS} editions inside the free window. A category level is the highest
           story-level threat currently filed under it; where nothing is filed, the level is shown as unset rather than defaulted to
           Low. GCW publishes across all six categories, but a single daily cycle rarely touches every one.
@@ -52,7 +52,7 @@ export default function ThreatsIndexPage() {
                   {storyCount} {storyCount === 1 ? "story" : "stories"}
                 </span>
               </p>
-              <ul className="mt-4 flex flex-col gap-1.5 text-[14px] leading-relaxed text-paper-faint">
+              <ul className="mt-4 flex flex-col gap-1.5 text-[14px] leading-relaxed text-faint">
                 {includes.slice(0, 3).map((item) => (
                   <li key={`${slug}-${item}`} className="flex gap-2.5">
                     <span aria-hidden="true" className="mt-[10px] h-px w-2.5 shrink-0 bg-rule-strong" />

@@ -32,7 +32,7 @@ export function SiteNav({ threatLevel }: { threatLevel: ThreatLevel }) {
         onClick={() => setOpenedAt(open ? undefined : pathname)}
         aria-expanded={open}
         aria-controls={MENU_ID}
-        className="ml-auto shrink-0 border border-rule px-3 py-2 font-mono text-[11px] uppercase tracking-[0.11em] text-paper-dim transition-colors hover:text-paper lg:hidden"
+        className="ml-auto shrink-0 border border-rule px-3 py-2 font-mono text-[11px] uppercase tracking-[0.11em] text-muted transition-colors hover:text-ink lg:hidden"
       >
         {open ? "Close" : "Menu"}
         <span className="sr-only"> navigation</span>
@@ -41,7 +41,7 @@ export function SiteNav({ threatLevel }: { threatLevel: ThreatLevel }) {
       <div
         id={MENU_ID}
         hidden={!open}
-        className="absolute left-0 right-0 top-full border-b border-rule-strong bg-ink px-4 pb-4 pt-2 lg:hidden"
+        className="absolute left-0 right-0 top-full border-b border-rule-strong bg-surface px-4 pb-4 pt-2 lg:hidden"
       >
         <nav aria-label="Primary, mobile">
           <ul className="flex flex-col">

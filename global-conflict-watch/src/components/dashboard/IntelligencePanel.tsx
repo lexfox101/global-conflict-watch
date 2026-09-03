@@ -23,7 +23,7 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
       <div className="min-h-0 flex-1 overflow-y-auto pb-2">
         {selected ? <SelectionDetails selected={selected} /> : (
           <section className="intro-note mx-4 mb-1 p-3.5">
-            <p className="text-xs leading-5 text-paper-dim">Select a report or map marker to see its demonstration details and source attribution.</p>
+            <p className="text-xs leading-5 text-muted">Select a report or map marker to see its demonstration details and source attribution.</p>
           </section>
         )}
 
@@ -32,7 +32,7 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
           <div className="metric-strip mt-3 grid grid-cols-3">
             <Metric value={incidents.length} label="Reports" />
             <Metric value={highPriority} label="High+" accent="threat-high" />
-            <Metric value={corroborated} label="Corroborated" accent="text-paper" />
+            <Metric value={corroborated} label="Corroborated" accent="text-ink" />
           </div>
         </section>
 
@@ -40,9 +40,9 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
           <h3 className="eyebrow">Demo tracking inventory</h3>
           <div className="metric-strip mt-3 grid grid-cols-2">
             <Metric value={aircraftCount} label="Aircraft" accent="text-flag" />
-            <Metric value={vesselCount} label="Vessels" accent="text-paper" />
+            <Metric value={vesselCount} label="Vessels" accent="text-ink" />
           </div>
-          <p className="mt-3 text-[10px] leading-4 text-paper-faint">Fictional records only, generalized and delayed. No live operational tracking.</p>
+          <p className="mt-3 text-[10px] leading-4 text-faint">Fictional records only, generalized and delayed. No live operational tracking.</p>
         </section>
 
         <section className="insight-section px-4 py-4">
@@ -51,7 +51,7 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
             {EVENT_CATEGORIES.map((category) => {
               const count = incidents.filter((incident) => incident.category === category).length;
               const percentage = incidents.length ? (count / incidents.length) * 100 : 0;
-              return <div key={category}><div className="flex justify-between text-[10px]"><span className="text-paper-dim"><span aria-hidden="true" className="mr-2" style={{ color: categoryColors[category] }}>●</span>{category}</span><span className="font-mono text-paper-faint">{count}</span></div><div className="mt-1 h-1 overflow-hidden bg-rule"><div className="h-full" style={{ width: `${percentage}%`, backgroundColor: categoryColors[category] }} /></div></div>;
+              return <div key={category}><div className="flex justify-between text-[10px]"><span className="text-muted"><span aria-hidden="true" className="mr-2" style={{ color: categoryColors[category] }}>●</span>{category}</span><span className="font-mono text-faint">{count}</span></div><div className="mt-1 h-1 overflow-hidden bg-rule"><div className="h-full" style={{ width: `${percentage}%`, backgroundColor: categoryColors[category] }} /></div></div>;
             })}
           </div>
         </section>
@@ -59,7 +59,7 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
         <section className="insight-section px-4 py-4">
           <h3 className="eyebrow">Regional concentration</h3>
           <ol className="mt-3 space-y-2">
-            {regionCounts.length ? regionCounts.slice(0, 4).map(([region, count], index) => <li key={region} className="flex items-center gap-3 text-[11px]"><span className="font-mono text-paper-faint">0{index + 1}</span><span className="flex-1 text-paper-dim">{region}</span><span className="font-mono text-paper">{count}</span></li>) : <li className="text-[11px] text-paper-faint">No regional data in current selection.</li>}
+            {regionCounts.length ? regionCounts.slice(0, 4).map(([region, count], index) => <li key={region} className="flex items-center gap-3 text-[11px]"><span className="font-mono text-faint">0{index + 1}</span><span className="flex-1 text-muted">{region}</span><span className="font-mono text-ink">{count}</span></li>) : <li className="text-[11px] text-faint">No regional data in current selection.</li>}
           </ol>
         </section>
       </div>
@@ -72,10 +72,10 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
     const incident = selected.item;
     return (
       <section className="selection-details mx-4 mb-1 p-4" aria-live="polite">
-        <div className="flex items-center justify-between gap-2"><SeverityBadge severity={incident.severity} /><span className="font-mono text-[9px] text-paper-faint">{incident.id}</span></div>
+        <div className="flex items-center justify-between gap-2"><SeverityBadge severity={incident.severity} /><span className="font-mono text-[9px] text-faint">{incident.id}</span></div>
         <h3 className="headline-item mt-3 text-[16px]">{incident.title}</h3>
         <p className="meta-line mt-2"><span>{incident.location}</span><span>{incident.country}</span></p>
-        <p className="mt-4 text-xs leading-5 text-paper-dim">{incident.summary}</p>
+        <p className="mt-4 text-xs leading-5 text-muted">{incident.summary}</p>
         <DetailGrid rows={[["Category", incident.category], ["Confidence", incident.confidence], ["Verification", incident.verification], ["Observed", `${formatDateTime(incident.timestamp)} UTC`]]} />
         <div className="mt-4">
           <p className="eyebrow">Source references</p>
@@ -109,7 +109,7 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
     <section className="selection-details mx-4 mb-1 p-4" aria-live="polite">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="pill pill-flag">{assetLabel}</span>
-        <span className="font-mono text-[9px] text-paper-faint">{asset.id}</span>
+        <span className="font-mono text-[9px] text-faint">{asset.id}</span>
       </div>
       <p className="meta-line mt-3 text-flag">
         <span>Generalized position</span>
@@ -117,12 +117,12 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
       </p>
       <h3 className="headline-item mt-3 text-[16px]">{asset.displayName}</h3>
       <p className="meta-line mt-2"><span>{asset.broadArea}</span><span>{asset.region}</span></p>
-      <p className="mt-4 text-xs leading-5 text-paper-dim">{asset.description}</p>
+      <p className="mt-4 text-xs leading-5 text-muted">{asset.description}</p>
       <DetailGrid rows={detailRows} />
       <div className="mt-4">
         <p className="eyebrow">Illustrative source attribution</p>
         <a href={asset.source.homepageUrl} target="_blank" rel="noopener noreferrer" className="link-signal mt-2 inline-block text-[11px]">{asset.source.name} <span aria-hidden="true">↗</span></a>
-        <p className="mt-2 text-[10px] leading-4 text-paper-faint">Homepage link only. GCW does not call, scrape, or connect to this provider.</p>
+        <p className="mt-2 text-[10px] leading-4 text-faint">Homepage link only. GCW does not call, scrape, or connect to this provider.</p>
       </div>
     </section>
   );
@@ -131,11 +131,11 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
 function DetailGrid({ rows }: { rows: Array<[string, string]> }) {
   return (
     <dl className="detail-list mt-4">
-      {rows.map(([label, value]) => <div key={label} className="flex items-start justify-between gap-4 py-2"><dt className="text-[10px] text-paper-faint">{label}</dt><dd className="max-w-[62%] text-right text-[11px] leading-4 text-paper-dim">{value}</dd></div>)}
+      {rows.map(([label, value]) => <div key={label} className="flex items-start justify-between gap-4 py-2"><dt className="text-[10px] text-faint">{label}</dt><dd className="max-w-[62%] text-right text-[11px] leading-4 text-muted">{value}</dd></div>)}
     </dl>
   );
 }
 
-function Metric({ value, label, accent = "text-paper" }: { value: number; label: string; accent?: string }) {
-  return <div className="px-2 py-3 text-center"><div className={`font-mono text-lg font-semibold ${accent}`}>{String(value).padStart(2, "0")}</div><div className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-paper-faint">{label}</div></div>;
+function Metric({ value, label, accent = "text-ink" }: { value: number; label: string; accent?: string }) {
+  return <div className="px-2 py-3 text-center"><div className={`font-mono text-lg font-semibold ${accent}`}>{String(value).padStart(2, "0")}</div><div className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-faint">{label}</div></div>;
 }

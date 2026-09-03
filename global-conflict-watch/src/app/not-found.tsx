@@ -14,7 +14,7 @@ const HELPFUL_LINKS = [
 export default function NotFound() {
   return (
     <div className="mx-auto w-full max-w-[900px] px-4 py-16 lg:px-6 lg:py-24">
-      <p className="eyebrow">Error 404</p>
+      <p className="eyebrow eyebrow-signal">Error 404</p>
       <h1 className="headline-page mt-3">That page is not here</h1>
       <p className="standfirst mt-4 max-w-[60ch]">
         The address you followed does not match anything on Global Conflict Watch. Briefing pages are addressed by calendar date, so a
@@ -43,7 +43,7 @@ export default function NotFound() {
             <li key={link.href} className="border-t border-rule py-4">
               <Link href={link.href} className="group block">
                 <span className="headline-item block group-hover:text-signal">{link.label}</span>
-                <span className="mt-1.5 block text-[13px] leading-relaxed text-paper-faint">{link.blurb}</span>
+                <span className="mt-1.5 block text-[13px] leading-relaxed text-faint">{link.blurb}</span>
               </Link>
             </li>
           ))}

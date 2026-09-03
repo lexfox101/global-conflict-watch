@@ -106,7 +106,7 @@ const FAQ = [
 function AvailabilityCell({ available }: { available: boolean }) {
   return (
     <>
-      <span aria-hidden="true" className={available ? "text-signal" : "text-paper-faint"}>
+      <span aria-hidden="true" className={available ? "text-signal" : "text-faint"}>
         {available ? "●" : "—"}
       </span>
       <span className="sr-only">{available ? "Included" : "Not included"}</span>
@@ -126,7 +126,7 @@ export default function PricingPage() {
 
       <div className="soft-panel panel-note mt-8 p-5 sm:p-6" role="note">
         <p className="eyebrow text-flag">Billing is not enabled in this demo</p>
-        <p className="mt-2 max-w-[76ch] text-[14px] leading-relaxed text-paper-body">
+        <p className="mt-2 max-w-[76ch] text-[14px] leading-relaxed text-ink-body">
           There is no payment processor, no checkout, no card handling and no stored billing data anywhere on this site. Prices are
           not set and are shown below as to be confirmed. The buttons in the subscriber column are deliberately inert: they cannot
           take a payment, start a trial, or create an account. Everything described as a subscriber feature is a statement of intent,
@@ -144,7 +144,7 @@ export default function PricingPage() {
             <h2 className="headline-section mt-2">Open access</h2>
             <p className="dateline mt-2">No charge, no sign-up</p>
           </div>
-          <p className="text-[14px] leading-relaxed text-paper-dim">
+          <p className="text-[14px] leading-relaxed text-muted">
             The current record stays open: the homepage and today&apos;s top threats, the {FREE_ARCHIVE_DAYS} most recent editions in
             full, every region page, every threat category page, and the interactive map. That is {allBriefings.length} editions on the
             site today, of which the {FREE_ARCHIVE_DAYS} newest are readable in full.
@@ -166,7 +166,7 @@ export default function PricingPage() {
             <h2 className="headline-section mt-2">Full archive</h2>
             <p className="dateline mt-2">Price to be confirmed</p>
           </div>
-          <p className="text-[14px] leading-relaxed text-paper-dim">
+          <p className="text-[14px] leading-relaxed text-muted">
             Adds the searchable archive beyond the free window, region and category feeds across the whole archive, early alerts
             between editions, export and citation output, and priority handling of correction requests and coverage questions.
           </p>
@@ -179,7 +179,7 @@ export default function PricingPage() {
             >
               Checkout unavailable in this demo
             </button>
-            <p id="billing-disabled-note" className="text-[12px] leading-relaxed text-paper-faint">
+            <p id="billing-disabled-note" className="text-[12px] leading-relaxed text-faint">
               This control is disabled because no billing system exists. It will not charge you, start a trial, or collect any
               details.
             </p>
@@ -193,7 +193,7 @@ export default function PricingPage() {
           <table className="w-full min-w-[620px] border-collapse text-left">
             <caption className="sr-only">Feature comparison between free and subscriber access</caption>
             <thead>
-              <tr className="border-b border-rule-strong font-mono text-[10px] uppercase tracking-[0.11em] text-paper-faint">
+              <tr className="border-b border-rule-strong font-mono text-[10px] uppercase tracking-[0.11em] text-faint">
                 <th scope="col" className="py-3 pr-4 font-medium">
                   Feature
                 </th>
@@ -210,7 +210,7 @@ export default function PricingPage() {
                 <tr key={row.feature} className="border-t border-rule align-top">
                   <th scope="row" className="py-4 pr-4 font-normal">
                     <span className="headline-item block">{row.feature}</span>
-                    <span className="mt-1 block max-w-[60ch] text-[12px] leading-relaxed text-paper-faint">{row.detail}</span>
+                    <span className="mt-1 block max-w-[60ch] text-[12px] leading-relaxed text-faint">{row.detail}</span>
                   </th>
                   <td className="py-4 text-center">
                     <AvailabilityCell available={row.free} />
@@ -231,11 +231,11 @@ export default function PricingPage() {
           {FAQ.map((item) => (
             <div key={item.question} className="border-t border-rule py-5">
               <dt className="headline-item">{item.question}</dt>
-              <dd className="mt-2 max-w-[64ch] text-[14px] leading-relaxed text-paper-dim">{item.answer}</dd>
+              <dd className="mt-2 max-w-[64ch] text-[14px] leading-relaxed text-muted">{item.answer}</dd>
             </div>
           ))}
         </dl>
-        <p className="mt-6 text-[13px] text-paper-faint">
+        <p className="mt-6 text-[13px] text-faint">
           More on how entries are sourced and rated:{" "}
           <Link href="/data#methodology" className="link-signal">
             methodology

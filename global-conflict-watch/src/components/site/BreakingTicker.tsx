@@ -12,8 +12,8 @@ function AlertItem({ alert }: { alert: BreakingAlert }) {
         <span aria-hidden="true" className="threat-dot" />
         {alert.level}
       </span>
-      <span className="text-[13px] text-paper-body">{alert.headline}</span>
-      <time dateTime={alert.timestamp} className="font-mono text-[11px] text-paper-faint">
+      <span className="text-[13px] text-ink-body">{alert.headline}</span>
+      <time dateTime={alert.timestamp} className="font-mono text-[11px] text-faint">
         {formatAlertTime(alert.timestamp)}
       </time>
     </>
@@ -56,7 +56,7 @@ export function BreakingTicker({ alerts }: { alerts: BreakingAlert[] }) {
   return (
     <section className="ticker" aria-label="Breaking alerts">
       <div className="mx-auto flex max-w-[1400px] items-center gap-3 px-4 py-2 lg:px-6">
-        <p className="eyebrow shrink-0 text-signal">Breaking</p>
+        <p className="eyebrow eyebrow-signal shrink-0">Breaking</p>
 
         <div className="ticker-viewport min-w-0 flex-1">
           <div className={`ticker-track ${paused || !animated ? "is-paused" : ""}`}>
@@ -80,7 +80,7 @@ export function BreakingTicker({ alerts }: { alerts: BreakingAlert[] }) {
             type="button"
             onClick={() => setPaused((current) => !current)}
             aria-pressed={paused}
-            className="shrink-0 border border-rule px-3 py-1 font-mono text-[10px] uppercase tracking-[0.11em] text-paper-faint transition-colors hover:text-paper"
+            className="shrink-0 border border-rule px-3 py-1 font-mono text-[10px] uppercase tracking-[0.11em] text-faint transition-colors hover:text-ink"
           >
             {paused ? "Resume" : "Pause"}
             <span className="sr-only"> scrolling alerts</span>

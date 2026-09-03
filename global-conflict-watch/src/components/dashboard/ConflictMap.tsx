@@ -20,20 +20,20 @@ interface ConflictMapProps {
 const BASEMAP_STYLE: StyleSpecification = {
   version: 8,
   sources: {
-    "carto-dark": {
+    "carto-light": {
       type: "raster",
       tiles: [
-        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-        "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+        "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+        "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+        "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+        "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
       ],
       tileSize: 256,
       maxzoom: 20,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     },
   },
-  layers: [{ id: "basemap", type: "raster", source: "carto-dark", minzoom: 0, maxzoom: 20 }],
+  layers: [{ id: "basemap", type: "raster", source: "carto-light", minzoom: 0, maxzoom: 20 }],
 };
 
 function incidentsToGeoJSON(incidents: Incident[]) {
@@ -115,10 +115,10 @@ export function ConflictMap({ incidents, aircraft, vessels, visibility, selected
             source: "incidents",
             paint: {
               "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 5, 5, 8],
-              "circle-color": ["match", ["get", "category"], "Armed conflict", categoryColors["Armed conflict"], "Air activity", categoryColors["Air activity"], "Civil unrest", categoryColors["Civil unrest"], "Maritime", categoryColors.Maritime, "Cyber", categoryColors.Cyber, "Humanitarian", categoryColors.Humanitarian, "#8a847a"],
-              "circle-stroke-color": "#ece7de",
-              "circle-stroke-width": 1,
-              "circle-opacity": 0.88,
+              "circle-color": ["match", ["get", "category"], "Armed conflict", categoryColors["Armed conflict"], "Air activity", categoryColors["Air activity"], "Civil unrest", categoryColors["Civil unrest"], "Maritime", categoryColors.Maritime, "Cyber", categoryColors.Cyber, "Humanitarian", categoryColors.Humanitarian, "#67675f"],
+              "circle-stroke-color": "#ffffff",
+              "circle-stroke-width": 1.5,
+              "circle-opacity": 0.95,
             },
           });
           map.addLayer({
@@ -127,32 +127,32 @@ export function ConflictMap({ incidents, aircraft, vessels, visibility, selected
             source: "aircraft",
             paint: {
               "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 7, 5, 10],
-              "circle-color": ["match", ["get", "classification"], "government-state", "#8a86a8", "humanitarian", "#6f9483", "#c9a24e"],
-              "circle-stroke-color": "#0c0c0d",
+              "circle-color": ["match", ["get", "classification"], "government-state", "#5b4f8c", "humanitarian", "#2f6b56", "#8a6a11"],
+              "circle-stroke-color": "#ffffff",
               "circle-stroke-width": 3,
               "circle-opacity": 0.95,
             },
           });
-          map.addLayer({ id: "aircraft-core", type: "circle", source: "aircraft", paint: { "circle-radius": 2, "circle-color": "#ece7de" } });
+          map.addLayer({ id: "aircraft-core", type: "circle", source: "aircraft", paint: { "circle-radius": 2, "circle-color": "#ffffff" } });
           map.addLayer({
             id: "vessel-points",
             type: "circle",
             source: "vessels",
             paint: {
               "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 7, 5, 10],
-              "circle-color": "rgba(12,12,13,0.7)",
-              "circle-stroke-color": ["match", ["get", "classification"], "government-state", "#8a86a8", "humanitarian", "#6f9483", "#6d8ea3"],
+              "circle-color": "rgba(255,255,255,0.92)",
+              "circle-stroke-color": ["match", ["get", "classification"], "government-state", "#5b4f8c", "humanitarian", "#2f6b56", "#2f5f7a"],
               "circle-stroke-width": 3,
             },
           });
-          map.addLayer({ id: "vessel-core", type: "circle", source: "vessels", paint: { "circle-radius": 2.5, "circle-color": "#ece7de" } });
+          map.addLayer({ id: "vessel-core", type: "circle", source: "vessels", paint: { "circle-radius": 2.5, "circle-color": "#16160f" } });
           ["incidents", "aircraft", "vessels"].forEach((source) => {
             map.addLayer({
               id: `${source}-selection`,
               type: "circle",
               source,
               filter: ["==", ["get", "id"], ""],
-              paint: { "circle-radius": 14, "circle-color": "rgba(212,103,90,0.12)", "circle-stroke-color": "#ece7de", "circle-stroke-width": 2 },
+              paint: { "circle-radius": 14, "circle-color": "rgba(179,18,43,0.12)", "circle-stroke-color": "#16160f", "circle-stroke-width": 2 },
             });
           });
           const selectableLayers = ["incident-points", "aircraft-points", "vessel-points"];
@@ -264,7 +264,7 @@ export function ConflictMap({ incidents, aircraft, vessels, visibility, selected
 
   return (
     <section className="map-canvas relative min-h-[440px] overflow-hidden" aria-label="Interactive incidents and tracking map">
-      <div ref={containerRef} className="absolute inset-0 bg-sunken" />
+      <div ref={containerRef} className="absolute inset-0 bg-surface-sunken" />
       <div className="map-layer-control absolute top-3 max-w-[calc(100%-5rem)] p-1.5">
         <div className="flex flex-wrap gap-1" aria-label="Map layer visibility controls">
           {([
@@ -278,7 +278,7 @@ export function ConflictMap({ incidents, aircraft, vessels, visibility, selected
               aria-pressed={visibility[layer.key]}
               aria-label={`${visibility[layer.key] ? "Hide" : "Show"} ${layer.label.toLowerCase()} layer`}
               onClick={() => onToggleLayer(layer.key)}
-              className={`layer-pill px-2.5 py-1.5 text-[10px] font-medium transition ${visibility[layer.key] ? "is-active text-paper" : "text-paper-faint"}`}
+              className={`layer-pill px-2.5 py-1.5 text-[10px] font-medium transition ${visibility[layer.key] ? "is-active text-ink" : "text-faint"}`}
             >
               <span aria-hidden="true" className="mr-1.5 text-signal">{layer.symbol}</span>{layer.label} <strong className="ml-0.5 font-mono font-medium">{visibility[layer.key] ? layer.count : 0}</strong>
             </button>
@@ -288,14 +288,14 @@ export function ConflictMap({ incidents, aircraft, vessels, visibility, selected
           {visibility.incidents ? incidents.length : 0} reports, {visibility.aircraft ? aircraft.length : 0} aircraft, and {visibility.vessels ? vessels.length : 0} vessels visible.
         </p>
       </div>
-      {!mapReady && !mapError && <div role="status" className="map-status absolute bottom-4 left-4 px-3 py-2 text-[10px] text-paper-dim">Loading basemap…</div>}
+      {!mapReady && !mapError && <div role="status" className="map-status absolute bottom-4 left-4 px-3 py-2 text-[10px] text-muted">Loading basemap…</div>}
       {mapError && (
         <div role="status" className="map-status absolute bottom-4 left-4 max-w-xs px-3 py-2 text-[10px] leading-4 text-flag">
           Basemap tiles are currently unavailable. Feed and analysis remain usable; retry when network access is restored.
         </div>
       )}
       <div className="map-legend absolute bottom-4 hidden max-w-[52%] flex-wrap gap-x-3 gap-y-1 px-3 py-2 md:flex">
-        {Object.entries(categoryColors).map(([category, color]) => <span key={category} className="text-[9px] text-paper-dim"><span aria-hidden="true" className="mr-1" style={{ color }}>●</span>{category}</span>)}
+        {Object.entries(categoryColors).map(([category, color]) => <span key={category} className="text-[9px] text-muted"><span aria-hidden="true" className="mr-1" style={{ color }}>●</span>{category}</span>)}
       </div>
     </section>
   );

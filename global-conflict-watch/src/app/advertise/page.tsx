@@ -76,7 +76,7 @@ export default function AdvertisePage() {
 
       <div className="soft-panel panel-note mt-8 p-5 sm:p-6" role="note">
         <p className="eyebrow text-flag">Audience figures are not published yet</p>
-        <p className="mt-2 max-w-[76ch] text-[14px] leading-relaxed text-paper-body">
+        <p className="mt-2 max-w-[76ch] text-[14px] leading-relaxed text-ink-body">
           GCW does not publish subscriber counts, traffic figures or open rates it cannot yet substantiate. Every quantitative field
           on this page is marked to be confirmed and will be filled in from measured data, with the measurement period stated. Treat
           the audience description below as qualitative only.
@@ -86,7 +86,7 @@ export default function AdvertisePage() {
       <section className="mt-12" aria-labelledby="audience">
         <SectionHeading eyebrow="Audience" title="Who reads GCW" id="audience" />
         <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
-          <ul className="flex flex-col gap-4 text-[15px] leading-relaxed text-paper-dim">
+          <ul className="flex flex-col gap-4 text-[15px] leading-relaxed text-muted">
             {AUDIENCE.map((item) => (
               <li key={item} className="flex gap-3">
                 <span aria-hidden="true" className="mt-[11px] h-px w-2.5 shrink-0 bg-rule-strong" />
@@ -97,13 +97,13 @@ export default function AdvertisePage() {
 
           <div className="soft-panel p-6">
             <h3 className="eyebrow">Audience metrics</h3>
-            <p className="mt-2 text-[12px] leading-relaxed text-paper-faint">
+            <p className="mt-2 text-[12px] leading-relaxed text-faint">
               Placeholders. No figure below has been measured or verified.
             </p>
             <dl className="mt-5 flex flex-col">
               {METRICS.map((metric) => (
                 <div key={metric.label} className="flex flex-wrap items-baseline justify-between gap-2 border-t border-rule py-2.5">
-                  <dt className="text-[13px] text-paper-dim">{metric.label}</dt>
+                  <dt className="text-[13px] text-muted">{metric.label}</dt>
                   <dd className="font-mono text-[11px] uppercase tracking-[0.11em] text-flag">{metric.value}</dd>
                 </div>
               ))}
@@ -128,7 +128,7 @@ export default function AdvertisePage() {
                   <span>{placement.format}</span>
                   <span>Rate to be confirmed</span>
                 </p>
-                <p className="mt-1 text-[14px] leading-relaxed text-paper-dim">{placement.description}</p>
+                <p className="mt-1 text-[14px] leading-relaxed text-muted">{placement.description}</p>
               </article>
             </li>
           ))}
@@ -138,10 +138,10 @@ export default function AdvertisePage() {
       <section className="mt-14" aria-labelledby="independence">
         <SectionHeading eyebrow="Policy" title="Editorial independence" id="independence" />
         <div className="mt-6">
-          <ol className="flex flex-col text-[15px] leading-relaxed text-paper-dim">
+          <ol className="flex flex-col text-[15px] leading-relaxed text-muted">
             {INDEPENDENCE.map((item, index) => (
               <li key={item} className="flex gap-4 border-t border-rule py-4">
-                <span aria-hidden="true" className="mt-0.5 font-mono text-[13px] text-paper-faint">
+                <span aria-hidden="true" className="mt-0.5 font-mono text-[13px] text-faint">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span>{item}</span>
@@ -159,7 +159,7 @@ export default function AdvertisePage() {
           description="Some categories are refused outright, because carrying them would compromise the beat GCW reports on. This list is not exhaustive and the decision rests with the publication."
         />
         <div className="mt-6">
-          <ul className="flex flex-col text-[15px] leading-relaxed text-paper-dim">
+          <ul className="flex flex-col text-[15px] leading-relaxed text-muted">
             {UNACCEPTABLE.map((item) => (
               <li key={item} className="flex gap-4 border-t border-rule py-3.5">
                 <span aria-hidden="true" className="mt-[11px] h-px w-2.5 shrink-0 bg-signal" />
@@ -173,13 +173,13 @@ export default function AdvertisePage() {
       <section className="mt-14" aria-labelledby="sponsor-contact">
         <SectionHeading eyebrow="Contact" title="Enquiries" id="sponsor-contact" />
         <div className="soft-panel mt-6 p-6 sm:p-8">
-          <p className="max-w-[68ch] text-[15px] leading-relaxed text-paper-dim">
+          <p className="max-w-[68ch] text-[15px] leading-relaxed text-muted">
             Sponsorship enquiries go to the address below. Include the placement you are interested in, the term, and the copy or
             creative you have in mind. Requests for editorial input, pre-publication review, or unlabelled placement will be declined
             without a rate being quoted.
           </p>
-          <p className="mt-5 font-mono text-[16px] text-paper">sponsors@example.com</p>
-          <p className="mt-2 text-[12px] leading-relaxed text-paper-faint">
+          <p className="mt-5 font-mono text-[16px] text-ink">sponsors@example.com</p>
+          <p className="mt-2 text-[12px] leading-relaxed text-faint">
             Placeholder address — the live sponsorship mailbox has not been set up yet. Do not send anything to it.
           </p>
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[13px]">

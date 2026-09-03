@@ -184,7 +184,7 @@ export default function DataPage() {
             />
           </li>
         </ul>
-        <p className="mt-8 max-w-[80ch] text-[12px] leading-relaxed text-paper-faint">
+        <p className="mt-8 max-w-[80ch] text-[12px] leading-relaxed text-faint">
           Latest edition: {formatBriefingDate(latestBriefing.date)}. Counters cover every edition on the site unless the note says
           otherwise; the free window covers the {FREE_ARCHIVE_DAYS} most recent editions.
         </p>
@@ -195,7 +195,7 @@ export default function DataPage() {
         <div className="mt-6 grid gap-4 lg:grid-cols-3">
           <div className="soft-panel p-6">
             <h3 className="headline-item">By threat category</h3>
-            <p className="mt-1.5 text-[12px] leading-relaxed text-paper-faint">
+            <p className="mt-1.5 text-[12px] leading-relaxed text-faint">
               Each story is filed under exactly one category, so these sum to the total.
             </p>
             <div className="mt-5">
@@ -205,7 +205,7 @@ export default function DataPage() {
 
           <div className="soft-panel p-6">
             <h3 className="headline-item">By confidence level</h3>
-            <p className="mt-1.5 text-[12px] leading-relaxed text-paper-faint">
+            <p className="mt-1.5 text-[12px] leading-relaxed text-faint">
               Each story carries exactly one rating. The lower two ratings are not defects — they record what the sourcing supports.
             </p>
             <div className="mt-5">
@@ -215,7 +215,7 @@ export default function DataPage() {
 
           <div className="soft-panel p-6">
             <h3 className="headline-item">By region</h3>
-            <p className="mt-1.5 text-[12px] leading-relaxed text-paper-faint">
+            <p className="mt-1.5 text-[12px] leading-relaxed text-faint">
               A story tagged to several regions is counted in each, so these sum to more than the total.
             </p>
             <div className="mt-5">
@@ -237,7 +237,7 @@ export default function DataPage() {
 
         <div className="soft-panel panel-note mt-6 p-5" role="note">
           <p className="eyebrow text-flag">Not affiliated</p>
-          <p className="mt-2 max-w-[78ch] text-[13px] leading-relaxed text-paper-body">
+          <p className="mt-2 max-w-[78ch] text-[13px] leading-relaxed text-ink-body">
             Global Conflict Watch is not affiliated with, endorsed by, or funded by any of these organisations. Their names appear
             here as attribution for a link, nothing more. No data is fetched from them, cached, or re-published on this site — each
             entry below is a pointer, and their own terms and licences govern any use you make of them.
@@ -249,8 +249,8 @@ export default function DataPage() {
             <li key={dataset.name} className="flex flex-col gap-2 border-t border-rule py-5">
               <article className="flex h-full flex-col gap-2">
                 <h3 className="headline-item">{dataset.name}</h3>
-                <p className="text-[13px] leading-relaxed text-paper-dim">{dataset.description}</p>
-                <p className="text-[13px] leading-relaxed text-paper-faint">{dataset.useFor}</p>
+                <p className="text-[13px] leading-relaxed text-muted">{dataset.description}</p>
+                <p className="text-[13px] leading-relaxed text-faint">{dataset.useFor}</p>
                 <a
                   href={dataset.url}
                   target="_blank"
@@ -293,7 +293,7 @@ export default function DataPage() {
 
         <div className="soft-panel panel-note mt-10 p-5 sm:p-6" role="note">
           <p className="eyebrow text-flag">Standing caveat</p>
-          <p className="mt-2 max-w-[78ch] text-[14px] leading-relaxed text-paper-body">
+          <p className="mt-2 max-w-[78ch] text-[14px] leading-relaxed text-ink-body">
             Time-sensitive figures — severity scores, contract values, casualty and displacement counts, alert levels — change after
             publication and are frequently revised. Verify any such figure against the issuing primary source before acting on it. A
             GCW briefing is a starting point for that check, not a substitute for it.

@@ -36,7 +36,7 @@ export function CountBreakdown({ items, label, total, caption }: CountBreakdownP
           return (
             <li key={item.key}>
               <div className="flex items-baseline justify-between gap-4 text-[13px]">
-                <span className="min-w-0 truncate text-paper-dim">
+                <span className="min-w-0 truncate text-muted">
                   {item.href ? (
                     <Link href={item.href} className="hover:text-signal">
                       {item.label}
@@ -45,7 +45,7 @@ export function CountBreakdown({ items, label, total, caption }: CountBreakdownP
                     item.label
                   )}
                 </span>
-                <span className="shrink-0 font-mono text-[12px] text-paper-faint">
+                <span className="shrink-0 font-mono text-[12px] text-faint">
                   {item.count}
                   <span> · {share}%</span>
                 </span>
@@ -53,14 +53,14 @@ export function CountBreakdown({ items, label, total, caption }: CountBreakdownP
               <div aria-hidden="true" className="mt-1.5 h-1.5 overflow-hidden bg-rule">
                 <div
                   className="h-full"
-                  style={{ width: `${width}%`, backgroundColor: item.accent ?? "var(--paper-faint)" }}
+                  style={{ width: `${width}%`, backgroundColor: item.accent ?? "var(--text-faint)" }}
                 />
               </div>
             </li>
           );
         })}
       </ul>
-      {caption ? <p className="mt-4 max-w-[60ch] text-[12px] leading-relaxed text-paper-faint">{caption}</p> : null}
+      {caption ? <p className="mt-4 max-w-[60ch] text-[12px] leading-relaxed text-faint">{caption}</p> : null}
     </div>
   );
 }

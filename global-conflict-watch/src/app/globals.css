@@ -1,45 +1,45 @@
 @import "tailwindcss";
 
 /* ── Tokens ────────────────────────────────────────────────────────────
-   One near-black ink, one warm paper, two greys, one signal accent.
+   A white page, one warm near-black for text, two greys, one signal red.
    Threat levels are the only other colours, and they are muted on purpose. */
 
 :root {
-  --ink: #0c0c0d;
-  --ink-raised: #131312;
-  --ink-sunken: #08080a;
+  --surface: #ffffff;
+  --surface-raised: #faf9f6;
+  --surface-sunken: #f4f3ef;
 
-  --paper: #ece7de;
-  --paper-body: #dcd6cc;
-  --paper-dim: #a8a29a;
-  --paper-faint: #8a847a;
+  --text: #16160f;
+  --text-body: #1f1f1b;
+  --text-muted: #55554f;
+  --text-faint: #67675f;
 
-  --signal: #d4675a;
-  --signal-ink: #f0cac2;
-  --flag: #c9a24e;
+  --signal: #b3122b;
+  --signal-ink: #8f0e22;
+  --flag: #8a6a11;
 
-  --rule: rgb(236 231 222 / 0.13);
-  --rule-strong: rgb(236 231 222 / 0.26);
+  --rule: rgb(0 0 0 / 0.12);
+  --rule-strong: rgb(0 0 0 / 0.24);
 
-  --threat-critical: #d4544a;
-  --threat-high: #c98442;
-  --threat-elevated: #b9a44e;
-  --threat-low: #7d9490;
+  --threat-critical: #a3202b;
+  --threat-high: #9a5518;
+  --threat-elevated: #7f6b17;
+  --threat-low: #3f6660;
 
-  --background: var(--ink);
-  --foreground: var(--paper);
+  --background: var(--surface);
+  --foreground: var(--text);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-ink: var(--ink);
-  --color-surface: var(--ink-raised);
-  --color-sunken: var(--ink-sunken);
-  --color-paper: var(--paper);
-  --color-paper-body: var(--paper-body);
-  --color-paper-dim: var(--paper-dim);
-  --color-paper-faint: var(--paper-faint);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-ink: var(--text);
+  --color-ink-body: var(--text-body);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
   --color-signal: var(--signal);
   --color-flag: var(--flag);
   --color-rule: var(--rule);
@@ -54,18 +54,23 @@
 @layer base {
   * {
     scrollbar-width: thin;
-    scrollbar-color: #37342f transparent;
+    scrollbar-color: #c4c1ba transparent;
   }
 
   html {
-    background: var(--ink);
+    background: var(--surface);
   }
 
   body {
     margin: 0;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--surface);
+    color: var(--text);
     font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--signal) 18%, transparent);
+    color: var(--text);
   }
 
   button,
@@ -97,12 +102,13 @@
   .headline-item {
     font-family: var(--font-source-serif), Georgia, "Times New Roman", serif;
     font-weight: 600;
-    color: var(--paper);
+    color: var(--text);
     text-wrap: balance;
   }
 
   .headline-lead {
     font-size: clamp(34px, 6.4vw, 56px);
+    font-weight: 700;
     line-height: 1.04;
     letter-spacing: -0.02em;
   }
@@ -133,7 +139,7 @@
   .standfirst,
   .standfirst-sm {
     font-family: var(--font-source-serif), Georgia, "Times New Roman", serif;
-    color: var(--paper-dim);
+    color: var(--text-muted);
   }
 
   .standfirst {
@@ -148,7 +154,7 @@
 
   .prose-editorial {
     max-width: 68ch;
-    color: var(--paper-body);
+    color: var(--text-body);
     font-family: var(--font-source-serif), Georgia, "Times New Roman", serif;
     font-size: 17px;
     line-height: 1.65;
@@ -165,7 +171,7 @@
   }
 
   .prose-editorial strong {
-    color: var(--paper);
+    color: var(--text);
     font-weight: 600;
   }
 
@@ -184,12 +190,17 @@
 
   /* Uppercase mono label above headings and section blocks. */
   .eyebrow {
-    color: var(--paper-faint);
+    color: var(--text-muted);
     font-family: var(--font-geist-mono), monospace;
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
+  }
+
+  /* Kicker variant for the category label that sits directly above a headline. */
+  .eyebrow-signal {
+    color: var(--signal);
   }
 
   /* Typographic replacement for stacked badges: CATEGORY · REGION · CONFIDENCE. */
@@ -198,7 +209,7 @@
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0;
-    color: var(--paper-faint);
+    color: var(--text-faint);
     font-family: var(--font-geist-mono), monospace;
     font-size: 10.5px;
     letter-spacing: 0.11em;
@@ -213,7 +224,7 @@
   }
 
   .dateline {
-    color: var(--paper-faint);
+    color: var(--text-faint);
     font-family: var(--font-geist-mono), monospace;
     font-size: 11px;
     letter-spacing: 0.13em;
@@ -234,7 +245,7 @@
 
   .rule-masthead {
     border: 0;
-    border-top: 2px solid var(--paper);
+    border-top: 2px solid var(--text);
   }
 
   .ruled-list > li {
@@ -253,7 +264,7 @@
   .soft-panel {
     border: 1px solid var(--rule);
     border-radius: 0;
-    background: var(--ink-raised);
+    background: var(--surface-raised);
   }
 
   .soft-panel-hover {
@@ -262,13 +273,13 @@
 
   .soft-panel-hover:hover {
     border-color: var(--rule-strong);
-    background: #191817;
+    background: var(--surface-sunken);
   }
 
   /* Standing notices: demo status, placeholders, standing caveats. */
   .panel-note {
     border-color: color-mix(in srgb, var(--flag) 34%, transparent);
-    background: color-mix(in srgb, var(--flag) 7%, var(--ink-raised));
+    background: color-mix(in srgb, var(--flag) 7%, var(--surface-raised));
   }
 
   /* ── Controls ──────────────────────────────────────────────────────── */
@@ -281,7 +292,7 @@
     border-radius: 0;
     padding: 9px 18px;
     background: transparent;
-    color: var(--paper);
+    color: var(--text);
     font-family: var(--font-geist-sans), Arial, sans-serif;
     font-size: 13px;
     font-weight: 600;
@@ -289,7 +300,7 @@
   }
 
   .btn:hover {
-    background: rgb(236 231 222 / 0.07);
+    background: rgb(0 0 0 / 0.05);
   }
 
   .btn-primary {
@@ -305,20 +316,20 @@
   .btn:disabled {
     border-color: var(--rule);
     background: transparent;
-    color: var(--paper-faint);
+    color: var(--text-faint);
     cursor: not-allowed;
   }
 
   .field {
-    border: 1px solid var(--rule);
+    border: 1px solid var(--rule-strong);
     border-radius: 0;
-    background: var(--ink-sunken);
-    color: var(--paper);
-    color-scheme: dark;
+    background: var(--surface);
+    color: var(--text);
+    color-scheme: light;
   }
 
   .field::placeholder {
-    color: var(--paper-faint);
+    color: var(--text-faint);
   }
 
   /* ── Signals ─────────────────────────────────────────────────────────
@@ -332,7 +343,7 @@
     border: 1px solid color-mix(in srgb, currentColor 38%, transparent);
     border-radius: 0;
     padding: 3px 8px;
-    color: var(--paper-dim);
+    color: var(--text-muted);
     font-family: var(--font-geist-mono), monospace;
     font-size: 10px;
     font-weight: 500;
@@ -342,7 +353,7 @@
   }
 
   .pill-muted {
-    color: var(--paper-faint);
+    color: var(--text-faint);
   }
 
   .pill-flag {
@@ -383,7 +394,7 @@
     height: 6px;
     flex: 1 1 0;
     border-radius: 0;
-    background: rgb(236 231 222 / 0.1);
+    background: rgb(0 0 0 / 0.12);
   }
 
   .threat-seg.is-on {
@@ -396,7 +407,7 @@
     display: flex;
     min-height: 100dvh;
     flex-direction: column;
-    background: var(--ink);
+    background: var(--surface);
   }
 
   .site-main {
@@ -411,7 +422,7 @@
     top: 0;
     z-index: 40;
     border-bottom: 1px solid var(--rule-strong);
-    background: var(--ink);
+    background: var(--surface);
   }
 
   .masthead-name {
@@ -420,45 +431,45 @@
     font-weight: 600;
     letter-spacing: -0.01em;
     line-height: 1.1;
-    color: var(--paper);
+    color: var(--text);
   }
 
   .dateline-strip {
     border-top: 1px solid var(--rule);
-    background: var(--ink-sunken);
+    background: var(--surface-sunken);
   }
 
   .site-nav-link {
     position: relative;
     border-radius: 0;
     padding: 6px 10px;
-    color: var(--paper-dim);
+    color: var(--text-muted);
     font-size: 13px;
     transition: color 140ms ease;
   }
 
   .site-nav-link:hover {
-    color: var(--paper);
+    color: var(--text);
   }
 
   .site-nav-link.is-active {
-    color: var(--paper);
+    color: var(--text);
     box-shadow: inset 0 -2px 0 var(--signal);
   }
 
   .site-footer {
     margin-top: auto;
     border-top: 1px solid var(--rule-strong);
-    background: var(--ink-sunken);
+    background: var(--surface-sunken);
   }
 
   .site-footer a {
-    color: var(--paper-dim);
+    color: var(--text-muted);
     transition: color 140ms ease;
   }
 
   .site-footer a:hover {
-    color: var(--paper);
+    color: var(--text);
   }
 
   .brand-mark {
@@ -470,7 +481,7 @@
     border: 1px solid var(--rule-strong);
     border-radius: 0;
     background: transparent;
-    color: var(--paper);
+    color: var(--text);
     font-family: var(--font-source-serif), Georgia, serif;
     font-size: 15px;
     font-weight: 600;
@@ -481,7 +492,7 @@
   .ticker {
     overflow: hidden;
     border-bottom: 1px solid var(--rule);
-    background: var(--ink-sunken);
+    background: var(--surface-sunken);
   }
 
   .ticker-viewport {
@@ -509,16 +520,27 @@
     position: relative;
     min-height: 16rem;
     overflow: hidden;
+    background: var(--surface-sunken);
   }
 
   .premium-veil {
     filter: blur(4px);
-    opacity: 0.38;
+    opacity: 0.5;
     user-select: none;
   }
 
+  /* Fades to the panel tint rather than to a dark colour, so the teaser reads as
+     text disappearing into the page. */
   .premium-scrim {
-    background: linear-gradient(to bottom, rgb(12 12 13 / 0.2), rgb(12 12 13 / 0.97) 70%);
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--surface-sunken) 20%, transparent),
+      color-mix(in srgb, var(--surface-sunken) 97%, transparent) 70%
+    );
+  }
+
+  .newsletter-band {
+    background: var(--surface-sunken);
   }
 
   /* ── Map dashboard ───────────────────────────────────────────────────
@@ -526,19 +548,19 @@
      palette and type. Square corners are enforced against MapLibre below. */
 
   .dashboard-shell {
-    background: var(--ink);
+    background: var(--surface);
   }
 
   .app-header {
     position: relative;
     z-index: 20;
     border-bottom: 1px solid var(--rule);
-    background: var(--ink);
+    background: var(--surface);
   }
 
   .app-footer {
     border-top: 1px solid var(--rule);
-    background: var(--ink-sunken);
+    background: var(--surface-sunken);
   }
 
   .demo-status {
@@ -557,18 +579,18 @@
   }
 
   .filter-bar {
-    background: var(--ink);
+    background: var(--surface);
   }
 
   .filter-control {
     border: 1px solid var(--rule);
-    background: var(--ink-sunken);
-    color-scheme: dark;
+    background: var(--surface);
+    color-scheme: light;
   }
 
   .result-pill {
     border: 1px solid var(--rule);
-    background: var(--ink-sunken);
+    background: var(--surface-sunken);
   }
 
   .dashboard-stage {
@@ -580,10 +602,13 @@
     padding: 12px;
   }
 
+  /* Panels sit over the basemap, so they carry the faintest possible lift on top
+     of the hairline. */
   .floating-panel {
     border: 1px solid var(--rule);
     border-radius: 0;
-    background: var(--ink-raised);
+    background: var(--surface);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
   }
 
   .feed-overlay,
@@ -595,7 +620,7 @@
     height: min(62vh, 640px);
     flex: none;
     border: 1px solid var(--rule);
-    background: var(--ink-sunken);
+    background: var(--surface-sunken);
   }
 
   .map-layer-control,
@@ -603,7 +628,8 @@
   .map-status {
     z-index: 4;
     border: 1px solid var(--rule);
-    background: var(--ink);
+    background: var(--surface);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
   }
 
   .map-layer-control {
@@ -623,7 +649,7 @@
   }
 
   .layer-pill:hover {
-    background: rgb(236 231 222 / 0.06);
+    background: rgb(0 0 0 / 0.05);
   }
 
   .layer-pill.is-active {
@@ -632,11 +658,11 @@
   }
 
   .feed-row:hover {
-    background: rgb(236 231 222 / 0.04);
+    background: rgb(0 0 0 / 0.035);
   }
 
   .feed-row.is-selected {
-    background: rgb(236 231 222 / 0.05);
+    background: rgb(0 0 0 / 0.05);
     box-shadow: inset 3px 0 0 var(--signal);
   }
 
@@ -648,7 +674,7 @@
   .selection-details,
   .metric-strip {
     border: 1px solid var(--rule);
-    background: var(--ink-sunken);
+    background: var(--surface-sunken);
   }
 
   .insight-section + .insight-section {
@@ -685,7 +711,7 @@
 }
 
 @keyframes status-pulse {
-  70%, 100% { box-shadow: 0 0 0 6px rgb(201 162 78 / 0); }
+  70%, 100% { box-shadow: 0 0 0 6px rgb(138 106 17 / 0); }
 }
 
 /* ── MapLibre overrides (square corners, project palette) ──────────── */
@@ -696,14 +722,20 @@
 
 .maplibregl-ctrl-group {
   overflow: hidden;
-  border: 1px solid var(--rule) !important;
+  border: 1px solid var(--rule-strong) !important;
   border-radius: 0 !important;
-  background: var(--ink) !important;
+  background: var(--surface) !important;
   box-shadow: none !important;
 }
 
+/* MapLibre ships dark control glyphs, which already read on a light basemap. */
 .maplibregl-ctrl-group button {
-  filter: invert(1) opacity(0.7);
+  opacity: 0.75;
+}
+
+.maplibregl-ctrl-group button:hover {
+  background: rgb(0 0 0 / 0.05);
+  opacity: 1;
 }
 
 .maplibregl-ctrl-attrib,
@@ -714,13 +746,13 @@
 }
 
 .maplibregl-ctrl-attrib {
-  background: rgb(12 12 13 / 0.86) !important;
-  color: #8a847a !important;
+  background: rgb(255 255 255 / 0.9) !important;
+  color: var(--text-faint) !important;
   font-size: 9px !important;
 }
 
 .maplibregl-ctrl-attrib a {
-  color: #a8a29a !important;
+  color: var(--text-muted) !important;
 }
 
 .maplibregl-popup-content,
@@ -736,19 +768,19 @@
 .maplibregl-popup-content {
   min-width: 220px;
   border: 1px solid var(--rule-strong);
-  background: #131312;
-  color: var(--paper);
-  box-shadow: none;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
   padding: 14px 30px 14px 14px;
 }
 
 .maplibregl-popup-tip {
-  border-top-color: #131312 !important;
-  border-bottom-color: #131312 !important;
+  border-top-color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
 }
 
 .maplibregl-popup-close-button {
-  color: #a8a29a;
+  color: var(--text-muted);
   font-size: 18px;
   padding: 4px 8px;
 }
@@ -773,7 +805,7 @@
 }
 
 .gcw-popup small {
-  color: #8a847a;
+  color: var(--text-faint);
   font-size: 9px;
 }
 

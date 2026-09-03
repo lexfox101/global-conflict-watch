@@ -80,7 +80,7 @@ export function Dashboard({ incidents, aircraft, vessels, lastUpdated }: Dashboa
   };
 
   return (
-    <div className="dashboard-shell flex min-h-dvh flex-col text-paper-body">
+    <div className="dashboard-shell flex min-h-dvh flex-col text-ink-body">
       <header className="app-header shrink-0">
         <div className="mx-auto flex max-w-[1920px] items-center justify-between gap-4 px-4 py-3 lg:px-6">
           <div className="flex min-w-0 items-center gap-3">
@@ -93,7 +93,7 @@ export function Dashboard({ incidents, aircraft, vessels, lastUpdated }: Dashboa
           <div className="flex shrink-0 items-center gap-3 sm:gap-5">
             <div className="hidden text-right md:block">
               <p className="eyebrow">Last update</p>
-              <time dateTime={lastUpdated} className="mt-1 block font-mono text-[10px] text-paper-dim">{formatDateTime(lastUpdated)} UTC</time>
+              <time dateTime={lastUpdated} className="mt-1 block font-mono text-[10px] text-muted">{formatDateTime(lastUpdated)} UTC</time>
             </div>
             <div className="demo-status" title="Fictional demonstration data — not live reporting">
               <span className="status-pulse h-1.5 w-1.5 rounded-full bg-flag" />
@@ -137,8 +137,8 @@ export function Dashboard({ incidents, aircraft, vessels, lastUpdated }: Dashboa
       </div>
 
       <footer className="app-footer shrink-0 px-4 py-2 lg:px-6">
-        <div className="mx-auto flex max-w-[1920px] flex-col justify-between gap-1 text-[10px] leading-4 text-paper-faint sm:flex-row sm:items-center">
-          <p><strong className="font-medium text-paper-dim">Methodology:</strong> positions are fictional, generalized and delayed; corroboration is mocked.</p>
+        <div className="mx-auto flex max-w-[1920px] flex-col justify-between gap-1 text-[10px] leading-4 text-faint sm:flex-row sm:items-center">
+          <p><strong className="font-medium text-muted">Methodology:</strong> positions are fictional, generalized and delayed; corroboration is mocked.</p>
           <p>No live sources or APIs · Basemap © OpenStreetMap © CARTO</p>
         </div>
       </footer>

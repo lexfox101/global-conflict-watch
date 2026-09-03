@@ -18,7 +18,7 @@ export function ThreatLevelBadge({ level, label, variant = "mark", className = "
 
   return (
     <span className={`${base} ${threatToneClass[level]} ${className}`}>
-      {label ? <span className="opacity-70">{label}</span> : null}
+      {label ? <span className="text-muted">{label}</span> : null}
       <span aria-hidden="true" className="threat-dot" />
       <span>
         <span className="sr-only">Threat level: </span>
