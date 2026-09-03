@@ -50,9 +50,9 @@ export function CountBreakdown({ items, label, total, caption }: CountBreakdownP
                   <span className="text-slate-600"> · {share}%</span>
                 </span>
               </div>
-              <div aria-hidden="true" className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+              <div aria-hidden="true" className="mt-1.5 h-1.5 overflow-hidden rounded-none bg-white/[0.06]">
                 <div
-                  className="h-full rounded-full"
+                  className="h-full rounded-none"
                   style={{ width: `${width}%`, backgroundColor: item.accent ?? "rgb(103 232 249 / 0.5)" }}
                 />
               </div>

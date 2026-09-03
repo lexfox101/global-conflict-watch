@@ -19,7 +19,7 @@ function AlertItem({ alert }: { alert: BreakingAlert }) {
   return (
     <li className="flex shrink-0 items-center gap-3">
       {alert.href ? (
-        <Link href={alert.href} className="flex items-center gap-3 rounded-full hover:text-cyan-100">
+        <Link href={alert.href} className="flex items-center gap-3 rounded-none hover:text-cyan-100">
           {body}
         </Link>
       ) : (
@@ -77,7 +77,7 @@ export function BreakingTicker({ alerts }: { alerts: BreakingAlert[] }) {
             type="button"
             onClick={() => setPaused((current) => !current)}
             aria-pressed={paused}
-            className="shrink-0 rounded-full border border-white/10 px-3 py-1 text-[11px] text-slate-400 transition-colors hover:bg-white/5 hover:text-slate-200"
+            className="shrink-0 rounded-none border border-white/10 px-3 py-1 text-[11px] text-slate-400 transition-colors hover:bg-white/5 hover:text-slate-200"
           >
             {paused ? "Resume" : "Pause"}
             <span className="sr-only"> scrolling alerts</span>

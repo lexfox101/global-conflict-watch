@@ -40,7 +40,7 @@ export function PremiumGate({ title, dateLabel, teaser, storyCount, compact = fa
         <div className="flex flex-wrap items-center gap-3">
           <Link
             href="/pricing"
-            className="rounded-full border border-cyan-300/25 bg-cyan-400/10 px-4 py-2 text-[13px] font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15"
+            className="rounded-none border border-cyan-300/25 bg-cyan-400/10 px-4 py-2 text-[13px] font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15"
           >
             View subscription options
           </Link>

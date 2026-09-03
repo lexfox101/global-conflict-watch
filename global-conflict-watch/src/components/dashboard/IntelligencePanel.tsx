@@ -19,17 +19,17 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
 
   return (
     <aside className="floating-panel inspector-panel flex min-h-[430px] flex-col overflow-hidden" aria-label="Intelligence summary">
-      <PanelHeading eyebrow="Analyst workspace" title={selected ? (selected.kind === "incident" ? "Selected report" : "Selected tracking asset") : "Intelligence summary"} trailing={<span className="rounded-full bg-cyan-300/10 px-2 py-1 font-mono text-[8px] font-medium text-cyan-200">Demo</span>} />
+      <PanelHeading eyebrow="Analyst workspace" title={selected ? (selected.kind === "incident" ? "Selected report" : "Selected tracking asset") : "Intelligence summary"} trailing={<span className="rounded-none bg-cyan-300/10 px-2 py-1 font-mono text-[8px] font-medium text-cyan-200">Demo</span>} />
       <div className="min-h-0 flex-1 overflow-y-auto pb-2">
         {selected ? <SelectionDetails selected={selected} /> : (
-          <section className="intro-note mx-4 mb-1 rounded-xl p-3.5">
+          <section className="intro-note mx-4 mb-1 rounded-none p-3.5">
             <p className="text-xs leading-5 text-slate-400">Select a report or map marker to inspect safe demonstration details and source attribution.</p>
           </section>
         )}
 
         <section className="insight-section px-4 py-4">
           <h3 className="text-[11px] font-medium text-slate-400">Current result set</h3>
-          <div className="metric-strip mt-3 grid grid-cols-3 rounded-xl">
+          <div className="metric-strip mt-3 grid grid-cols-3 rounded-none">
             <Metric value={incidents.length} label="Reports" />
             <Metric value={highPriority} label="High+" accent="text-orange-300" />
             <Metric value={corroborated} label="Corroborated" accent="text-cyan-300" />
@@ -38,7 +38,7 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
 
         <section className="insight-section px-4 py-4">
           <h3 className="text-[11px] font-medium text-slate-400">Demo tracking inventory</h3>
-          <div className="metric-strip mt-3 grid grid-cols-2 rounded-xl">
+          <div className="metric-strip mt-3 grid grid-cols-2 rounded-none">
             <Metric value={aircraftCount} label="Aircraft" accent="text-amber-300" />
             <Metric value={vesselCount} label="Vessels" accent="text-cyan-300" />
           </div>
@@ -51,7 +51,7 @@ export function IntelligencePanel({ incidents, selected, aircraftCount, vesselCo
             {EVENT_CATEGORIES.map((category) => {
               const count = incidents.filter((incident) => incident.category === category).length;
               const percentage = incidents.length ? (count / incidents.length) * 100 : 0;
-              return <div key={category}><div className="flex justify-between text-[10px]"><span className="text-slate-400"><span className="mr-2" style={{ color: categoryColors[category] }}>●</span>{category}</span><span className="font-mono text-slate-500">{count}</span></div><div className="mt-1 h-1 overflow-hidden rounded-full bg-white/5"><div className="h-full rounded-full" style={{ width: `${percentage}%`, backgroundColor: categoryColors[category] }} /></div></div>;
+              return <div key={category}><div className="flex justify-between text-[10px]"><span className="text-slate-400"><span className="mr-2" style={{ color: categoryColors[category] }}>●</span>{category}</span><span className="font-mono text-slate-500">{count}</span></div><div className="mt-1 h-1 overflow-hidden rounded-none bg-white/5"><div className="h-full rounded-none" style={{ width: `${percentage}%`, backgroundColor: categoryColors[category] }} /></div></div>;
             })}
           </div>
         </section>
@@ -71,7 +71,7 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
   if (selected.kind === "incident") {
     const incident = selected.item;
     return (
-      <section className="selection-details mx-4 mb-1 rounded-xl p-4" aria-live="polite">
+      <section className="selection-details mx-4 mb-1 rounded-none p-4" aria-live="polite">
         <div className="flex items-center justify-between gap-2"><SeverityBadge severity={incident.severity} /><span className="font-mono text-[9px] text-slate-500">{incident.id}</span></div>
         <h3 className="mt-3 text-base font-semibold leading-snug text-slate-100">{incident.title}</h3>
         <p className="mt-2 text-[11px] text-cyan-200/70">{incident.location} · {incident.country}</p>
@@ -106,14 +106,14 @@ function SelectionDetails({ selected }: { selected: SelectedTarget }) {
   }
 
   return (
-    <section className="selection-details mx-4 mb-1 rounded-xl p-4" aria-live="polite">
+    <section className="selection-details mx-4 mb-1 rounded-none p-4" aria-live="polite">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="rounded-full border border-amber-300/20 bg-amber-300/10 px-2 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wide text-amber-200">{assetLabel}</span>
+        <span className="rounded-none border border-amber-300/20 bg-amber-300/10 px-2 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wide text-amber-200">{assetLabel}</span>
         <span className="font-mono text-[9px] text-slate-500">{asset.id}</span>
       </div>
       <div className="mt-3 flex flex-wrap gap-1.5">
-        <strong className="rounded-full bg-cyan-300/10 px-2 py-1 font-mono text-[8px] uppercase tracking-wide text-cyan-200">Generalized position</strong>
-        <strong className="rounded-full bg-amber-300/10 px-2 py-1 font-mono text-[8px] uppercase tracking-wide text-amber-200">Delayed demo data</strong>
+        <strong className="rounded-none bg-cyan-300/10 px-2 py-1 font-mono text-[8px] uppercase tracking-wide text-cyan-200">Generalized position</strong>
+        <strong className="rounded-none bg-amber-300/10 px-2 py-1 font-mono text-[8px] uppercase tracking-wide text-amber-200">Delayed demo data</strong>
       </div>
       <h3 className="mt-3 text-base font-semibold leading-snug text-slate-100">{asset.displayName}</h3>
       <p className="mt-2 text-[11px] text-cyan-200/70">{asset.broadArea} · {asset.region}</p>

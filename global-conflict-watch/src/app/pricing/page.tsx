@@ -151,7 +151,7 @@ export default function PricingPage() {
           </p>
           <Link
             href={`/briefings/${latestBriefing.slug}`}
-            className="mt-auto self-start rounded-full border border-cyan-300/25 bg-cyan-400/10 px-5 py-2.5 text-[14px] font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15"
+            className="mt-auto self-start rounded-none border border-cyan-300/25 bg-cyan-400/10 px-5 py-2.5 text-[14px] font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15"
           >
             Read today&apos;s briefing
           </Link>
@@ -175,7 +175,7 @@ export default function PricingPage() {
               type="button"
               disabled
               aria-describedby="billing-disabled-note"
-              className="self-start rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-[14px] font-semibold text-slate-400 disabled:cursor-not-allowed"
+              className="self-start rounded-none border border-white/10 bg-white/[0.03] px-5 py-2.5 text-[14px] font-semibold text-slate-400 disabled:cursor-not-allowed"
             >
               Checkout unavailable in this demo
             </button>

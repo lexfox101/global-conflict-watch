@@ -29,7 +29,7 @@ export function PanelHeading({ eyebrow, title, trailing }: { eyebrow: string; ti
 }
 
 export function SeverityBadge({ severity }: { severity: Severity }) {
-  return <span className={`rounded-full border px-2 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wide ${severityStyles[severity]}`}>{severity}</span>;
+  return <span className={`rounded-none border px-2 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wide ${severityStyles[severity]}`}>{severity}</span>;
 }
 
 export function formatTime(timestamp: string) {

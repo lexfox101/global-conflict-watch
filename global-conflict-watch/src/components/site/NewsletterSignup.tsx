@@ -38,7 +38,7 @@ export function NewsletterSignup({
       <p className="mt-3 max-w-[56ch] text-[15px] leading-relaxed text-slate-400">{description}</p>
 
       {status === "done" ? (
-        <div className="mt-6 rounded-2xl border border-cyan-300/20 bg-cyan-400/[0.07] p-5" role="status">
+        <div className="mt-6 rounded-none border border-cyan-300/20 bg-cyan-400/[0.07] p-5" role="status">
           <p className="text-[15px] font-semibold text-cyan-100">Address captured in this page only.</p>
           <p className="mt-2 text-sm leading-relaxed text-slate-400">
             This is an interface demonstration. Nothing was transmitted, stored, or shared — the value you entered lives in browser
@@ -50,7 +50,7 @@ export function NewsletterSignup({
               setEmail("");
               setStatus("idle");
             }}
-            className="mt-4 rounded-full border border-white/10 px-4 py-2 text-[13px] text-slate-300 transition-colors hover:bg-white/5 hover:text-slate-100"
+            className="mt-4 rounded-none border border-white/10 px-4 py-2 text-[13px] text-slate-300 transition-colors hover:bg-white/5 hover:text-slate-100"
           >
             Enter another address
           </button>
@@ -75,11 +75,11 @@ export function NewsletterSignup({
               }}
               aria-describedby={noteId}
               aria-invalid={status === "error"}
-              className="min-w-0 flex-1 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2.5 text-[15px] text-slate-100 placeholder:text-slate-500"
+              className="min-w-0 flex-1 rounded-none border border-white/10 bg-white/[0.04] px-4 py-2.5 text-[15px] text-slate-100 placeholder:text-slate-500"
             />
             <button
               type="submit"
-              className="shrink-0 rounded-full border border-cyan-300/25 bg-cyan-400/10 px-5 py-2.5 text-[14px] font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15"
+              className="shrink-0 rounded-none border border-cyan-300/25 bg-cyan-400/10 px-5 py-2.5 text-[14px] font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15"
             >
               Sign up
             </button>

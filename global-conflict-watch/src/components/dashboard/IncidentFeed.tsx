@@ -10,7 +10,7 @@ interface IncidentFeedProps {
 export function IncidentFeed({ incidents, selectedId, onSelect }: IncidentFeedProps) {
   return (
     <aside className="floating-panel feed-overlay flex min-h-[430px] flex-col overflow-hidden" aria-label="Incident feed">
-      <PanelHeading eyebrow="Monitoring stream" title="Incident feed" trailing={<span className="rounded-full bg-white/[0.055] px-2 py-1 font-mono text-[9px] text-slate-400">UTC</span>} />
+      <PanelHeading eyebrow="Monitoring stream" title="Incident feed" trailing={<span className="rounded-none bg-white/[0.055] px-2 py-1 font-mono text-[9px] text-slate-400">UTC</span>} />
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2 pb-2">
         {incidents.length === 0 ? (
           <div className="flex h-52 flex-col items-center justify-center px-6 text-center" role="status">
@@ -21,7 +21,7 @@ export function IncidentFeed({ incidents, selectedId, onSelect }: IncidentFeedPr
         ) : incidents.map((incident, index) => {
           const selected = incident.id === selectedId;
           return (
-            <article key={incident.id} className={`feed-row my-0.5 overflow-hidden rounded-xl transition ${selected ? "is-selected" : ""}`}>
+            <article key={incident.id} className={`feed-row my-0.5 overflow-hidden rounded-none transition ${selected ? "is-selected" : ""}`}>
               <button type="button" onClick={() => onSelect(incident.id)} aria-pressed={selected} className="w-full px-3 py-3 text-left focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-cyan-300">
                 <div className="flex items-center gap-2">
                   <span className="w-5 font-mono text-[9px] text-slate-600">{String(index + 1).padStart(2, "0")}</span>

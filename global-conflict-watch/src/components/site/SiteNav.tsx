@@ -37,7 +37,7 @@ export function SiteNav({ threatLevel }: { threatLevel: ThreatLevel }) {
           onClick={() => setOpenedAt(open ? undefined : pathname)}
           aria-expanded={open}
           aria-controls={MENU_ID}
-          className="rounded-full border border-white/10 px-3 py-2 text-[12px] text-slate-300 transition-colors hover:bg-white/5 lg:hidden"
+          className="rounded-none border border-white/10 px-3 py-2 text-[12px] text-slate-300 transition-colors hover:bg-white/5 lg:hidden"
         >
           {open ? "Close" : "Menu"}
           <span className="sr-only"> navigation</span>

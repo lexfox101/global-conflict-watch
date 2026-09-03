@@ -263,10 +263,10 @@ export function ConflictMap({ incidents, aircraft, vessels, visibility, selected
   }, [selected, mapReady]);
 
   return (
-    <section className="map-canvas relative min-h-[440px] overflow-hidden rounded-2xl" aria-label="Interactive incidents and tracking map">
+    <section className="map-canvas relative min-h-[440px] overflow-hidden rounded-none" aria-label="Interactive incidents and tracking map">
       <div ref={containerRef} className="absolute inset-0 bg-[#07111d]" />
       <div className="map-vignette pointer-events-none absolute inset-0" />
-      <div className="map-layer-control absolute top-3 max-w-[calc(100%-5rem)] rounded-2xl p-1.5 backdrop-blur-xl">
+      <div className="map-layer-control absolute top-3 max-w-[calc(100%-5rem)] rounded-none p-1.5 backdrop-blur-xl">
         <div className="flex flex-wrap gap-1" aria-label="Map layer visibility controls">
           {([
             { key: "incidents", label: "Incidents", count: incidents.length, symbol: "●" },
@@ -279,7 +279,7 @@ export function ConflictMap({ incidents, aircraft, vessels, visibility, selected
               aria-pressed={visibility[layer.key]}
               aria-label={`${visibility[layer.key] ? "Hide" : "Show"} ${layer.label.toLowerCase()} layer`}
               onClick={() => onToggleLayer(layer.key)}
-              className={`layer-pill rounded-xl px-2.5 py-1.5 text-[10px] font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300 ${visibility[layer.key] ? "is-active text-slate-100" : "text-slate-500"}`}
+              className={`layer-pill rounded-none px-2.5 py-1.5 text-[10px] font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300 ${visibility[layer.key] ? "is-active text-slate-100" : "text-slate-500"}`}
             >
               <span aria-hidden="true" className="mr-1.5 text-cyan-300">{layer.symbol}</span>{layer.label} <strong className="ml-0.5 font-mono font-medium">{visibility[layer.key] ? layer.count : 0}</strong>
             </button>
@@ -289,13 +289,13 @@ export function ConflictMap({ incidents, aircraft, vessels, visibility, selected
           {visibility.incidents ? incidents.length : 0} reports, {visibility.aircraft ? aircraft.length : 0} aircraft, and {visibility.vessels ? vessels.length : 0} vessels visible.
         </p>
       </div>
-      {!mapReady && !mapError && <div role="status" className="map-status absolute bottom-4 left-4 rounded-xl px-3 py-2 text-[10px] text-slate-300">Loading basemap…</div>}
+      {!mapReady && !mapError && <div role="status" className="map-status absolute bottom-4 left-4 rounded-none px-3 py-2 text-[10px] text-slate-300">Loading basemap…</div>}
       {mapError && (
-        <div role="status" className="map-status absolute bottom-4 left-4 max-w-xs rounded-xl px-3 py-2 text-[10px] leading-4 text-amber-100 shadow-xl">
+        <div role="status" className="map-status absolute bottom-4 left-4 max-w-xs rounded-none px-3 py-2 text-[10px] leading-4 text-amber-100 shadow-xl">
           Basemap tiles are currently unavailable. Feed and analysis remain usable; retry when network access is restored.
         </div>
       )}
-      <div className="map-legend absolute bottom-4 hidden max-w-[52%] flex-wrap gap-x-3 gap-y-1 rounded-xl px-3 py-2 backdrop-blur md:flex">
+      <div className="map-legend absolute bottom-4 hidden max-w-[52%] flex-wrap gap-x-3 gap-y-1 rounded-none px-3 py-2 backdrop-blur md:flex">
         {Object.entries(categoryColors).map(([category, color]) => <span key={category} className="text-[8px] text-slate-400"><span className="mr-1" style={{ color }}>●</span>{category}</span>)}
       </div>
     </section>
